@@ -27,6 +27,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 // app.use('/users', users);
 
+app.get('/signin', function (req, res) {
+  res.render('portal.ejs', { title: 'Stockhub' });
+})
+
+app.post('/testget', function (req, res) {
+  // res.render('portal.ejs', { title: 'Stockhub' });
+  console.log("got the post");
+  console.log('req.body');
+  console.log(req.body);
+  res.write('You sent the Email "' + req.body.inputEmail+'".\n');
+  res.end()
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

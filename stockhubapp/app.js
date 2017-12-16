@@ -4,11 +4,24 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var bcrypt = require('bcrypt-nodejs');
+var ejs = require('ejs');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
-var con = require('./DBConnection')
+var con = require('./db')
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+// var index = require('./routes/index');
+// var users = require('./routes/users');
+
+// custom libraries
+// routes
+var route = require('./route');
+// model
+var Model = require('./model');
+
+
 
 var app = express();
 
@@ -24,36 +37,64 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-// app.use('/users', users);
 
-app.get('/signin', function (req, res) {
-  res.render('portal.ejs', { title: 'Stockhub' });
-})
-
-app.post('/testget', function (req, res) {
-  // res.render('portal.ejs', { title: 'Stockhub' });
-  console.log("got the post");
-  console.log('req.body');
-  console.log(req.body);
-  res.write('You sent the Email "' + req.body.inputEmail+'".\n');
-
-  
-  var email = req.body.inputEmail;
-  var password = req.body.inputPassword;
-  var sql = 'SELECT * FROM users WHERE email = ? AND password = ?';
-
-  con.query(sql, [email,password], function (err, result) {
-    if (err) throw err;
-    console.log('Data received from Db:\n');
-    console.log(result);
-    if(result){
-
-    }
+passport.use(new LocalStrategy(function(username, password, done) {
+  new Model.User({username: username}).fetch().then(function(data) {
+     var user = data;
+     if(user === null) {
+        return done(null, false, {message: 'Invalid username or password'});
+     } else {
+        user = data.toJSON();
+        if(!bcrypt.compareSync(password, user.password)) {
+           return done(null, false, {message: 'Invalid username or password'});
+        } else {
+           return done(null, user);
+        }
+     }
   });
+}));
 
-  res.end()
-})
+passport.serializeUser(function(user, done) {
+ done(null, user.username);
+});
+
+passport.deserializeUser(function(username, done) {
+  new Model.User({username: username}).fetch().then(function(user) {
+     done(null, user);
+  });
+});
+
+
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+
+app.use(session({secret: process.env.SESSION_SECRET || '<mysecret>',resave: true,
+   saveUninitialized: true}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// GET
+app.get('/', route.index);
+
+// signin
+// GET
+app.get('/signin', route.signIn);
+// POST
+app.post('/signin', route.signInPost);
+
+// signup
+// GET
+app.get('/signup', route.signUp);
+// POST
+app.post('/signup', route.signUpPost);
+
+// logout
+// GET
+app.get('/signout', route.signOut);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -72,121 +113,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
-// ================================================================
-// ROUTING CODES
-// ================================================================
-
-// // This responds with "Hello World" on the homepage
-// app.get('/', function (req, res) {
-//     console.log("Got a GET request for the homepage");
-//     res.send('Hello GET');
-//  })
- 
-//  // This responds a POST request for the homepage
-//  app.post('/', function (req, res) {
-//     console.log("Got a POST request for the homepage");
-//     res.send('Hello POST');
-//  })
- 
-//  // This responds a DELETE request for the /del_user page.
-//  app.delete('/del_user', function (req, res) {
-//     console.log("Got a DELETE request for /del_user");
-//     res.send('Hello DELETE');
-//  })
- 
-//  // This responds a GET request for the /list_user page.
-//  app.get('/list_user', function (req, res) {
-//     console.log("Got a GET request for /list_user");
-//     res.send('Page Listing');
-//  })
- 
-//  // This responds a GET request for abcd, abxcd, ab123cd, and so on
-//  app.get('/ab*cd', function(req, res) {   
-//     console.log("Got a GET request for /ab*cd");
-//     res.send('Page Pattern Match');
-//  })
-
-
-
-
-
-
-// ================================================================
-// GET AND POST METHODS
-// ================================================================
-
-// app.use(cookieParser())
-
-
-// app.get('/', function (req, res) {
-//     console.log("Cookies: ", req.cookies)
-//     res.sendFile( __dirname + "/" + "index.htm" );
-//  })
-
-
-
-//  app.get('/process_get', function (req, res) {
-//     // Prepare output in JSON format
-//     response = {
-//        first_name:req.query.first_name,
-//        last_name:req.query.last_name
-//     };
-//     console.log("Get Method")
-//     console.log(response);
-//     res.end(JSON.stringify(response));
-//  })
-
-
- 
-//  // Create application/x-www-form-urlencoded parser
-//  var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
-//  app.post('/process_post', urlencodedParser, function (req, res) {
-//     // Prepare output in JSON format
-//     response = {
-//        first_name:req.body.first_name,
-//        last_name:req.body.last_name
-//     };
-//     console.log("Post Method")
-//     console.log(response);
-//     res.end(JSON.stringify(response));
-//  })
-
-
-
-
-
-
-// ================================================================
-// DATABASE CONNECTION
-// ================================================================
-
-
-// const con = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'mango123%',
-//   database: 'testdb'mango123
-// });
-
-// con.connect((err) => {
-//   if(err){
-//     console.log('Error connecting to Db');
-//     return;
-//   }
-//   console.log('Connection established');
-// });
-
-// con.query('SELECT * FROM employees', (err,rows) => {
-//   if(err) throw err;
-
-//   console.log('Data received from Db:\n');
-//   console.log(rows);
-
-// });
-
 
 
 module.exports = app;

@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-const mysql = require('mysql');
+var con = require('./DBConnection')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -37,6 +37,21 @@ app.post('/testget', function (req, res) {
   console.log('req.body');
   console.log(req.body);
   res.write('You sent the Email "' + req.body.inputEmail+'".\n');
+
+  
+  var email = req.body.inputEmail;
+  var password = req.body.inputPassword;
+  var sql = 'SELECT * FROM users WHERE email = ? AND password = ?';
+
+  con.query(sql, [email,password], function (err, result) {
+    if (err) throw err;
+    console.log('Data received from Db:\n');
+    console.log(result);
+    if(result){
+
+    }
+  });
+
   res.end()
 })
 

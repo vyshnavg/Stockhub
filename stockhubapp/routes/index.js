@@ -4,20 +4,7 @@ const mysql = require('mysql');
 
 var rows_m={}
 
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'mango123%',
-  database: 'testdb'
-});
-
-con.connect((err) => {
-  if(err){
-    console.log('Error connecting to Db');
-    return;
-  }
-  console.log('Connection established');
-});
+var con = require('../DBConnection')
 
 con.query('SELECT * FROM employees', (err,rows) => {
   if(err) throw err;

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <!-- <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+  </body> -->
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <table border="1" cellpadding="7" cellspacing="7">
+      <tr>
+        <th width="50px">No</th>
+        <th>name</th>
+        <th>location</th>
+      </tr>
+      <% if(data.length){ 
+        for(var i = 0;i < data.length;i++) { %>
+      <tr>
+        <td><%= (i+1) %></td>
+        <td><%= data[i].name %></td>
+        <td><%= data[i].location %></td>
+      </tr>
+      <% }
+      }else{ %>
+      <tr>
+        <td colspan="3">No user</td>
+      </tr>
+    <% } %>
+    </table>
+  </body>
+</html>

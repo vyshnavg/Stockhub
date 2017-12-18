@@ -17,7 +17,7 @@ var con = require('./db')
 
 // custom libraries
 // routes
-var route = require('./route');
+var route = require('./routes/authUser');
 // model
 var Model = require('./model');
 

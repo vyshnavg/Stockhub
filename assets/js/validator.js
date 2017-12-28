@@ -1,6 +1,6 @@
-   $(document).ready(function() {
+$(document).ready(function() {
     $('#reg_form').bootstrapValidator({
-        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+        // framework: 'bootstrap',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
@@ -14,82 +14,28 @@
                     },
                         notEmpty: {
                         message: 'Please supply your first name'
+					},
+					regexp: {
+                        regexp: /^[a-z]+$/i,
+                        message: 'Can consist of only alphabetical characters'
                     }
                 }
-            },
-             last_name: {
+			},
+			lastName: {
                 validators: {
-                     stringLength: {
+                        stringLength: {
                         min: 2,
                     },
-                    notEmpty: {
+                        notEmpty: {
                         message: 'Please supply your last name'
+					},
+					regexp: {
+                        regexp: /^[a-z]+$/i,
+                        message: 'Can consist of only alphabetical characters'
                     }
                 }
-            },
-           
-            phone: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please supply your phone number'
-                    },
-                    phone: {
-                        country: 'US',
-                        message: 'Please supply a vaild phone number with area code'
-                    }
-                }
-            },
-            address: {
-                validators: {
-                     stringLength: {
-                        min: 8,
-                    },
-                    notEmpty: {
-                        message: 'Please supply your street address'
-                    }
-                }
-            },
-            city: {
-                validators: {
-                     stringLength: {
-                        min: 4,
-                    },
-                    notEmpty: {
-                        message: 'Please supply your city'
-                    }
-                }
-            },
-            state: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please select your state'
-                    }
-                }
-            },
-            zip: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please supply your zip code'
-                    },
-                    zipCode: {
-                        country: 'US',
-                        message: 'Please supply a vaild zip code'
-                    }
-                }
-            },
-		comment: {
-                validators: {
-                      stringLength: {
-                        min: 10,
-                        max: 200,
-                        message:'Please enter at least 10 characters and no more than 200'
-                    },
-                    notEmpty: {
-                        message: 'Please supply a description about yourself'
-                    }
-                    }
-                 },	
-	 email: {
+			},
+			email: {
                 validators: {
                     notEmpty: {
                         message: 'Please supply your email address'
@@ -98,49 +44,47 @@
                         message: 'Please supply a valid email address'
                     }
                 }
-            },
-					
-	password: {
-            validators: {
-                identical: {
-                    field: 'confirmPassword',
-                    message: 'Confirm your password below - type same password please'
+			},
+			username: {
+                validators: {
+                    // stringLength: {
+                    //     min: 2,
+                    // },
+                    // notEmpty: {
+                    //     message: 'Please supply a username'
+					// },
+					regexp: {
+                        regexp: /^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){6,20}[a-zA-Z0-9]$/u,
+                        message: '<ul> <li>Only alphanumeric characters, underscore and dot.</li> <li>Length at least 6 characters and maximum of 20</li>'
+					}
                 }
-            }
-        },
-        confirmPassword: {
-            validators: {
-                identical: {
-                    field: 'password',
-                    message: 'The password and its confirm are not the same'
-                }
-            }
-         },
+			},
+			password: {
+				validators: {
+					notEmpty: {
+                        message: 'Please supply a password'
+					},
+					regexp: {
+                        regexp: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,30}$/u,
+                        message: '<ul><li>Must contain atleast one digit from 0-9</li> <li>Must contain atleast one lowercase character</li> <li>Must contain atleast one uppercase character</li> <li>Must contain atleast one special symbol in the list "#?!@$%^&*-"</li> <li>Length at least 8 characters and maximum of 30</li></ul>'
+					}
+				}
+			},
+			password2: {
+				validators: {
+					notEmpty: {
+                        message: 'Please supply a password'
+					},
+					identical: {
+						field: 'password',
+						message: 'The password and its confirm are not the same'
+					}
+				}
+			},
 			
             
             }
         })
 		
  	
-        .on('success.form.bv', function(e) {
-            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
-                $('#reg_form').data('bootstrapValidator').resetForm();
-
-            // Prevent form submission
-            e.preventDefault();
-
-            // Get the form instance
-            var $form = $(e.target);
-
-            // Get the BootstrapValidator instance
-            var bv = $form.data('bootstrapValidator');
-
-            // Use Ajax to submit form data
-            $.post($form.attr('action'), $form.serialize(), function(result) {
-                console.log(result);
-            }, 'json');
-        });
 });
-
-
- 

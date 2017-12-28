@@ -1,4 +1,4 @@
-<?php echo form_open('users/register',' id="reg_form"'); ?>
+<?php echo form_open('admins/register',' id="reg_form"'); ?>
 	<div class="row">
 
 		<div class="col-md-4 col-md-offset-4  col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
@@ -27,13 +27,6 @@
 					</div>
 				</div>
 
-
-			<div class="form-group">
-				<label>Email</label>
-				<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-					<input type="email" class="form-control" name="email" placeholder="Email" required/>
-				</div>
-			</div>
 			<div class="form-group">
 				<label>Username</label>
 				<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -60,20 +53,8 @@
 	
 <?php echo form_close(); ?>
 
-<div class="row">
-
-	<div class="col-md-4 col-md-offset-4  col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
-
-		<h3  class="text-center">OR</h3>
-
-		<button class="btn btn-primary btn-block">Sign Up for Vendor</button>
-
-	</div>
-
-</div>
 
 <!-- 
 <script type="text/javascript" src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script type="text/javascript" src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js'></script> -->
-

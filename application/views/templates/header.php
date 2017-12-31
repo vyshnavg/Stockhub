@@ -8,10 +8,11 @@
     
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
     <link rel="stylesheet" type="text/css"  href="https://bootswatch.com/3/yeti/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/style.css" />
     
     <!-- <script src="main.js"></script> -->
 
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css" rel="stylesheet"/>
+    <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css" rel="stylesheet"/> -->
 
 </head>
 <body>
@@ -34,6 +35,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                <li class="<?php if ($title=="Materials") {echo "active"; } else  {echo "noactive";} ?>"> <a href="<?php echo base_url(); ?>materials">Materials</a></li>
                 <li class="<?php if ($title=="About") {echo "active"; } else  {echo "noactive";} ?>"> <a href="<?php echo base_url(); ?>about">About</a></li>
                 <!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

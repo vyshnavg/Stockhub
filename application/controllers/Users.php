@@ -131,4 +131,18 @@
 				return false;
 			}
 		}
+
+		public function userdashboard(){
+			
+			// Check if the user is not logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+
+            $data['title'] = "Dashboard";
+            
+			$this->load->view('templates/header', $data);
+			$this->load->view('users/userdashboard', $data);
+			$this->load->view('templates/footer');
+        }
 	}

@@ -64,7 +64,7 @@
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo ucfirst($this->session->userdata('first_name'))." ".ucfirst($this->session->userdata('last_name')) ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
+                        <li class="<?php if ($title=="Dashboard") {echo "active"; } else  {echo "noactive";} ?>"><a href="<?php echo base_url(); ?>users/userdashboard">Dashboard</a></li>
                         <li role="separator" class="divider"></li>
                         <li > <a href="<?php echo base_url(); ?>users/logout">Logout</a></li>
                     </ul>
@@ -91,6 +91,10 @@
 
         <?php if($this->session->flashdata('login_failed')): ?>
             <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>'; ?>
+        <?php endif; ?>
+
+        <?php if($this->session->flashdata('user_loggedout')): ?>
+            <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_loggedout').'</p>'; ?>
         <?php endif; ?>
 
 

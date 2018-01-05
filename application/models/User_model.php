@@ -33,7 +33,13 @@
 			if(empty($query->row_array())){
 				return true;
 			} else {
-				return false;
+				// return false;
+				$query = $this->db->get_where('vendors', array('v_username' => $username));
+				if(empty($query->row_array())){
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}
 		// Check email exists
@@ -42,7 +48,13 @@
 			if(empty($query->row_array())){
 				return true;
 			} else {
-				return false;
+				// return false;
+				$query = $this->db->get_where('vendors', array('v_email' => $username));
+				if(empty($query->row_array())){
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}
 	}

@@ -52,7 +52,7 @@
 					<input type="password" class="form-control" name="password2" placeholder="Confirm Password" required/>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary btn-block">Submit</button>
+			<button type="submit" class="btn btn-success btn-block">Submit</button>
 
 		</div>
 
@@ -66,7 +66,9 @@
 
 		<h3  class="text-center">OR</h3>
 
-		<button class="btn btn-primary btn-block">Sign Up for Vendor</button>
+		<a class="btn btn-info btn-block" role="button" href="<?php echo base_url(); ?>vendors/register">Sign Up for Vendor </a>
+
+		<!-- <button class="btn btn-primary btn-block" href="<?php //echo base_url(); ?>vendors/register">Sign Up for Vendor</button> -->
 
 	</div>
 

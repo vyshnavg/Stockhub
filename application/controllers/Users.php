@@ -33,6 +33,7 @@
 			}
 		}
 
+
 		// Log in user
 		public function login(){
 			
@@ -42,6 +43,7 @@
 			}
 
 			$data['title'] = 'Login';
+
 			$this->form_validation->set_rules('username', 'Username', 'required');
 			$this->form_validation->set_rules('password', 'Password', 'required');
 			if($this->form_validation->run() === FALSE){
@@ -49,12 +51,17 @@
 				$this->load->view('users/login', $data);
 				$this->load->view('templates/footer');
 			} else {
+				
+				
 				// Get username
 				$username = $this->input->post('username');
 				// Get and encrypt the password
 				$password = md5($this->input->post('password'));
+
+				// CHECKING IN USERS TABLE
 				// Login user
 				$getres = $this->user_model->login($username, $password);
+
 				if($getres){
 					// Create session
 					$user_data = array(
@@ -62,6 +69,7 @@
 						'first_name' => $getres[1],
 						'last_name' => $getres[2],
 						'username' => $username,
+						'usertype' => 'user',
 						'logged_in' => true
 					);
 					$this->session->set_userdata($user_data);
@@ -69,30 +77,49 @@
 					$this->session->set_flashdata('user_loggedin', 'You are now logged in');
 					redirect('home');
 				} else {
-					// Set message
-					// $this->session->set_flashdata('login_failed', 'Login is invalid');
-					// redirect('users/login');
 
-							// Login admin
-							$getres = $this->admin_model->login($username, $password);
-							if($getres){
-								// Create session
-								$user_data = array(
-									'user_id' => $getres[0],
-									'first_name' => $getres[1],
-									'last_name' => $getres[2],
-									'username' => $username,
-									'logged_in' => true
-								);
-								$this->session->set_userdata($user_data);
-								// Set message
-								$this->session->set_flashdata('user_loggedin', 'You are now logged in');
-								redirect('home');
-							} else {
-								// Set message
-								$this->session->set_flashdata('login_failed', 'Login is invalid');
-								redirect('users/login');
-							}	
+						// CHECKING IN VENDORS TABLE
+						// Login admin
+						$getres = $this->vendor_model->login($username, $password);
+						if($getres){
+							// Create session
+							$user_data = array(
+								'user_id' => $getres[0],
+								'first_name' => $getres[1],
+								'last_name' => $getres[2],
+								'username' => $username,
+								'usertype' => 'vendor',
+								'logged_in' => true
+							);
+							$this->session->set_userdata($user_data);
+							// Set message
+							$this->session->set_flashdata('user_loggedin', 'You are now logged in');
+							redirect('home');
+						} else {
+							
+								// CHECKING IN ADMINS TABLE
+								// Login admin
+								$getres = $this->admin_model->login($username, $password);
+								if($getres){
+									// Create session
+									$user_data = array(
+										'user_id' => $getres[0],
+										'first_name' => $getres[1],
+										'last_name' => $getres[2],
+										'username' => $username,
+										'usertype' => 'shadmin',
+										'logged_in' => true
+									);
+									$this->session->set_userdata($user_data);
+									// Set message
+									$this->session->set_flashdata('user_loggedin', 'You are now logged in');
+									redirect('home');
+								} else {
+									// Set message
+									$this->session->set_flashdata('login_failed', 'Login is invalid');
+									redirect('users/login');
+								}
+						}	
 				}		
 			}
 		}
@@ -105,6 +132,7 @@
 			$this->session->unset_userdata('username');
 			$this->session->unset_userdata('first_name');
             $this->session->unset_userdata('last_name');
+            $this->session->unset_userdata('usertype');
 			// Set message
 			$this->session->set_flashdata('user_loggedout', 'You are now logged out');
 			redirect('home');

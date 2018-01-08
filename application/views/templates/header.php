@@ -6,11 +6,9 @@
     <title>Stockhub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
-    <link rel="stylesheet" type="text/css"  href="https://bootswatch.com/3/yeti/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" type="text/css"  href="https://bootswatch.com/3/yeti/bootstrap.min.css" /> -->
+    <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/yeti/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/style.css" />
-    
-    <!-- <script src="main.js"></script> -->
 
     <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css" rel="stylesheet"/> -->
 

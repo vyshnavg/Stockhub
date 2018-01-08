@@ -1,0 +1,34 @@
+.material-date{
+    background: #f4f4f4;
+    padding: 4px;
+    margin:3px 0px;
+    display: block;
+}
+
+.post-thumb{
+    /* width:100%; */
+    width: auto;
+    height: auto;
+}
+
+.post-thumb-view{
+    width:100%;
+}
+
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row.display-flex > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.thumbnail{
+    margin-bottom: 0px;
+}
+
+.h3-margin-top-change{
+    margin-top: 0px;
+}

@@ -17,8 +17,8 @@
 			<div id="profile" class="tab-pane fade in active">
 				<div class="row">
 					
-					<div class="col-md-6">
-						<h2>display picture</h2>
+					<div class="col-md-6 img-align-center">
+						<img class="thumbnail" src="<?php echo asset_url().'images/web-req/noimg.png'?>" >
 					</div>
 					
 					<div class="col-md-6">

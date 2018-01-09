@@ -32,3 +32,8 @@
 .h3-margin-top-change{
     margin-top: 0px;
 }
+
+.img-align-center{
+    align-items: center;
+    align-content: center;
+}

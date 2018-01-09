@@ -28,7 +28,7 @@
 				$enc_password = md5($this->input->post('password'));
 				$this->vendor_model->register($enc_password);
 				// Set message
-				$this->session->set_flashdata('user_registered', 'You are now registered and can log in');
+				$this->session->set_flashdata('flash-success', 'You are now registered and can log in');
 				redirect('home');
 			}
 		}

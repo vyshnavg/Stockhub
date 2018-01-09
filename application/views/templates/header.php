@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!-- <link rel="stylesheet" type="text/css"  href="https://bootswatch.com/3/yeti/bootstrap.min.css" /> -->
-    <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/yeti/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
 
     <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css" rel="stylesheet"/> -->
 
@@ -79,21 +80,16 @@
 
     <div class="container">
         <!-- Flash messages -->
-        <?php if($this->session->flashdata('user_registered')): ?>
-            <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_registered').'</p>'; ?>
+        <?php if($this->session->flashdata('flash-success')): ?>
+            <?php echo '<p class="alert alert-success animated bounceIn">'.$this->session->flashdata('flash-success').'</p>'; ?>
         <?php endif; ?>
 
-        <?php if($this->session->flashdata('user_loggedin')): ?>
-            <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_loggedin').'</p>'; ?>
+        <?php if($this->session->flashdata('flash-danger')): ?>
+            <?php echo '<p class="alert alert-danger animated shake">'.$this->session->flashdata('flash-danger').'</p>'; ?>
         <?php endif; ?>
 
-        <?php if($this->session->flashdata('login_failed')): ?>
-            <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>'; ?>
+        <?php if($this->session->flashdata('flash-warning')): ?>
+            <?php echo '<p class="alert alert-warning animated shake">'.$this->session->flashdata('flash-warning').'</p>'; ?>
         <?php endif; ?>
-
-        <?php if($this->session->flashdata('user_loggedout')): ?>
-            <?php echo '<p class="alert alert-success">'.$this->session->flashdata('user_loggedout').'</p>'; ?>
-        <?php endif; ?>
-
 
     </div>

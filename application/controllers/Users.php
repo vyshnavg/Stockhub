@@ -28,7 +28,7 @@
 				$enc_password = md5($this->input->post('password'));
 				$this->user_model->register($enc_password);
 				// Set message
-				$this->session->set_flashdata('user_registered', 'You are now registered and can log in');
+				$this->session->set_flashdata('flash-success', 'You are now registered and can log in');
 				redirect('home');
 			}
 		}
@@ -74,7 +74,7 @@
 					);
 					$this->session->set_userdata($user_data);
 					// Set message
-					$this->session->set_flashdata('user_loggedin', 'You are now logged in');
+					$this->session->set_flashdata('flash-success', 'You are now logged in');
 					redirect('home');
 				} else {
 
@@ -93,7 +93,7 @@
 							);
 							$this->session->set_userdata($user_data);
 							// Set message
-							$this->session->set_flashdata('user_loggedin', 'You are now logged in');
+							$this->session->set_flashdata('flash-success', 'You are now logged in');
 							redirect('home');
 						} else {
 							
@@ -112,11 +112,11 @@
 									);
 									$this->session->set_userdata($user_data);
 									// Set message
-									$this->session->set_flashdata('user_loggedin', 'You are now logged in');
+									$this->session->set_flashdata('flash-success', 'You are now logged in');
 									redirect('home');
 								} else {
 									// Set message
-									$this->session->set_flashdata('login_failed', 'Login is invalid');
+									$this->session->set_flashdata('flash-danger', 'Login is invalid');
 									redirect('users/login');
 								}
 						}	
@@ -134,7 +134,7 @@
             $this->session->unset_userdata('last_name');
             $this->session->unset_userdata('usertype');
 			// Set message
-			$this->session->set_flashdata('user_loggedout', 'You are now logged out');
+			$this->session->set_flashdata('flash-success', 'You are now logged out');
 			redirect('home');
 		}
 
@@ -164,8 +164,12 @@
 			
 			// Check if the user is not logged in.
 			if(!$this->session->userdata('logged_in')){
-				redirect('home');
+				if($this->session->userdata('usertype') != 'user') {     // 	NOT WORKING
+					redirect('home');
+				}
 			}
+
+			$this->user_model->check_active_status();
 
             $data['title'] = "Dashboard";
             

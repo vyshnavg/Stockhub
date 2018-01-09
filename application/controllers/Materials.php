@@ -26,15 +26,16 @@
 			$this->load->view('templates/footer');
         }
 
-        public function tenderOpen(){
-            // $data['material'] =$this ->material_model->get_materials($slug);
+        public function tenderOpen($slug = NULL){
+            $data['material'] =$this ->material_model->get_materials($slug);
 
-            // if(empty($data['material'])){
-            //     show_404();
-            // }
+            if(empty($data['material'])){
+                show_404();
+            }
 
-            // $data['title'] =$data['material']['rm_name'];
-            $data['title'] = 'tenderOpen';
+            $data['material_title'] =$data['material']['rm_name'];
+            $data['slug'] =$slug;
+            $data['title'] = 'Open a Tender';
 
             $this->load->view('templates/header' , $data);
 			$this->load->view('materials/tenderOpen', $data);

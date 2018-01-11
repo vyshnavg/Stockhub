@@ -58,54 +58,82 @@
 			}
 		}
 
-		// Check active status
-		public function check_active_status(){
-			
+		public function get_address(){
 			$id = $this->session->userdata('user_id');
 
-			$this->db->select('*');
-			$this->db->from('users');
-			$this->db->where('m_id', $id);
-			$this->db->where('m_address_id !=', '');
-			$query = $this->db->get();
+			// $this->db->select('m_address_id');
+			// $this->db->from('users');
+			// $this->db->where('m_id', $id);
+			// $query = $this->db->get();
 
-			if(empty($query->row_array())){
+			$this->db->join('address', 'address.add_id = users.m_address_id');
+			
+			$query = $this->db->get('users', array('m_id' => $id));
+			return $query->row_array();
+
+
+		}
+
+		// Check active status
+		public function check_active_status($return = FALSE){
+			if($return === FALSE){
+				$id = $this->session->userdata('user_id');
 
 				$this->db->select('*');
 				$this->db->from('users');
 				$this->db->where('m_id', $id);
-				$this->db->where('m_status !=', '');
+				$this->db->where('m_address_id !=', '');
 				$query = $this->db->get();
-
+				
+	
 				if(empty($query->row_array())){
-					
-					$data = array(
-						'm_status' => 'Inactive'
-					);
-
-					$this->db->update('users',  $data);
+	
+					$this->db->select('*');
+					$this->db->from('users');
+					$this->db->where('m_id', $id);
+					$this->db->where('m_status !=', '');
+					$query = $this->db->get();
+	
+					if(empty($query->row_array())){
+						
+						$data = array(
+							'm_status' => 'Inactive'
+						);
+	
+						$this->db->update('users',  $data);
+					}
+	
+					// Set message
+					$this->session->set_flashdata('flash-warning', 'You are currently inactive user. Please add Address Information to be active.');
 				}
-
-				// Set message
-				$this->session->set_flashdata('flash-warning', 'You are currently inactive user. Please add Address Information to be active.');
+				else{
+	
+					$this->db->select('m_status');
+					$this->db->from('users');
+					$this->db->where('m_id', $id);
+					$query = $this->db->get();
+	
+					if($query->row_array()['m_status'] == 'Inactive'){
+						$this->db->set('m_status', 'Active');
+						$this->db->where('m_id', $id);
+						$this->db->update('users');
+					}
+					
+				}
 			}
 			else{
-
-				$this->db->select('*');
+				$id = $this->session->userdata('user_id');
+				$this->db->select('m_status');
 				$this->db->from('users');
 				$this->db->where('m_id', $id);
-				$this->db->where('m_status !=', '');
 				$query = $this->db->get();
 
-				if(empty($query->row_array())){
-					
-					$data = array(
-						'm_status' => 'Active'
-					);
-
-					$this->db->update('users',  $data);
+				if($query->row_array()['m_status'] === 'Inactive'){
+					return FALSE;
 				}
+				return TRUE;
 				
 			}
+
 		}
 	}

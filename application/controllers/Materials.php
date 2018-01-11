@@ -27,6 +27,23 @@
         }
 
         public function tenderOpen($slug = NULL){
+
+            // Check if the user is not logged in.
+			if(!$this->session->userdata('logged_in')){
+                // Set message
+                $this->session->set_flashdata('flash-warning', 'Please Log In to continue');
+                redirect('users/login');
+            }
+            
+            $quary = $this->user_model->check_active_status("ADFDSF");
+
+            if(!$quary){
+                // Set message
+                $this->session->set_flashdata('flash-warning', 'Please be Active user');
+                redirect('home');
+            }
+            
+
             $data['material'] =$this ->material_model->get_materials($slug);
 
             if(empty($data['material'])){
@@ -36,6 +53,8 @@
             $data['material_title'] =$data['material']['rm_name'];
             $data['slug'] =$slug;
             $data['title'] = 'Open a Tender';
+
+            $data['address_arr'] =$this->user_model->get_address();
 
             $this->load->view('templates/header' , $data);
 			$this->load->view('materials/tenderOpen', $data);

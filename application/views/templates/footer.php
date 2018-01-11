@@ -4,10 +4,11 @@
     <!-- Placed at the end of the document so the pages load faster -->
     
     
-    <script type="text/javascript" src="<?php echo asset_url();?>js/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap.min.js"></script>
     <script type="text/javascript" src='<?php echo asset_url();?>js/bootstrapValidator.js'></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/validator.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/random.js"></script>
     
     
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->

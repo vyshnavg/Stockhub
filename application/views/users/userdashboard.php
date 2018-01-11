@@ -9,8 +9,8 @@
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
 			<li><a data-toggle="tab" href="#menu1">Messages</a></li>
-			<li><a data-toggle="tab" href="#menu2">My Storage</a></li>
-			<li><a data-toggle="tab" href="#menu3">My Booking</a></li>
+			<!-- <li><a data-toggle="tab" href="#menu2">My Storage</a></li>
+			<li><a data-toggle="tab" href="#menu3">My Booking</a></li> -->
 		</ul>
 
 		<div class="tab-content">
@@ -54,5 +54,11 @@
 					
 				</div>
 			</div>
+
+
+			<div id="menu1" class="tab-pane fade in active">
+				<h3> No messages</h3>
+			</div>
+			
 		</div>
  </div>

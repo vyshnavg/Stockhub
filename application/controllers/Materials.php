@@ -28,6 +28,8 @@
 
         public function tenderOpen($slug = NULL){
 
+            
+
             // Check if the user is not logged in.
 			if(!$this->session->userdata('logged_in')){
                 // Set message

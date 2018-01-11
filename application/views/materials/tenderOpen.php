@@ -21,40 +21,37 @@
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label for="inpuFname">Quantity</label>
-				<!-- <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
-					<input type="text" class="form-control" name="quantity" placeholder="Quantity" required/>
-					<ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="#">Separated link</a></li>
-					</ul>
-				</div> -->
-				<div class="input-group"> 
-					
-					<span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
-				
-					<input type="number" value="" class="form-control" min="0" name="text">
+			<div class="row">
 
-					<div class="input-group-btn bs-dropdown-to-select-group">
-						<button type="button" class="btn btn-default dropdown-toggle as-is bs-dropdown-to-select" data-toggle="dropdown">
-							<span data-bind="bs-drp-sel-label">Select...</span>
-							<input type="hidden" name="selected_value" data-bind="bs-drp-sel-value" value="">
-							<span class="caret"></span>
-							<span class="sr-only">Toggle Dropdown</span>
-						</button>
-						<ul class="dropdown-menu" role="menu" style="">
-							<li data-value="1"><a href="#">One</a></li>
-							<li data-value="2"><a href="#">Two</a></li>
-							<li data-value="3"><a href="#">Three</a></li>
-						</ul>
+				<div class="col-xs-8">
+					<div class="form-group">
+						<label for="inpuFname">Quantity</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
+							<input type="number" value="0" class="form-control" min="0" name="text">
+						</div>
 					</div>
+				</div>
 
-            	</div>
+				<div class="col-xs-4">
+					<div class="form-group">
+
+						<label for="sel1">Select Measurement:</label>
+						<select class="form-control" id="sel1">
+							<option>Kilograms</option>
+							<option>Pounds</option>
+							<option>Quintals</option>
+							<option>Litres</option>
+							<option>Gallons</option>
+							<option>Units</option>
+						</select>
+
+					</div>
+				</div>
+
 			</div>
+
+
 
 			<div class="row">
 				<div class="col-xs-6">
@@ -101,15 +98,15 @@
 				<label>Estimated Price</label>
 				<div class="input-group"> 
 					<span class="input-group-addon">₹</span>
-					<input type="number" class="form-control" name="estimated-price" min="0" step="100"required/>
+					<input type="number" class="form-control" name="estimated-price" value="0" min="0" step="100"required/>
 				</div>
 			</div> 
 
 			<div class="form-group">
-				<label>Extra Requirements / Comments</label>
+				<label>Extra Requirements / Comments (Optional)</label>
 				<div class="input-group"> 
 					<span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-					<textarea class="form-control" rows="5" id="comments" placeholder="Optional"></textarea>
+					<textarea class="form-control" rows="5" id="comments" placeholder="Max 300 characters" maxlength="300"></textarea>
 				</div>
 			</div>
 

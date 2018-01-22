@@ -171,10 +171,32 @@
 
 			$this->user_model->check_active_status();
 
-            $data['title'] = "Dashboard";
+			$data['title'] = "Dashboard";
+			
+			
+			$data['addresses_arr'] =$this->user_model->get_address();
             
 			$this->load->view('templates/header', $data);
 			$this->load->view('users/userdashboard', $data);
+			$this->load->view('templates/footer');
+		}
+		
+
+		public function manageAddress(){
+			
+			// Check if the user is not logged in.
+			if(!$this->session->userdata('logged_in')){
+				if($this->session->userdata('usertype') != 'user') {     // 	NOT WORKING
+					redirect('home');
+				}
+			}
+
+
+			$data['title'] = "Manage Address";
+			$data['addresses_arr'] =$this->user_model->get_address();
+            
+			$this->load->view('templates/header', $data);
+			$this->load->view('users/manageAddress', $data);
 			$this->load->view('templates/footer');
         }
 	}

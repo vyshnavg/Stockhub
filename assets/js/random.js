@@ -10,3 +10,8 @@ $(document).ready(function(e){
 		return false;
 	});
 });
+
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover({html:true,container: 'body'});   
+});

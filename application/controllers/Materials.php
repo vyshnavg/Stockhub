@@ -28,8 +28,6 @@
 
         public function tenderOpen($slug = NULL){
 
-            
-
             // Check if the user is not logged in.
 			if(!$this->session->userdata('logged_in')){
                 // Set message
@@ -57,7 +55,7 @@
             $data['title'] = 'Open a Tender';
 
             $data['addresses_arr'] =$this->user_model->get_address();
-print_r($data);
+            
             $this->load->view('templates/header' , $data);
 			$this->load->view('materials/tenderOpen', $data);
 			$this->load->view('templates/footer');

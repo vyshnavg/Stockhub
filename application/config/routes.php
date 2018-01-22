@@ -51,7 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $route['userdashboard'] = 'users/userdashboard';
-$route['manageAddress'] = 'users/manageAddress';
 
 $route['tenderOpen'] = 'materials/tenderOpen';
 $route['tenderOpen/(:any)'] = 'materials/tenderOpen/$1';

@@ -9,6 +9,7 @@
     <script type="text/javascript" src='<?php echo asset_url();?>js/bootstrapValidator.js'></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/validator.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/random.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/state.js"></script>
     
     
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->

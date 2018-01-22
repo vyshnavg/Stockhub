@@ -5,6 +5,7 @@
 
 
 <div id="tabnav" class="tabnav">
+
 	<div class="container">
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
@@ -15,6 +16,9 @@
 		</ul>
 
 		<div class="tab-content">
+
+			<!-- ========================= PROFILE SECTION ========================= -->
+
 			<div id="profile" class="tab-pane fade in active">
 				<div class="row">
 					
@@ -54,20 +58,131 @@
 							<button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="location.href = '#';" >Edit</button>
 						</div>
 
-						<div class="well">
-							<button type="button" class="btn btn-info btn-lg btn-block login-button" onclick="location.href = 'manageAddress';" >Manage Address Book</button>
-						</div>
-
 					</div>
 				</div>
 			</div>
+
+
+			<!-- ========================= MESSAGES SECTION ========================= -->
 
 			<div id="messages" class="tab-pane fade in">
 				<h3> Under Construction</h3>
 			</div>
 
+			<!-- ========================= ADDRESS SECTION ========================= -->
+
 			<div id="address" class="tab-pane fade in">
 				<h3> Manage Address</h3>
+
+				<div class="row is-flex">
+
+					<!-- == DISPLAY ADDRESS == -->
+
+					<?php foreach($addresses_arr as $address_arr) : ?>
+					<div class="col-sm-6 col-md-3">
+						<div class="well">
+							<div class="caption">
+								<h3 class="h3-margin-top-change"><?php echo ($address_arr['building_no']." , ".$address_arr['street']." , ".$address_arr['city']." , ".$address_arr['state']." , ".$address_arr['country'].". Pincode : ".$address_arr['pincode']); ?></h3>
+									
+									<div class="col-md-6">
+										<button class="btn btn-warning btn-block" type="button" href="#"><span class=" glyphicon glyphicon-wrench" aria-hidden="true"></span></button> 
+									</div>
+									<div class="col-md-6">
+										<button class="btn btn-danger btn-block" type="button" href="#" title="Do you want to delete the Address?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<button class='btn btn-danger btn-block' href='#'>Yes</button> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+									</div>
+							</div>
+						</div>
+					</div>
+					<?php endforeach; ?>
+
+					<!-- == ADD ADDRESS == -->
+
+					<div class="col-sm-6 col-md-3">
+						
+						<button class="btn btn-info plus-button-larger" type="button" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i></button>  
+
+
+						<!-- Modal -->
+						<div class="modal fade" id="addModal" role="dialog">
+							<div class="modal-dialog">
+							
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Add New Address</h4>
+								</div>
+								<div class="modal-body">
+									
+									<?php echo form_open('users/newAddress',' id="address_form"'); ?>
+										<div class="row">
+
+											<div class="col-md-8 col-md-offset-2">
+
+												<p  class="text-center"> <?php echo validation_errors(); ?></p>
+
+
+
+												<div class="form-group">
+													<label>Building/Flat No: </label>
+														<input type="text" class="form-control" id="buildno" name="buildno" required/>
+												</div>
+
+												<div class="form-group">
+													<label>Street: </label>
+													<textarea class="form-control" rows="3" id="street" name="street" placeholder="Max 100 characters" maxlength="100"></textarea>
+												</div>
+
+												<div class="form-group">
+													<label>Pincode No: </label>
+														<input type="number" class="form-control" id="pincode" name="pincode" required/>
+												</div>
+
+												<div class="form-group">
+													<label>Landmark (Optional): </label>
+														<input type="text" class="form-control" id="landmark" name="landmark" />
+												</div>
+
+												<div class="form-group">
+													<label>State: </label>
+													<select class="form-control" id="listBox" name="listBox" onchange='selct_district(this.value)'></select>
+												</div>
+
+												<div class="form-group">
+													<label>City: </label>
+													<select class="form-control" id='secondlist' name="secondlist"></select>
+												</div>
+
+												<div class="form-group">
+													<label>Country: </label>
+													<input type="text" class="form-control" value="India" id="country" name="country" data-toggle="popover" data-trigger="hover" data-content="Only available in India now." readonly="readonly"/>
+												</div>
+
+
+
+
+												
+												<button type="submit" class="btn btn-success btn-block">Submit</button>
+
+											</div>
+
+										</div>
+										
+									<?php echo form_close(); ?>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+							
+							</div>
+						</div>
+
+
+					</div>
+
+				</div>
 			</div>
 
 		</div>

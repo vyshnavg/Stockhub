@@ -136,4 +136,28 @@
 			}
 
 		}
+
+		public function newAddress(){
+			// address data array
+			$data = array(
+				'state' => $this->input->post('listBox'),
+				'city' => $this->input->post('secondlist'),
+				'street' => $this->input->post('street'),
+                'building_no' => $this->input->post('buildno'),
+				'land_mark' => $this->input->post('landmark'),
+				'pincode' => $this->input->post('pincode'),
+				'country' => $this->input->post('country')
+			);
+			// Insert address
+			$this->db->insert('address', $data);
+
+			$insert_id = $this->db->insert_id();
+
+			$newdata = array(
+				'm_id' => $this->session->userdata('user_id'),
+				'add_id' => $insert_id
+			);
+			// Insert address dict
+			return $this->db->insert('m_address_dict', $newdata);
+		}
 	}

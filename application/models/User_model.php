@@ -66,10 +66,10 @@
 			// $this->db->where('m_id', $id);
 			// $query = $this->db->get();
 
-			$this->db->join('address', 'address.add_id = users.m_address_id');
+			$this->db->join('address', 'address.add_id = m_address_dict.add_id');
 			
-			$query = $this->db->get('users', array('m_id' => $id));
-			return $query->row_array();
+			$query = $this->db->get_where('m_address_dict', array('m_id' => $id));
+			return $query->result_array();
 
 
 		}

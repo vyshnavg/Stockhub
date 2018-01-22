@@ -41,6 +41,8 @@
 .container{
     align-items: center;
     text-align: left;
-    display:none;
-    
+}
+
+.tab-content{
+    margin-top: 10px;
 }

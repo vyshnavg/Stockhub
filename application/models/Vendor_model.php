@@ -45,4 +45,20 @@
 				return false;
 			}
 		}
+
+		public function get_address(){
+			$id = $this->session->userdata('user_id');
+
+			// $this->db->select('m_address_id');
+			// $this->db->from('users');
+			// $this->db->where('m_id', $id);
+			// $query = $this->db->get();
+
+			$this->db->join('address', 'address.add_id = users.m_address_id');
+			
+			$query = $this->db->get('users', array('m_id' => $id));
+			return $query->row_array();
+
+
+		}
 	}

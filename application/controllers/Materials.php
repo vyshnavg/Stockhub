@@ -56,8 +56,8 @@
             $data['slug'] =$slug;
             $data['title'] = 'Open a Tender';
 
-            $data['address_arr'] =$this->user_model->get_address();
-
+            $data['addresses_arr'] =$this->user_model->get_address();
+print_r($data);
             $this->load->view('templates/header' , $data);
 			$this->load->view('materials/tenderOpen', $data);
 			$this->load->view('templates/footer');

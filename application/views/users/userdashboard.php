@@ -8,7 +8,8 @@
 	<div class="container">
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
-			<li><a data-toggle="tab" href="#menu1">Messages</a></li>
+			<li class="inactive"><a data-toggle="tab" href="#menu1">Messages</a></li>
+			<li class="inactive"><a data-toggle="tab" href="#address">Address</a></li>
 			<!-- <li><a data-toggle="tab" href="#menu2">My Storage</a></li>
 			<li><a data-toggle="tab" href="#menu3">My Booking</a></li> -->
 		</ul>
@@ -22,6 +23,7 @@
 					</div>
 					
 					<div class="col-md-6">
+						<div class="well">
 						<?php
 
 									$std = ucfirst($this->session->userdata('user_id'));
@@ -49,15 +51,21 @@
 								// 			}
 										}
 						?>
-						<button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="location.href = 'Ken-UserEdit.php';" >Edit</button>
+
+
+						<button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="location.href = '#';" >Edit</button>
+						</div>
+
+						<div class="well">
+							<button type="button" class="btn btn-info btn-lg btn-block login-button" onclick="location.href = '#';" >Manage Address Book</button>
+						</div>
 					</div>
-					
 				</div>
 			</div>
 
 
-			<div id="menu1" class="tab-pane fade in active">
-				<h3> No messages</h3>
+			<div id="menu1" class="tab-pane fade in">
+				<h3> Under Construction</h3>
 			</div>
 			
 		</div>

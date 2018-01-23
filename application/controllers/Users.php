@@ -190,12 +190,10 @@
 				redirect('home');
 			}
 			
-			
-				
 				$this->user_model->newAddress();
 				// Set message
-				$this->session->set_flashdata('flash-success', 'You are now registered and can log in');
-				redirect('home');
+				$this->session->set_flashdata('flash-success', 'You added new Address');
+				redirect('userdashboard');
 			
 		}
 

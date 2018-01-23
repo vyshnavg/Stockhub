@@ -125,7 +125,7 @@
 
 												<div class="form-group">
 													<label>Building/Flat No: </label>
-														<input type="text" class="form-control" id="buildno" name="buildno" required/>
+														<input type="text" class="form-control" id="buildno" name="buildno" maxlength="24" required/>
 												</div>
 
 												<div class="form-group">
@@ -135,22 +135,22 @@
 
 												<div class="form-group">
 													<label>Pincode No: </label>
-														<input type="number" class="form-control" id="pincode" name="pincode" required/>
+														<input type="number" class="form-control" id="pincode" name="pincode"  min="100000" max="999999" required/>
 												</div>
 
 												<div class="form-group">
 													<label>Landmark (Optional): </label>
-														<input type="text" class="form-control" id="landmark" name="landmark" />
+														<input type="text" class="form-control" id="landmark" name="landmark" maxlength="49" />
 												</div>
 
 												<div class="form-group">
 													<label>State: </label>
-													<select class="form-control" id="listBox" name="listBox" onchange='selct_district(this.value)'></select>
+													<select class="form-control" id="listBox" name="listBox" maxlength="24" onchange='selct_district(this.value)'></select>
 												</div>
 
 												<div class="form-group">
 													<label>City: </label>
-													<select class="form-control" id='secondlist' name="secondlist"></select>
+													<select class="form-control" id='secondlist' maxlength="29" name="secondlist"></select>
 												</div>
 
 												<div class="form-group">

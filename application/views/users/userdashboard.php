@@ -83,12 +83,13 @@
 						<div class="well">
 							<div class="caption">
 								<h3 class="h3-margin-top-change"><?php echo ($address_arr['building_no']." , ".$address_arr['street']." , ".$address_arr['city']." , ".$address_arr['state']." , ".$address_arr['country'].". Pincode : ".$address_arr['pincode']); ?></h3>
-									
-									<div class="col-md-6">
-										<button class="btn btn-warning btn-block" type="button" href="#"><span class=" glyphicon glyphicon-wrench" aria-hidden="true"></span></button> 
-									</div>
-									<div class="col-md-6">
-										<button class="btn btn-danger btn-block" type="button" href="#" title="Do you want to delete the Address?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<button class='btn btn-danger btn-block' href='#'>Yes</button> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+									<div class="row">
+										<div class="col-md-6">
+											<button class="btn btn-warning btn-block" type="button" href="#"><span class=" glyphicon glyphicon-wrench" aria-hidden="true"></span></button> 
+										</div>
+										<div class="col-md-6">
+											<button class="btn btn-danger btn-block" type="button" href="#" title="Do you want to delete the Address?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<button class='btn btn-danger btn-block' href='#'>Yes</button> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+										</div>
 									</div>
 							</div>
 						</div>

@@ -24,7 +24,7 @@ $(document).ready(function(){
 								items.push('<a class="list-group-item linkInSearch" href="http://localhost/Stockhub/materials/'+val.rm_slug+'"> <b>'+ val.rm_name +'</b></a>');
 
 								if(temp==0){
-									items.push('<a class="list-group-item linkInSearch" href="http://localhost/Stockhub/materials"> <b> Category : '+ val.subcat_name +'</b></a>');
+									items.push('<a class="list-group-item linkInSearch" href="http://localhost/Stockhub/materials#'+val.subcat_name+'"> <b> Category : '+ val.subcat_name +'</b></a>');
 								}
 								temp=temp+1;
 							}); 

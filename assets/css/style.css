@@ -1,3 +1,7 @@
+body{
+    background: #FAFAFA;
+}
+
 .material-date{
     background: #f4f4f4;
     padding: 4px;
@@ -57,6 +61,7 @@
 
 .thumbnail{
     margin-bottom: 0px;
+    border: none;
 }
 
 .h3-margin-top-change{
@@ -83,6 +88,54 @@
     align-items:center;
 }
 
-.linkInSearch{
-    
+/* ========================= */
+
+.thumbnail img {
+    height:250px;
+    width:100%;
+}
+
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .flex-text {
+    flex-grow: 1;
+    text-align: justify;
+    height:160px;
+}
+.post-thumb{
+    border: none;
+}
+/* ========================= */
+ul {
+    list-style-type: none;
+	padding: 0;
+}
+
+#sidebar-menu{
+    padding-top: 15px;
+}
+
+#sidebar-menu .main-menu a {
+    display: block;
+	font-size: 13px;
+	font-weight: 500;
+	color: #999;
+	padding: 4px 20px;
+}
+#sidebar-menu .main-menu a:hover {
+	color: #11427D;
+	text-decoration: none;
+	background-color: transparent;
+	border-left: 1px solid #11427D;
+}
+
+#sidebar-menu .sub-menu a {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 30px;
+	font-size: 12px;
+	font-weight: 400;
 }

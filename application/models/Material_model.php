@@ -8,16 +8,24 @@
 
         public function get_materials($slug = FALSE){
 
+			$this->db->join('material_subcat','material_subcat.subcat_id = raw_material.material_subcat_id');
+			
 			if($slug === FALSE){
-
-				$this->db->join('material_subcat','material_subcat.subcat_id = raw_material.material_subcat_id');
-				
 				$query = $this->db->get('raw_material');
 				return $query->result_array();
 			}
-			$this->db->join('material_subcat','material_subcat.subcat_id = raw_material.material_subcat_id');
+			
 			$query = $this->db->get_where('raw_material', array('rm_slug' => $slug));
 			return $query->row_array();
+		}
+
+		public function get_categorys(){
+
+			$this->db->select("*");
+			$this->db->from('material_subcat');
+			$query = $this->db->get();
+			return $query->result_array();
+
 		}
 		
 		public function get_homesearch($search){

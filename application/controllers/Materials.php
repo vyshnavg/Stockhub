@@ -5,6 +5,7 @@
             $data['title'] = 'Materials';
 
             $data['materials'] = $this->material_model->get_materials();
+            $data['categorys'] = $this->material_model->get_categorys();
             
             $this->load->view('templates/header' , $data);
 			$this->load->view('materials/index', $data);

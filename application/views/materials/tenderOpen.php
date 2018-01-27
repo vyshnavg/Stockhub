@@ -28,7 +28,7 @@
 						<label for="inpuFname">Quantity</label>
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
-							<input type="number" value="0" class="form-control" min="0" name="text">
+							<input type="number" value="1" class="form-control" min="1" name="text">
 						</div>
 					</div>
 				</div>

@@ -60,5 +60,12 @@
 			$this->load->view('materials/tenderOpen', $data);
 			$this->load->view('templates/footer');
         }
+
+        public function homesearch(){
+			$search=  $this->input->post('search');
+            $query = $this->material_model->get_homesearch($search);
+            // print_r(json_encode($query));
+			echo json_encode ($query);
+		}
         
 	}

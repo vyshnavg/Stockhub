@@ -1,5 +1,8 @@
 $(document).ready(function(){
 	$("#search").keyup(function(){
+		if($("#search").val().length<=2){
+			$('#finalResult').html('');
+		}
 		if($("#search").val().length>2){
 			$.ajax({
 				type: "post",

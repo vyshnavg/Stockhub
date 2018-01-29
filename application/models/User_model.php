@@ -58,19 +58,22 @@
 			}
 		}
 
-		public function get_address(){
-			$id = $this->session->userdata('user_id');
-
-			// $this->db->select('m_address_id');
-			// $this->db->from('users');
-			// $this->db->where('m_id', $id);
-			// $query = $this->db->get();
-
-			$this->db->join('address', 'address.add_id = m_address_dict.add_id');
+		public function get_address($choice = 0,$value = NULL){
 			
-			$query = $this->db->get_where('m_address_dict', array('m_id' => $id));
-			return $query->result_array();
+			//ALL ADDRESS UNDER A USER ID
+			if($choice === 0){
+				$id = $this->session->userdata('user_id');
 
+				$this->db->join('address', 'address.add_id = m_address_dict.add_id');
+				$query = $this->db->get_where('m_address_dict', array('m_id' => $id));
+				return $query->result_array();
+			}
+
+			//WHEN HAVING A ADD_ID AND WANT ALL INFO
+			elseif($choice === 1 and $value != NULL){
+				$query = $this->db->get_where('address', array('add_id' => $value));
+				return $query->row_array();
+			}
 
 		}
 
@@ -160,4 +163,30 @@
 			// Insert address dict
 			return $this->db->insert('m_address_dict', $newdata);
 		}
+
+
+
+		public function delAddress($data){
+			// Delete address
+			$this->db->delete('m_address_dict', array('add_id' => $data));
+			return $this->db->delete('address', array('add_id' => $data));
+		}
+
+		public function editAddress($data){
+			// address data array
+			$data = array(
+				'state' => $this->input->post('listBox'),
+				'city' => $this->input->post('secondlist'),
+				'street' => $this->input->post('street'),
+                'building_no' => $this->input->post('buildno'),
+				'land_mark' => $this->input->post('landmark'),
+				'pincode' => $this->input->post('pincode'),
+				'country' => $this->input->post('country')
+			);
+			// Edit address
+			$this->db->delete('m_address_dict', array('add_id' => $data));
+			return $this->db->delete('address', array('add_id' => $data));
+		}
+
+
 	}

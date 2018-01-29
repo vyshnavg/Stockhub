@@ -83,13 +83,18 @@
 						<div class="well">
 							<div class="caption">
 								<h3 class="h3-margin-top-change"><?php echo ($address_arr['building_no']." , ".$address_arr['street']." , ".$address_arr['city']." , ".$address_arr['state']." , ".$address_arr['country'].". Pincode : ".$address_arr['pincode']); ?></h3>
+									
 									<div class="row">
+										
 										<div class="col-md-6">
-											<button class="btn btn-warning btn-block" type="button" href="#"><span class=" glyphicon glyphicon-wrench" aria-hidden="true"></span></button> 
+											<button class="btn btn-warning btn-block" type="button" onclick="location.href='<?php echo base_url(); ?>users/viewAddress/<?php echo ($address_arr['add_id'])?>'"><span class=" glyphicon glyphicon-wrench" aria-hidden="true"></span></button> 
 										</div>
 										<div class="col-md-6">
-											<button class="btn btn-danger btn-block" type="button" href="#" title="Do you want to delete the Address?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<button class='btn btn-danger btn-block' href='#'>Yes</button> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+											<button class="btn btn-danger btn-block" type="button" href="#" title="Do you want to delete this Address?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<form action='<?php echo base_url(); ?>users/delAddress/<?php echo($address_arr['add_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 										</div>
+
+
+										
 									</div>
 							</div>
 						</div>
@@ -103,11 +108,11 @@
 						<button class="btn btn-info plus-button-larger" type="button" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i></button>  
 
 
-						<!-- Modal -->
+						<!-- Add Modal -->
 						<div class="modal fade" id="addModal" role="dialog">
 							<div class="modal-dialog">
 							
-							<!-- Modal content-->
+							<!-- Add Modal content-->
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -146,12 +151,12 @@
 
 												<div class="form-group">
 													<label>State: </label>
-													<select class="form-control" id="listBox" name="listBox" maxlength="24" onchange='selct_district(this.value)'></select>
+													<select class="form-control" id="listBox" name="listBox" maxlength="24" onchange='selct_district(this.value)' ></select>
 												</div>
 
 												<div class="form-group">
 													<label>City: </label>
-													<select class="form-control" id='secondlist' maxlength="29" name="secondlist"></select>
+													<select class="form-control" id='secondlist' maxlength="29" name="secondlist" ></select>
 												</div>
 
 												<div class="form-group">

@@ -190,12 +190,82 @@
 				redirect('home');
 			}
 			
-				$this->user_model->newAddress();
-				// Set message
-				$this->session->set_flashdata('flash-success', 'You added new Address');
-				redirect('userdashboard');
+			$this->user_model->newAddress();
+			// Set message
+			$this->session->set_flashdata('flash-success', 'You added new Address');
+			redirect('userdashboard');
 			
 		}
+
+		//Delete address
+		public function delAddress($address = NULL){
+
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			// No address passed
+			elseif($address === NULL){
+				$this->session->set_flashdata('flash-warning', 'Non Existing Address');
+				redirect('userdashboard');
+			}
+			//execute code
+			else{
+				$this->user_model->delAddress($address);
+				// Set message
+				$this->session->set_flashdata('flash-success', 'You deleted a Address');
+				redirect('userdashboard');
+			}
+			
+		}
+
+
+		//View address before editing
+		public function viewAddress($address = NULL){
+
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			// No address passed
+			elseif($address === NULL){
+				redirect('userdashboard');
+			}
+			//execute code
+			else{
+				$data['title'] = "Edit Address";
+				$data['address_arr'] =$this->user_model->get_address(1,$address);
+				$this->load->view('templates/header', $data);
+				$this->load->view('users/viewAddress', $data);
+				$this->load->view('templates/footer');
+			}
+			
+		}
+
+
+		
+		//Edit address
+		public function editAddress($address = NULL){
+
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			// No address passed
+			elseif($address === NULL){
+				$this->session->set_flashdata('flash-warning', 'Non Existing Address');
+				redirect('userdashboard');
+			}
+			//execute code
+			else{
+				$this->user_model->editAddress($address);
+				// Set message
+				$this->session->set_flashdata('flash-success', 'You edited a Address');
+				redirect('userdashboard');
+			}
+			
+		}
+
 
 
 

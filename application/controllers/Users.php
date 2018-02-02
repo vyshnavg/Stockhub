@@ -175,7 +175,7 @@
 			
 			
 			$data['addresses_arr'] =$this->user_model->get_address();
-            
+			
 			$this->load->view('templates/header', $data);
 			$this->load->view('users/userdashboard', $data);
 			$this->load->view('templates/footer');
@@ -185,9 +185,15 @@
 		//Add new address
 		public function newAddress(){
 
+			$data['addresses_arr'] =$this->user_model->get_address();
+			
 			// Check if the user is already logged in.
 			if(!$this->session->userdata('logged_in')){
 				redirect('home');
+			}
+			elseif(sizeof($data['addresses_arr']) >= 2){
+				$this->session->set_flashdata('flash-warning', 'Only can add 2 Address');
+				redirect('userdashboard');
 			}
 			
 			$this->user_model->newAddress();
@@ -229,6 +235,7 @@
 			}
 			// No address passed
 			elseif($address === NULL){
+				$this->session->set_flashdata('flash-warning', 'Non Existing Address');
 				redirect('userdashboard');
 			}
 			//execute code
@@ -243,7 +250,7 @@
 		}
 
 
-		
+
 		//Edit address
 		public function editAddress($address = NULL){
 

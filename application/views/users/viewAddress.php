@@ -1,7 +1,10 @@
-<?php echo form_open('users/newAddress',' id="address_form"'); ?>
+
+<?php echo form_open('users/editAddress/'.($address_arr['add_id']),' id="address_form"'); ?>
     <div class="row">
 
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-4 col-md-offset-4  col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
+
+        <h1 class="text-center"><?= $title; ?></h1>
 
             <p  class="text-center"> <?php echo validation_errors(); ?></p>
 
@@ -30,12 +33,12 @@
 
             <div class="form-group">
                 <label>State: </label>
-                <select class="form-control" id="listBox" name="listBox" maxlength="24" onchange='selct_district(this.value)'></select>
+                <select class="form-control" id="listBox" name="listBox" maxlength="24" onchange='selct_district(this.value)' required></select>
             </div>
 
             <div class="form-group">
                 <label>City: </label>
-                <select class="form-control" id='secondlist' maxlength="29" name="secondlist"></select>
+                <select class="form-control" id='secondlist' maxlength="29" name="secondlist" required></select>
             </div>
 
             <div class="form-group">
@@ -46,8 +49,14 @@
 
 
 
-            
-            <button type="submit" class="btn btn-success btn-block">Submit</button>
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="btn btn-default btn-block" href="<?php echo base_url(); ?>userdashboard">Go Back</a>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-success btn-block">Submit</button>
+                </div>
+            </div>
 
         </div>
 

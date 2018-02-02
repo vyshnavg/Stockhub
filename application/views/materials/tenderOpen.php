@@ -1,4 +1,4 @@
-<?php echo form_open('users/register',' id="tenderOpen_form"'); ?>
+<?php echo form_open('materials/tenderRegister/'.$slug,' id="tenderRegister_form"'); ?>
 	<div class="row">
 
 		<div class="col-md-6 col-md-offset-3   col-xs-10 col-xs-offset-1   col-sm-8 col-sm-offset-2   col-lg-4 col-lg-offset-4">
@@ -28,7 +28,7 @@
 						<label for="inpuFname">Quantity</label>
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
-							<input type="number" value="1" class="form-control" min="1" name="text">
+							<input type="number" value="1" class="form-control" min="1" name="tender_quantity">
 						</div>
 					</div>
 				</div>
@@ -37,13 +37,13 @@
 					<div class="form-group">
 
 						<label for="sel1">Select Measurement:</label>
-						<select class="form-control" id="sel1">
-							<option>Kilograms</option>
-							<option>Pounds</option>
-							<option>Quintals</option>
-							<option>Litres</option>
-							<option>Gallons</option>
-							<option>Units</option>
+						<select class="form-control" id="sel1" name="tender_quantity_unit">
+							<option value="Kilograms">Kilograms</option>
+							<option value="Pounds">Pounds</option>
+							<option value="Quintals">Quintals</option>
+							<option value="Litres">Litres</option>
+							<option value="Gallons">Gallons</option>
+							<option value="Units">Units</option>
 						</select>
 
 					</div>
@@ -88,7 +88,7 @@
 				</div>
 				<?php endforeach; ?>
 				<div class="text-center well well-sm">
-					<a href="#"> Manage Address Book </a>
+					<a href="<?php echo base_url(); ?>userdashboard"> Manage Address Book </a>
 				</div>
 
 			</div>
@@ -105,7 +105,7 @@
 				<label>Extra Requirements / Comments (Optional)</label>
 				<div class="input-group"> 
 					<span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-					<textarea class="form-control" rows="5" id="comments" placeholder="Max 300 characters" maxlength="300"></textarea>
+					<textarea class="form-control" rows="5" id="comments" placeholder="Max 300 characters" maxlength="300" name="extra_info"></textarea>
 				</div>
 			</div>
 

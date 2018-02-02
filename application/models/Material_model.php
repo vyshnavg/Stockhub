@@ -39,5 +39,24 @@
 			$query = $this->db->get();
 			return $query->result();
 		}
+
+		public function tenderRegister($material_id){
+			// User data array
+			$data = array(
+				'm_id' => $this->session->userdata('user_id'),
+				'raw_material_id' => $material_id,
+				'tender_quantity' => $this->input->post('tender_quantity'),
+				'tender_quantity_unit' => $this->input->post(''),
+				'date_of_submission' => date("d(D) - M - Y"),
+				'time_submission' => date("H:i"),
+				'date_expire' => $this->input->post('doe'),
+				'time_expire' => $this->input->post('toe'),
+				'delivery_location' => $this->input->post('deliveryLocation'),
+				'estimated_price' => $this->input->post('estimated-price'),
+				'extra_info' => $this->input->post('extra_info')
+			);
+			// Insert user
+			return $this->db->insert('tender', $data);
+		}
         
 	}

@@ -53,7 +53,7 @@
 
             $data['material_title'] =$data['material']['rm_name'];
             $data['slug'] =$slug;
-            $data['title'] = 'Open a Tender';
+            $data['title'] = 'Create a Tender';
 
             $data['addresses_arr'] =$this->user_model->get_address();
             
@@ -69,4 +69,25 @@
 			echo json_encode ($query);
 		}
         
+        public function tenderRegister($slug = NULL){
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+
+            $data['title'] = 'Create a Tender';
+
+            $data['material'] =$this->material_model->get_materials($slug);
+
+            if(empty($data['material'])){
+                show_404();
+            }
+
+            $material_id =$data['material']['raw_material_id'];
+            
+            $this->material_model->tenderRegister($material_id);
+            // Set message
+            $this->session->set_flashdata('flash-success', 'Created a Tender');
+            redirect('home');
+		}
 	}

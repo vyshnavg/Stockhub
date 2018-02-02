@@ -172,7 +172,7 @@
 			return $this->db->delete('address', array('add_id' => $data));
 		}
 
-		public function editAddress($data){
+		public function editAddress($address_id){
 			// address data array
 			$data = array(
 				'state' => $this->input->post('listBox'),
@@ -184,8 +184,8 @@
 				'country' => $this->input->post('country')
 			);
 			// Edit address
-			$this->db->delete('m_address_dict', array('add_id' => $data));
-			return $this->db->delete('address', array('add_id' => $data));
+			$this->db->where('add_id', $address_id);
+			return $this->db->update('address', $data);
 		}
 
 

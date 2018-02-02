@@ -6,14 +6,9 @@
     <title>Stockhub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-<<<<<<< HEAD
     <!-- <link rel="stylesheet" type="text/css"  href="https://bootswatch.com/3/flatly/bootstrap.min.css" /> -->
     <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/bootstrap.min.css" />
 
-=======
-    <link rel="stylesheet" type="text/css"  href="https://bootswatch.com/3/flatly/bootstrap.min.css">
-    <!-- <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/bootstrap.min.css" /> -->
->>>>>>> 4a4afd92b0180a58ffce894605c769a2b3a4822a
     <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/style.css" />
     <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/animate.min.css" />
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"> -->

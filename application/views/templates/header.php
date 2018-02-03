@@ -39,6 +39,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="<?php if ($title=="Materials") {echo "active"; } else  {echo "noactive";} ?>"> <a href="<?php echo base_url(); ?>materials">Materials</a></li>
+                <li class="<?php if ($title=="Tenders") {echo "active"; } else  {echo "noactive";} ?>"> <a href="<?php echo base_url(); ?>tenders">Tenders</a></li>
                 <li class="<?php if ($title=="About") {echo "active"; } else  {echo "noactive";} ?>"> <a href="<?php echo base_url(); ?>about">About</a></li>
                 <!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

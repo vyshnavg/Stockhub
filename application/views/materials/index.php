@@ -29,11 +29,11 @@
 
 
 
-<div class="row">
-    <div id="sidebar-menu" class="col-md-1 col-md-offset-1 hidden-xs hidden-sm">
+<div class="row" data-spy="scroll" data-target="#sidebar-menu" data-offset="20">
+    <nav id="sidebar-menu" class="col-md-1 col-md-offset-1 hidden-xs hidden-sm"  >
         <ul class="main-menu nav nav-stacked affix"> <!-- GETTING THE VALUES FROM RANDOM.JS -->
     	</ul>
-    </div>
+    </nav>
 
     <div id="static-content" class="col-md-10">
     <?php foreach($categorys as $category) : ?>

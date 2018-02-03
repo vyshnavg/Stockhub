@@ -97,7 +97,7 @@
 				<label>Estimated Price</label>
 				<div class="input-group"> 
 					<span class="input-group-addon">₹</span>
-					<input type="number" class="form-control" name="estimated-price" value="0" min="0" step="100"required/>
+					<input type="number" class="form-control" name="estimated-price" value="0" min="0" required/>
 				</div>
 			</div> 
 

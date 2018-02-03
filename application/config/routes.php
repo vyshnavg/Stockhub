@@ -58,6 +58,8 @@ $route['tenderOpen/(:any)'] = 'materials/tenderOpen/$1';
 $route['materials'] = 'materials/index';
 $route['materials/(:any)'] = 'materials/view/$1';
 
+$route['tenders'] = 'tenders/index';
+
 $route['default_controller'] = 'pages/view';
 $route['(:any)'] = 'Pages/view/$1';
 $route['assets/(:any)'] = 'assets/$1';

@@ -1,76 +1,91 @@
-<div class="container">
+<!-- <div class="container"> -->
     
-    <h1><?= $title ?></h1>
+    
 
-    <input class="form-control" id="tenderSearchInput" type="text" placeholder="Search..">
-    <br>
+    <div class="row">
+    
+        <div class="col-md-2">
+            <h1>     </h1>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Show results for</h3>
+                </div>
+                <div class="panel-body">
+                    
+                        <h3 class="panel-title">Price</h3>
+                            <li class="list-unstyled"><a href="#">Under ₹10,000</a></li>
+                            <li class="list-unstyled"><a href="#">₹1,000 - ₹10,000</a></li>
+                            <li class="list-unstyled"><a href="#">₹10,000 - ₹50,000</a></li>
+                            <li class="list-unstyled"><a href="#">₹50,000 - ₹1,00,000</a></li>
+                            <li class="list-unstyled"><a href="#">Over ₹1,00,000</a></li>
+                        <hr>
 
-    <table class="table table-striped table-hover ">
-        
-        <thead>
-            <!-- <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            </tr> -->
+                        <h3 class="panel-title">Raw Material</h3>
+                            <select class="form-control" id="sel1" name="tender_quantity_unit">
+                                <option value="Kilograms">Kilograms</option>
+                                <option value="Pounds">Pounds</option>
+                                <option value="Quintals">Quintals</option>
+                                <option value="Litres">Litres</option>
+                                <option value="Gallons">Gallons</option>
+                                <option value="Units">Units</option>
+                            </select>
+                        <hr>
+            </div>
 
-            <tr>
-                <th>SI No</th>
-                <th>tender</th>
-                <th>Quantity</th> <!-- quuanitiy and unit combined-->
-                <th>Time till Expiry</th>
-                <th>Estimated Price (₹)</th>
-            </tr>
+            </div>
+        </div>
 
-        </thead>
+        <div class="col-md-10">
 
-        <tbody id="tenderSearchTable">
-            <!-- <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-            </tr>
-            <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@mail.com</td>
-            </tr>
-            <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@greatstuff.com</td>
-            </tr>
-            <tr>
-                <td>Anja</td>
-                <td>Ravendale</td>
-                <td>a_r@test.com</td>
-            </tr> -->
-            <?php $i = 1; ?>
-            <?php foreach($tenders as $tender): ?>
+            <h1><?= $title ?></h1>
+
+            <input class="form-control" id="tenderSearchInput" type="text" >
+            <br>
+
+            <table class="table table-striped table-hover " id="tenderSearchTable">
+                
+                <thead>
                     <tr>
-                        <td><?php echo($i++);?></td>
-                        <td><?php echo ($tender['rm_name']);?></td>
-                        <td><?php echo ($tender['tender_quantity']." ".$tender['tender_quantity_unit']);?> </td>
-                        <td>
-                        <?php
-                            
-                            $expdate = $tender['date_expire'];
-                            $exptime = $tender['time_expire'];
-                            $exp = date('Y-m-d H:i:s', strtotime("$expdate $exptime "));
-                            
-                            $datetime1 = new DateTime();
-                            $datetime2 = new DateTime($exp);
-                            $interval = $datetime1->diff($datetime2);
-                            echo $interval->format('%d day %h hours %i minutes');
-                            
-                        ?>
-                        </td>
-                        <td><?php echo ($tender['estimated_price']);?></td>
+                        <th>SI No</th>
+                        <th onclick="sortTable(0)" >Raw Material</th>
+                        <th onclick="sortTable(1)" >Quantity</th> <!-- quuanitiy and unit combined-->
+                        <th onclick="sortTable(2)" >Time till Expiry</th>
+                        <th onclick="sortTable(3)" >Estimated Price (₹)</th>
+                        <th>More Info</th>
                     </tr>
-            <?php endforeach; ?>
+                </thead>
 
-        </tbody>
+                <tbody id="tenderSearchTableBody">
+                    <?php $i = 1; ?>
+                    <?php foreach($tenders as $tender): ?>
+                            <tr>
+                                <td><?php echo($i++);?></td>
+                                <td><?php echo ($tender['rm_name']);?></td>
+                                <td><?php echo ($tender['tender_quantity']." ".$tender['tender_quantity_unit']);?> </td>
+                                <td>
+                                <?php
+                                    
+                                    $expdate = $tender['date_expire'];
+                                    $exptime = $tender['time_expire'];
+                                    $exp = date('Y-m-d H:i:s', strtotime("$expdate $exptime "));
+                                    
+                                    $datetime1 = new DateTime();
+                                    $datetime2 = new DateTime($exp);
+                                    $interval = $datetime1->diff($datetime2);
+                                    echo $interval->format('%d day %h hours %i minutes');
+                                    
+                                ?>
+                                </td>
+                                <td><?php echo ($tender['estimated_price']);?></td>
+                                <td><a href="<?php echo base_url(); ?>tenders/view/<?php echo($tender['tender_id']); ?>">View</a></td>
+                            </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table> 
+        </div>
+        
+    </div>
 
-    </table> 
+    
 
-</div>
+<!-- </div> -->

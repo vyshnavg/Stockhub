@@ -9,7 +9,7 @@
             <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" name="search" id="search" autofocus>
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                <button class="btn btn-default" type="button" ><i class="glyphicon glyphicon-search"></i></button>
             </span>   
             </div>
             <div class="list-group" id="finalResult"></div>

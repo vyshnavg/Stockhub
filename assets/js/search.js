@@ -46,3 +46,18 @@ $(document).ready(function(){
    	return false;
 	});
 });
+
+$(document).ready(function(){
+	var text = ["Search Raw Materials", "Search Products", "Search Categories" , "Search Prices"];
+	var counter = 0;
+	var elem = document.getElementById("search");
+	setInterval(change, 1500);
+
+	function change() {
+	elem.placeholder = text[counter];
+	counter++;
+		if (counter >= text.length) {
+			counter = 0;
+		}
+	}
+});

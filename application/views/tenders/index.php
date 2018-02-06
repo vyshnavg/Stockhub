@@ -51,15 +51,14 @@
                         <th onclick="sortTable(1)" >Quantity</th> <!-- quuanitiy and unit combined-->
                         <th onclick="sortTable(2)" >Time till Expiry</th>
                         <th onclick="sortTable(3)" >Estimated Price (₹)</th>
-                        <th>More Info</th>
                     </tr>
                 </thead>
 
                 <tbody id="tenderSearchTableBody">
                     <?php $i = 1; ?>
                     <?php foreach($tenders as $tender): ?>
-                            <tr>
-                                <td><?php echo($i++);?></td>
+                            <tr> 
+                                <td> <a href="<?php echo base_url(); ?>tenders/view/<?php echo($tender['tender_id']); ?>"></a> <?php echo($i++);?></td>
                                 <td><?php echo ($tender['rm_name']);?></td>
                                 <td><?php echo ($tender['tender_quantity']." ".$tender['tender_quantity_unit']);?> </td>
                                 <td>
@@ -77,7 +76,7 @@
                                 ?>
                                 </td>
                                 <td><?php echo ($tender['estimated_price']);?></td>
-                                <td><a href="<?php echo base_url(); ?>tenders/view/<?php echo($tender['tender_id']); ?>">View</a></td>
+                                
                             </tr>
                     <?php endforeach; ?>
                 </tbody>

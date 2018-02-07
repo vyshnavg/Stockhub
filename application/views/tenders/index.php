@@ -22,14 +22,9 @@
 
                         <h3 class="panel-title">Raw Material</h3>
                             <select class="form-control" id="sel1" name="tender_quantity_unit">
-                                <option value="Kilograms">Kilograms</option>
-                                <option value="Pounds">Pounds</option>
-                                <option value="Quintals">Quintals</option>
-                                <option value="Litres">Litres</option>
-                                <option value="Gallons">Gallons</option>
-                                <option value="Units">Units</option>
+                                <option value="wood">Wood</option>
+                                <option value="glass">Glass</option>
                             </select>
-                        <hr>
             </div>
 
             </div>
@@ -39,7 +34,7 @@
 
             <h1><?= $title ?></h1>
 
-            <input class="form-control" id="tenderSearchInput" type="text" >
+            <input class="form-control" id="tenderSearchInput" type="text" placeholder="Search" >
             <br>
 
             <table class="table table-striped table-hover " id="tenderSearchTable">
@@ -48,7 +43,7 @@
                     <tr>
                         <th>SI No</th>
                         <th onclick="sortTable(0)" >Raw Material</th>
-                        <th onclick="sortTable(1)" >Quantity</th> <!-- quuanitiy and unit combined-->
+                        <th onclick="sortTable(1)" >Quantity</th> <!-- quantity and unit combined-->
                         <th onclick="sortTable(2)" >Time till Expiry</th>
                         <th onclick="sortTable(3)" >Estimated Price (₹)</th>
                     </tr>

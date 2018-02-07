@@ -1,6 +1,8 @@
 <div class="container"> 
     
-    <h2 style="color:black;">StockHub is a raw material finder and procurement website which aids future and present manufacturers create links with vendors all across the country. It is an online platform for the manufacturing industry.<br><br><br></h2>
+    <h2 style="color:black;">StockHub is a raw material finder and procurement website which aids future and present manufacturers create links with vendors all across the country. It is an online platform for the manufacturing industry.</h2>
+
+    <hr>
     
     <h1>How does it work?</h1>
     

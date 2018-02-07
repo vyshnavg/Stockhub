@@ -10,14 +10,14 @@
                 'm_password' => $enc_password
 			);
 			// Insert user
-			return $this->db->insert('users', $data);
+			return $this->db->insert('manufacturers', $data);
 		}
 		// Log user in
 		public function login($username, $password){
 			// Validate
 			$this->db->where('m_username', $username);
 			$this->db->where('m_password', $password);
-			$result = $this->db->get('users');
+			$result = $this->db->get('manufacturers');
 			if($result->num_rows() == 1){
 				$getres[0] = $result->row(0)->m_id;
 				$getres[1] = $result->row(0)->m_firstname;
@@ -29,7 +29,7 @@
 		}
 		// Check username exists
 		public function check_username_exists($username){
-			$query = $this->db->get_where('users', array('m_username' => $username));
+			$query = $this->db->get_where('manufacturers', array('m_username' => $username));
 			if(empty($query->row_array())){
 				return true;
 			} else {
@@ -44,7 +44,7 @@
 		}
 		// Check email exists
 		public function check_email_exists($email){
-			$query = $this->db->get_where('users', array('m_email' => $email));
+			$query = $this->db->get_where('manufacturers', array('m_email' => $email));
 			if(empty($query->row_array())){
 				return true;
 			} else {
@@ -83,7 +83,7 @@
 				$id = $this->session->userdata('user_id');
 
 				$this->db->select('*');
-				$this->db->from('users');
+				$this->db->from('manufacturers');
 				$this->db->where('m_id', $id);
 				$this->db->where('m_address_id !=', '');
 				$query = $this->db->get();
@@ -92,7 +92,7 @@
 				if(empty($query->row_array())){
 	
 					$this->db->select('*');
-					$this->db->from('users');
+					$this->db->from('manufacturers');
 					$this->db->where('m_id', $id);
 					$this->db->where('m_status !=', '');
 					$query = $this->db->get();
@@ -103,7 +103,7 @@
 							'm_status' => 'Inactive'
 						);
 	
-						$this->db->update('users',  $data);
+						$this->db->update('manufacturers',  $data);
 					}
 	
 					// Set message
@@ -112,14 +112,14 @@
 				else{
 	
 					$this->db->select('m_status');
-					$this->db->from('users');
+					$this->db->from('manufacturers');
 					$this->db->where('m_id', $id);
 					$query = $this->db->get();
 	
 					if($query->row_array()['m_status'] == 'Inactive'){
 						$this->db->set('m_status', 'Active');
 						$this->db->where('m_id', $id);
-						$this->db->update('users');
+						$this->db->update('manufacturers');
 					}
 					
 				}
@@ -127,7 +127,7 @@
 			else{
 				$id = $this->session->userdata('user_id');
 				$this->db->select('m_status');
-				$this->db->from('users');
+				$this->db->from('manufacturers');
 				$this->db->where('m_id', $id);
 				$query = $this->db->get();
 

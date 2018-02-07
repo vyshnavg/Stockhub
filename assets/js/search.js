@@ -48,7 +48,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-	var text = ["Search Raw Materials", "Search Products", "Search Categories" , "Search Prices"];
+	var text = ["Search Raw Materials", "Search Products", "Search Categories" ];
 	var counter = 0;
 	var elem = document.getElementById("search");
 	setInterval(change, 1500);

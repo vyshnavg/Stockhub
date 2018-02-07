@@ -141,7 +141,7 @@ function sortTable(n) {
 
 
  
-$(document).ready(function(){
+$(document).ready(function(){		//CHANGING PLACEHOLDER IN TENDER SEARCH PAGE
 	var text = ["Search Raw Materials", "Search Quantities", "Search Time till Expiry" , "Search Prices"];
 	var counter = 0;
 	var elem = document.getElementById("tenderSearchInput");
@@ -156,12 +156,11 @@ $(document).ready(function(){
 	}
 });
 
-$(document).ready(function() {
+$(document).ready(function() {			//	MAKE EACH ROW CLICKABLE IN TENDER TABLE
 	$('#tenderSearchTableBody tr').click(function() {
 			var href = $(this).find("a").attr("href");
 			if(href) {
 					window.location = href;
 			}
 	});
-
 });

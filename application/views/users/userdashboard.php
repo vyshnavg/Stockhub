@@ -33,7 +33,7 @@
 										$std = ucfirst($this->session->userdata('user_id'));
 
 										include '..\stockhub\assets\dbh.php';
-										$sql="SELECT * from users where m_id = '$std'";
+										$sql="SELECT * from manufacturers where m_id = '$std'";
 										$result= mysqli_query($conn ,$sql)or die(mysqli_error($conn));
 										
 										if($row=mysqli_fetch_assoc($result)){

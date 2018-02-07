@@ -14,7 +14,7 @@
 				return $query->result_array();
 			}
 
-			$this->db->join('users','users.m_id = tender.m_id');
+			$this->db->join('manufacturers','manufacturers.m_id = tender.m_id');
 			$this->db->join('material_subcat','material_subcat.subcat_id = raw_material.material_subcat_id');
 			$query = $this->db->get_where('tender', array('tender_id' => $id));
 			return $query->row_array();

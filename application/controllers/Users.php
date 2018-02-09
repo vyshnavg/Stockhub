@@ -69,7 +69,7 @@
 						'first_name' => $getres[1],
 						'last_name' => $getres[2],
 						'username' => $username,
-						'usertype' => 'user',
+						'usertype' => 'manufacturer',
 						'logged_in' => true
 					);
 					$this->session->set_userdata($user_data);
@@ -163,22 +163,51 @@
 		public function userdashboard(){
 			
 			// Check if the user is not logged in.
-			if(!$this->session->userdata('logged_in')){
-				if($this->session->userdata('usertype') != 'user') {     // 	NOT WORKING
+			if($this->session->userdata('logged_in')){
+				if($this->session->userdata('usertype') === 'manufacturer') {
+
+					$this->user_model->check_active_status();
+
+					$data['title'] = "Manufacturer Dashboard";
+					
+					$data['addresses_arr'] =$this->user_model->get_address();
+					
+					$this->load->view('templates/header', $data);
+					$this->load->view('users/userdashboard', $data);
+					$this->load->view('templates/footer');
+
+				}
+				elseif($this->session->userdata('usertype') === 'vendor') {
+
+					$this->vendor_model->check_active_status();
+
+					$data['title'] = "Vendor Dashboard";
+					
+					$data['addresses_arr'] =$this->user_model->get_address();
+					
+					$this->load->view('templates/header', $data);
+					$this->load->view('vendors/vendordashboard', $data);
+					$this->load->view('templates/footer');
+
+				}
+				elseif($this->session->userdata('usertype') === 'shadmin') {
+
+					$data['title'] = "Admin Dashboard";
+					
+					$data['addresses_arr'] =$this->user_model->get_address();
+					
+					$this->load->view('templates/header', $data);
+					$this->load->view('users/userdashboard', $data);
+					$this->load->view('templates/footer');
+
+				}
+
+				else{
 					redirect('home');
 				}
 			}
 
-			$this->user_model->check_active_status();
-
-			$data['title'] = "Dashboard";
 			
-			
-			$data['addresses_arr'] =$this->user_model->get_address();
-			
-			$this->load->view('templates/header', $data);
-			$this->load->view('users/userdashboard', $data);
-			$this->load->view('templates/footer');
 		}
 
 

@@ -35,6 +35,16 @@
                 $this->session->set_flashdata('flash-warning', 'Please Log In to continue');
                 redirect('users/login');
             }
+
+            //Check if the user is manufacturer or not
+            
+            if($this->session->userdata('usertype') === 'vendor'){
+                // Set message
+                $this->session->set_flashdata('flash-warning', 'Only Manufacturers can put tenders.');
+                redirect('home');
+            }
+
+            //Check if the user/manufacturer is active user
             
             $quary = $this->user_model->check_active_status("ADFDSF");
 
@@ -43,7 +53,9 @@
                 $this->session->set_flashdata('flash-warning', 'Please be Active user');
                 redirect('home');
             }
-            
+
+
+            //getting materials and displaying it
 
             $data['material'] =$this ->material_model->get_materials($slug);
 

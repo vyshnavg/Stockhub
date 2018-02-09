@@ -58,7 +58,82 @@
                         <dd><?php echo $tender['rm_desc']; ?></dd>
                     </dl>
                 <br><br>
-                <a class="btn btn-primary" role="button" href="<?php echo site_url('/tenderOpen/'.$tender['rm_slug']); ?>">Send Request <span class="glyphicon glyphicon-send" aria-hidden="true"></span></a>
+                <button class="btn btn-primary" role="button" data-toggle="modal" data-target="#requestModal" >Send Request <span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
                 <a class="btn btn-default" role="button" href="<?php echo site_url('/tenders'); ?>">Go Back</a>
+
+                            <!-- Request Modal -->
+                            <div class="modal fade" id="requestModal" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                <!-- Request Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Send Request</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <?php echo form_open('/tenders/tenderRequest/'.$tender['tender_id']); ?>
+                                            <div class="row">
+
+                                                <div class="col-md-8 col-md-offset-2">
+
+                                                    <p  class="text-center"> <?php echo validation_errors(); ?></p>
+                                                    
+
+
+                                                    <div class="form-group">
+                                                        <label for="inpuFname">Enter the quantity that you can deliver</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                                                            <input type="number" value="1" class="form-control" min="1" name="tender_quantity">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label>Enter the Quoted Price</label>
+                                                        <div class="input-group"> 
+                                                            <span class="input-group-addon">₹</span>
+                                                            <input type="number" class="form-control" name="estimated-price" value="0" min="0" required/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Date of Delivery</label>
+                                                        <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                            <input type="date" class="form-control" name="doe" min="<?php echo date("Y-m-d",strtotime('tomorrow')); ?>" required/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Extra Info / Comments (Optional)</label>
+                                                        <div class="input-group"> 
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                                                            <textarea class="form-control" rows="5" id="comments" placeholder="Max 300 characters" maxlength="300" name="extra_info"></textarea>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                    
+                                                    <button type="submit" class="btn btn-success btn-block" >Submit</button>
+
+                                                </div>
+
+                                            </div>
+                                            
+                                        <?php echo form_close(); ?>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                
+                                </div>
+                            </div>
+
                 </div>
 </div></div>

@@ -27,6 +27,12 @@
 			$this->load->view('tenders/view', $data);
 			$this->load->view('templates/footer');
         }
+
+        public function tenderRequest($tenderID){
+
+            
+            
+        }
         
 
 

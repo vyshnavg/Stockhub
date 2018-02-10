@@ -1,4 +1,11 @@
 
+    <footer class="navbar-default navbar-fixed-bottom hidden-xs">
+        <div class="container-fluid">
+            <p>© 2018<a style="color:#fffff; text-decoration:none;" href="<?php echo base_url(); ?>about"> StockHUB</a>, All rights reserved 2018.</p>
+        </div>
+    </footer>
+
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

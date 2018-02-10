@@ -9,7 +9,8 @@
         public function get_materials($slug = FALSE){
 
 			$this->db->join('material_subcat','material_subcat.subcat_id = raw_material.material_subcat_id');
-			
+			$this->db->join('adv_table','adv_table.raw_material_id = raw_material.raw_material_id');
+			$this->db->join('disadv_table','disadv_table.raw_material_id = raw_material.raw_material_id');
 			if($slug === FALSE){
 				$query = $this->db->get('raw_material');
 				return $query->result_array();
@@ -27,8 +28,8 @@
 			return $query->result_array();
 
 		}
-		
-		public function get_homesearch($search){
+
+		public function get_materialsearch($search){
 			$this->db->select("*");
 			$this->db->from('raw_material');
 			$this->db->join('material_subcat','material_subcat.subcat_id = raw_material.material_subcat_id');
@@ -39,6 +40,33 @@
 			$query = $this->db->get();
 			return $query->result();
 		}
+		
+		public function get_homesearch($search){
+			$this->db->select("*");
+			$this->db->from('product_subcat');
+			$this->db->join('material_subcat','material_subcat.subcat_id = product_subcat.subcat_id');
+			$this->db->join('product_cat','product_cat.product_cat_id = product_cat.product_cat_id');
+
+			$this->db->like('product_cat_name' ,$search);
+			
+			$query = $this->db->get();
+			return $query->result();
+		}
+
+
+		public function hmsearch($search){
+			$this->db->select("*");
+			$this->db->from('product_subcat');
+			$this->db->join('material_subcat','material_subcat.subcat_id = product_subcat.subcat_id');
+			$this->db->join('product_cat','product_cat.product_cat_id = product_cat.product_cat_id');
+
+			$this->db->like('product_cat_name' ,$search);
+			
+			$query = $this->db->get();
+			return $query->row_array();
+		}
+
+
 
 		public function tenderRegister($material_id){
 			// User data array

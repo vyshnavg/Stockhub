@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2018 at 06:51 AM
+-- Generation Time: Feb 10, 2018 at 04:51 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -81,6 +81,19 @@ CREATE TABLE `adv_table` (
   `adv_desc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `adv_table`
+--
+
+INSERT INTO `adv_table` (`adv_id`, `raw_material_id`, `adv_desc`) VALUES
+(1, 7, ' It\'s low-cost, and it takes paint well, so it\'s great for kids\' furniture. (The same holds true for birch and poplar.) Pine develops a nice, rustic patina from age and use, and it resists shrinking and swelling.'),
+(2, 8, 'It\'s easily shaped, and it polishes well. Unstained, it has a rich, beautiful color.'),
+(3, 9, 'Maple is affordable and ultra-durable. It can take a beating and look great for years. Because it takes dark stains well, maple is often stained to mimic a pricier wood, like cherry or mahogany (which is a controversial pick itself because of deforestation in the regions where it\'s harvested).'),
+(4, 10, ' It\'s a very strong and stable wood that can take intricate carving. The color can be beautiful.'),
+(5, 2, 'It is very durable and often cut in a way that makes it resistant to warping. Because of its visible wavy grain, it has a distinctive look. A clear finish nicely highlights the grain.'),
+(6, 1, 'Teak wood has a very high aesthetic appeal with a very attractive looking straight grain pattern coupled with a rich golden-brown colour. Teak wood is an exceptionally strong hardwood from broad leaved deciduous trees used as a furniture and if taken care of well it can last for ages and ages. Teak with its natural oil resists organically the termites (white ants) and also the other insects that can destroy the wood. Teak wood is a very heavy and dense wood. It has a high weight to volume ratio.'),
+(7, 5, 'glass fiber than organic fiber, high temperature resistance, non flammable,corrosion-resistance, heat-insulation, good- sound-insulation (especially glass wool), high tensile strength, good insulation (such as non-alkali glass fiber).');
+
 -- --------------------------------------------------------
 
 --
@@ -106,8 +119,21 @@ CREATE TABLE `diff_vendor_req` (
 CREATE TABLE `disadv_table` (
   `disadv_id` int(11) NOT NULL,
   `raw_material_id` int(11) NOT NULL,
-  `disadv_desc` int(11) NOT NULL
+  `disadv_desc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `disadv_table`
+--
+
+INSERT INTO `disadv_table` (`disadv_id`, `raw_material_id`, `disadv_desc`) VALUES
+(1, 7, 'It\'s a softwood, so it\'s prone to scratches and dents.'),
+(2, 8, 'It\'s expensive. Sometimes the color darkens with age.'),
+(3, 9, 'If maple is not properly sealed first, the staining can look blotchy.'),
+(4, 10, 'Some may not like the variation from dark to light that\'s sometimes found on a single wide board. It\'s also one of the more costly woods.'),
+(5, 2, 'Stain can overly darken and exaggerate the grain, so it can end up looking two-toned.'),
+(6, 1, '\r\nTeak wood is very costly. The reason behind this is the declining availability of natural resources over the years. The demand is as high as ever, but the supply has reduced. Genuine and high-quality teak wood is hard to identify for customers since many number of other alternatives (such as teak oiled and teak covered) are made available in the market. Teak is a hardwood. From a carpenters point of view it presents a minor problem since the woodworking tools become blunt and there arises a need to be sharpened while working on the wood.\r\nThe teak wood furniture requires more care and maintenance.'),
+(7, 5, ' Brittle, weak abrasive-resistance');
 
 -- --------------------------------------------------------
 
@@ -199,6 +225,32 @@ CREATE TABLE `product_cat` (
   `product_cat_name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `product_cat`
+--
+
+INSERT INTO `product_cat` (`product_cat_id`, `product_cat_name`) VALUES
+(1, 'table');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_subcat`
+--
+
+CREATE TABLE `product_subcat` (
+  `product_subcat_id` int(11) NOT NULL,
+  `subcat_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_subcat`
+--
+
+INSERT INTO `product_subcat` (`product_subcat_id`, `subcat_id`, `product_id`) VALUES
+(1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -221,11 +273,12 @@ CREATE TABLE `raw_material` (
 
 INSERT INTO `raw_material` (`raw_material_id`, `rm_name`, `material_subcat_id`, `rm_slug`, `rm_pic`, `rm_desc`, `rm_created_at`) VALUES
 (1, 'Teak', 1, 'teak', 'teak1.jpg', 'Teak Lumber is a close-grained hardwood with high natural oil and silica content. It is one of the hardest, strongest and most durable of all timbers, highly resistant to any rotting and almost impervious to the effects of hot sun, rain, frost or snow. Teak Lumber requires little or no maintenance regardless of the environment. These characteristics combine to make it the ideal timber for all outdoor applications, and it has been the choice of boat builders for centuries. Once seen primarily on elegant yachts and in the most extravagant estates, teak wood is now a premium wood of choice for designers of hotels, corporate headquarters and upscale homes. Apart from its natural beauty, teak is one of the most valuable of all woods. Teak is popular for usage in Residential Teak Decking, Marine Teak Decking, Siding, Flooring, and Teak Plywood. ', '2017-12-31 18:29:10'),
-(2, 'White Oak', 1, 'white-oak', 'white-oak.jpg', 'White Oak wood lumber is strong, beautiful, rot-resistant, easy-to-work, and economical, representing an exceptional value to woodworkers. It’s no wonder that the White Oak Wood Lumber is so widely used in cabinet and furniture making. White Oak is commonly used in  Cabinetry, furniture, interior trim, flooring, boatbuilding, barrels, and veneer.', '2017-12-31 18:29:18'),
-(3, 'Borosilicate Glass', 2, 'borosilicate-glass', 'borosilicate-glass.jpg', 'Most of us are more familiar with this type of glass in the form of ovenware and other heat-resisting ware, better known under the trade name Pyrex.\r\n\r\nBorosilicate glass (or sodium-borosilicate glass) is made mainly of silica (70-80%) and boric oxide (7-13%) with smaller amounts of the alkalis (sodium and potassium oxides) and aluminium oxide.\r\n\r\nThis type of glass has a relatively low alkali content and consequently has both excellent chemical durability and thermal shock resistance - meaning it doesn\'t break when changing temperature quickly. ', '2018-01-27 14:39:45'),
-(4, 'Commercial Glass', 2, 'commercial-glass', 'commercial-glass.png', 'Most of the glass we see around us in our everyday lives in the form of bottles and jars, flat glass for windows or for drinking glasses is known as commercial glass or soda-lime glass, as soda ash is used in its manufacture.\r\n\r\nThe main constituent of practically all commercial glass is sand. Sand by itself can be fused to produce glass but the temperature at which this can be achieved is about 1700°C. Adding other minerals and chemicals to sand can considerably reduce the melting temperature.\r\n\r\nThe addition of sodium carbonate (Na2CO3), known as soda ash, to produce a mixture of 75% silica (SiO2) and 25% of sodium oxide (Na2O), will reduce the temperature of fusion to about 800°C. However, a glass of this composition is water-soluble and is known as water glass. In order to give the glass stability, other chemicals like calcium oxide (CaO) and magnesium oxide (MgO) are needed. These are obtained by adding limestone which results in a pure inert glass.', '2018-01-27 14:44:02'),
+(2, 'Oak', 1, 'oak', 'oak.png', 'Oak is a hardwood that tends to be very grainy. There are two varieties: red oak, which ranges from light brown to pinkish red with a swirling, waterlike pattern, and white oak, which has a tiger-stripe grain with yellow rays and flecks. Oak is often used in pieces made in the Arts and Crafts or Mission style.', '2018-02-09 14:24:48'),
 (5, 'Glass Fibre', 2, 'glass-fibre', 'glass-fibre.png', 'Glass fibre has many uses from roof insulation to medical equipment and its composition varies depending on its application.\r\n\r\nFor building insulation and glass wool the type of glass used is normally soda lime.\r\n\r\nFor textiles , an alumino-borosilicate glass with very low sodium oxide content is preferred because of its good chemical durability and high softening point. This is also the type of glass fibre used in the reinforced plastics to make protective helmets, boats, piping, car chassis, ropes, car exhausts and many other items.', '2018-01-27 14:44:02'),
-(6, 'Lead Glass', 2, 'lead-glass', 'lead-glass.png', 'Commonly known as lead crystal, lead glass is used to make a wide variety of decorative glass objects. It is made by using lead oxide instead of calcium oxide, and potassium oxide instead of all or most of the sodium oxide.\r\n\r\nThe traditional English full lead crystal contains at least 30% lead oxide (PbO) but any glass containing at least 24% PbO can be described as lead crystal. Glass containing less than 24% PbO, is known simply as crystal glass. The lead is locked into the chemical structure of the glass so there is no risk to human health.\r\n\r\nLead glass has a high refractive index making it sparkle brightly and a relatively soft surface so that it is easy to decorate by grinding, cutting and engraving which highlights the crystals brilliance making it popular for glasses, decanters and other decorative objects.', '2018-01-27 14:45:32');
+(7, 'Pine', 1, 'pine', 'pine.png', 'Pine is an inexpensive, lightweight wood that can be yellowish or whitish with brown knots. It\'s often used for rustic pieces, like farmhouse-style tables.', '2018-02-09 14:21:51'),
+(8, 'Cherry', 1, 'cherry', 'cherry.png', 'Cherry is a hardwood with a fine, straight grain that ranges from reddish brown to blond. It is often used for carved chairs but also shows up in clean-lined Shaker-style tables and cabinets.', '2018-02-09 14:23:17'),
+(9, 'Maple', 1, 'maple', 'maple.png', 'Maple is a creamy white hardwood that sometimes has a reddish tinge. One of the hardest wood species, maple is often chosen for heavy-use items, like dressers and kitchen cabinets.', '2018-02-09 14:23:17'),
+(10, 'Walnut', 1, 'walnut', 'walnut.png', 'Walnut is a straight-grained hardwood that ranges from chocolate brown (when it\'s from the center of the tree) to yellow (from the outer portion of the tree). A top pick for head-boards, ornate antique-style dining tables, and mantels, walnut is typically clear-coated or oiled to bring out its color.', '2018-02-09 14:24:05');
 
 -- --------------------------------------------------------
 
@@ -400,6 +453,12 @@ ALTER TABLE `product_cat`
   ADD PRIMARY KEY (`product_cat_id`);
 
 --
+-- Indexes for table `product_subcat`
+--
+ALTER TABLE `product_subcat`
+  ADD PRIMARY KEY (`product_subcat_id`);
+
+--
 -- Indexes for table `raw_material`
 --
 ALTER TABLE `raw_material`
@@ -461,13 +520,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `adv_table`
 --
 ALTER TABLE `adv_table`
-  MODIFY `adv_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `adv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `disadv_table`
 --
 ALTER TABLE `disadv_table`
-  MODIFY `disadv_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `disadv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -497,13 +556,19 @@ ALTER TABLE `m_address_dict`
 -- AUTO_INCREMENT for table `product_cat`
 --
 ALTER TABLE `product_cat`
-  MODIFY `product_cat_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `product_subcat`
+--
+ALTER TABLE `product_subcat`
+  MODIFY `product_subcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `raw_material`
 --
 ALTER TABLE `raw_material`
-  MODIFY `raw_material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `raw_material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `report`

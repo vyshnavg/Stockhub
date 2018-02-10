@@ -18,7 +18,7 @@
 			$this->db->where('v_username', $username);
 			$this->db->where('v_password', $password);
 			$result = $this->db->get('vendors');
-			if($result->nuv_rows() == 1){
+			if($result->num_rows() == 1){
 				$getres[0] = $result->row(0)->v_id;
 				$getres[1] = $result->row(0)->v_firstname;
 				$getres[2] = $result->row(0)->v_lastname;

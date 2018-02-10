@@ -36,8 +36,13 @@
                                     
                                     $datetime1 = new DateTime();
                                     $datetime2 = new DateTime($exp);
-                                    $interval = $datetime1->diff($datetime2);
+                                    if ( $datetime1 >  $datetime2){
+                                        echo("Expired");
+                                    }
+                                    else{
+                                        $interval = $datetime1->diff($datetime2);
                                     echo $interval->format('%d day %h hours %i minutes');
+                                    }
                                     
                                 ?>
                         <dd>

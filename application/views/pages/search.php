@@ -15,10 +15,13 @@
             <div class="list-group" id="finalResult2"></div>
         </div>
     </div>
+    
+    <h2 class="text-capitalize"><?php echo($products['product_cat_name']); ?></h2>
+    <a href="http://localhost/Stockhub/materials#<?php echo($products['subcat_name']); ?>"><?php echo($products['subcat_name']); ?></a>
+    
+
 </div>
 
-<!-- <div id="container">
-<input type="text" name="search" id="search" />
-<ul id="finalResult"></ul>
-</div> -->
+
+
 

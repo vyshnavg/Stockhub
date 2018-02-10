@@ -1,6 +1,6 @@
 <div class="container">
     
-<h1><?= $title ?></h1>
+
     
     <!-- <?php //foreach($materials as $material) : ?>
         <h3><?php //echo $material['rm_name']; ?></h3>
@@ -36,6 +36,13 @@
     </nav>
 
     <div id="static-content" class="col-md-10">
+    <h1><?= $title ?></h1>
+
+    <input class="form-control" name="search" id="search" type="text" placeholder="Search" >
+    <div class="list-group" id="finalResult"></div>
+
+    
+
     <?php foreach($categorys as $category) : ?>
         <h2 id="<?php echo($category['subcat_name']) ?>" ><?= $category['subcat_name'] ?></h2>
         <div class="row display-flex" >
@@ -61,6 +68,8 @@
             <?php endforeach; ?>
         </div>
     <?php endforeach; ?>
+
+    
     </div>
 
 </div>

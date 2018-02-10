@@ -22,6 +22,7 @@
 
             $data['title'] =$data['material']['rm_name'];
 
+
             $this->load->view('templates/header' , $data);
 			$this->load->view('materials/view', $data);
 			$this->load->view('templates/footer');
@@ -74,6 +75,13 @@
 			$this->load->view('templates/footer');
         }
 
+        public function materialsearch(){
+			$search=  $this->input->post('search');
+            $query = $this->material_model->get_materialsearch($search);
+            // print_r(json_encode($query));
+			echo json_encode ($query);
+        }
+        
         public function homesearch(){
 			$search=  $this->input->post('search');
             $query = $this->material_model->get_homesearch($search);

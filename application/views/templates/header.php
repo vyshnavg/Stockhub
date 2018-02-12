@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/style.css" />
     <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/animate.min.css" />
+    <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/awesomplete.css" />
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"> -->
 
     <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css" rel="stylesheet"/> -->

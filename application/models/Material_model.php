@@ -15,18 +15,28 @@
 				$query = $this->db->get('raw_material');
 				return $query->result_array();
 			}
-			
-			$query = $this->db->get_where('raw_material', array('rm_slug' => $slug));
-			return $query->row_array();
+			elseif($slug === "JSON"){
+				$query = $this->db->get('raw_material');
+				return $query->result();
+			}
+			else{
+				$query = $this->db->get_where('raw_material', array('rm_slug' => $slug));
+				return $query->row_array();
+			}
 		}
 
+		public function get_products(){
+			$this->db->select("*");
+			$this->db->from('product_cat');
+			$query = $this->db->get();
+			return $query->result_array();
+		}
+		
 		public function get_categorys(){
-
 			$this->db->select("*");
 			$this->db->from('material_subcat');
 			$query = $this->db->get();
 			return $query->result_array();
-
 		}
 
 		public function get_materialsearch($search){
@@ -45,7 +55,7 @@
 			$this->db->select("*");
 			$this->db->from('product_subcat');
 			$this->db->join('material_subcat','material_subcat.subcat_id = product_subcat.subcat_id');
-			$this->db->join('product_cat','product_cat.product_cat_id = product_cat.product_cat_id');
+			$this->db->join('product_cat','product_cat.product_cat_id = product_subcat.product_id');
 
 			$this->db->like('product_cat_name' ,$search);
 			

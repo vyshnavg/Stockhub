@@ -161,7 +161,7 @@
 									<div class="row">
 										
 										<div class="col-md-6">
-											<button class="btn btn-warning btn-block" type="button" onclick="location.href='<?php echo base_url(); ?>users/viewAddress/<?php echo ($address_arr['add_id'])?>'"><span class=" glyphicon glyphicon-wrench" aria-hidden="true"></span></button> 
+											<button class="btn btn-warning btn-block" type="button" onclick="location.href='<?php echo base_url(); ?>users/viewAddress/<?php echo ($address_arr['add_id'])?>'"><span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span></button> 
 										</div>
 										<div class="col-md-6">
 											<button class="btn btn-danger btn-block" type="button" href="#" title="Do you want to delete this Address?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<form action='<?php echo base_url(); ?>users/delAddress/<?php echo($address_arr['add_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span></button>

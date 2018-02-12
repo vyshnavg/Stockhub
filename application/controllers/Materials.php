@@ -13,6 +13,13 @@
             
         }
 
+        public function indexJSON(){
+            
+            $query = $this->material_model->get_materials("JSON");
+            
+            echo json_encode($query);
+        }
+
         public function view($slug = NULL){
             $data['material'] =$this ->material_model->get_materials($slug);
 
@@ -85,7 +92,8 @@
         public function homesearch(){
 			$search=  $this->input->post('search');
             $query = $this->material_model->get_homesearch($search);
-            // print_r(json_encode($query));
+            //print_r(json_encode($query));
+
 			echo json_encode ($query);
 		}
         

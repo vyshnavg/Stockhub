@@ -9,7 +9,7 @@
             
 			$data['title'] = ucfirst($page);
 			
-			if($page = 'home'){
+			if($page === 'home'){
 				$data['products'] = $this->material_model->get_products();
 			}
             

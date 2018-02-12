@@ -136,7 +136,7 @@ $(document).ready(function(){
 							
 							
 							items.push('<h2 id="homeSearchResultH2" class="animated fadeInUp">'+obj[0].product_cat_name+'</h2>');
-							items.push('<h4 id="homeSearchResultH4" class="animated fadeInUp">Raw Materials Required : </h4></br>');
+							items.push('<h4 id="homeSearchResultH4" class="animated fadeInUp">Raw Materials Required : </h4>');
 
 							$.each(obj, function(i,val){           
 								// items.push($('<a/>').text(val.rm_name));
@@ -164,7 +164,7 @@ $(document).ready(function(){
 											try{
 												
 												
-												items.push('<div class="row display-flex">');
+												items.push('<div class="row display-flex animated fadeInUp">');
 
 												//let enclosure = [];
 
@@ -172,11 +172,13 @@ $(document).ready(function(){
 													
 													
 													var base_url = window.location.origin;
+													base_url += "/Stockhub";
+
 													if(val.subcat_name===val2.subcat_name){
 														items.push('<div class="col-sm-6 col-md-4 col-lg-3 display-flex"> \
 																		<div class="thumbnail"> \
 																			<div class="caption"> \
-																				<img class="post-thumb thumbnail" id="imgUnderIndexSearch" src="'+base_url+'+ /assets/images/materials/'+ val2.rm_pic+'" /> \
+																				<img class="post-thumb thumbnail" id="imgUnderIndexSearch" src="'+base_url+'/assets/images/materials/'+ val2.rm_pic+'" /> \
 																				<h3 class="h3-margin-top-change">'+val2.rm_name+'</h3> \
 																			</div> \
 																		</div> \

@@ -7,7 +7,11 @@
 				show_404();
 			}
             
-            $data['title'] = ucfirst($page);
+			$data['title'] = ucfirst($page);
+			
+			if($page = 'home'){
+				$data['products'] = $this->material_model->get_products();
+			}
             
 			$this->load->view('templates/header', $data);
 			$this->load->view('pages/'.$page, $data);

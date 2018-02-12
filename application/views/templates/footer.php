@@ -18,6 +18,7 @@
     <script type="text/javascript" src="<?php echo asset_url();?>js/random.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/state.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/search.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/awesomplete.js"></script>
 
     
     

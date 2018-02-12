@@ -37,7 +37,7 @@
         <div class="panel panel-default ">
             <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question2">
                  <h4 class="panel-title">
-                    <a href="#" class="ing">Q:I created a tender with the neccesary details. How will I get the product.</a>
+                    <a href="#" class="ing">Q:I created a tender with the neccesary details. How will I get the product?</a>
               </h4>
 
             </div>
@@ -56,7 +56,7 @@
         <div class="panel panel-default ">
             <div class="panel-heading accordion-toggle collapsed question-toggle" data-toggle="collapse" data-parent="#faqAccordion" data-target="#question3">
                  <h4 class="panel-title">
-                    <a href="#" class="ing">Q: To Do I want the product urgently, how do I specify that?</a>
+                    <a href="#" class="ing">Q: I want the product urgently, how do I specify that?</a>
               </h4>
 
             </div>

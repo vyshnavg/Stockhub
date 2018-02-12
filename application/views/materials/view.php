@@ -13,11 +13,11 @@
 
                     <div class="row well">
                         <div class="col-md-6">
-                            <h4>Pros</h4>
+                            <h4 class="text-success">Pros</h4>
                             <p><?php echo $material['adv_desc']; ?></p>
                         </div>
                         <div class="col-md-6">
-                            <h4>Cons</h4>
+                            <h4 class="text-danger">Cons</h4>
                             <p><?php echo $material['disadv_desc']; ?></p>
                         </div>
                     </div>

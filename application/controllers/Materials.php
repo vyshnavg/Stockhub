@@ -58,7 +58,7 @@
 
             if(!$quary){
                 // Set message
-                $this->session->set_flashdata('flash-warning', 'Please be Active user');
+                $this->session->set_flashdata('flash-warning', 'Please be Active user. Add Address in your Dashboard.');
                 redirect('home');
             }
 

@@ -164,3 +164,4 @@ $(document).ready(function() {			//	MAKE EACH ROW CLICKABLE IN TENDER TABLE
 			}
 	});
 });
+

@@ -1,6 +1,7 @@
-<div class="container"> 
-    <h1 style="text-align:center;"> StockHUB </h1>
+<div  class="container"> 
+    <h1 style="text-align:center;">StockHUB</h1>
 </div>
+
 
 
 <div class="container"> 
@@ -37,6 +38,15 @@
         <div class="list-group" id="finalResult2">
         </div>
         
+</div>
+
+<div id="titleHomeDiv" class="container"> 
+    <div > 
+        StockHUB
+    </div>
+    <div> 
+        <span>into amazing experiences</span>
+    </div>
 </div>
 
 <!-- <div id="container">

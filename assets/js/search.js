@@ -179,7 +179,7 @@ $(document).ready(function(){
 																		<div class="thumbnail"> \
 																			<div class="caption"> \
 																				<img class="post-thumb thumbnail" id="imgUnderIndexSearch" src="'+base_url+'/assets/images/materials/'+ val2.rm_pic+'" /> \
-																				<h3 class="h3-margin-top-change">'+val2.rm_name+'</h3> \
+																				<a class="h3 h3-margin-top-change" href="'+base_url+'/materials/'+val2.rm_slug+'" >'+val2.rm_name+'</a> \
 																			</div> \
 																		</div> \
 																	</div> ');

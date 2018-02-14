@@ -29,8 +29,22 @@
         }
 
         public function tenderRequest($tenderID){
-
             
+            // Check if the user is not logged in.
+			if(!$this->session->userdata('logged_in')){
+                // Set message
+                $this->session->set_flashdata('flash-warning', 'Please Log In to continue');
+                redirect('users/login');
+            }
+
+            //Check if the user is manufacturer or not
+            
+            if($this->session->userdata('usertype') === 'manufacturer'){
+                // Set message
+                $this->session->set_flashdata('flash-warning', 'Only Vendors can send requests.');
+                redirect('home');
+            }
+
             
         }
         

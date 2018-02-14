@@ -49,6 +49,31 @@
     </div>
 </div>
 
+
+<div id="howitworks" class="howitworks bgimg-2">
+     <div class="container">
+         <h1 class="wow fadeInUp">How it works</h1>
+         
+        	     <h2>Searching for Space</h2>
+				<hr>
+
+				<div class="row">
+					<div class="col-lg-4 col-md-4 wow flipInY">
+						<i class="fas fa-user fa-3x" aria-hidden="true"></i>
+						<h3>Find space<br>near your location</h3>
+					</div>
+					<div class="col-lg-4 col-md-4 wow flipInY">
+						<i class="far fa-user fa-3x" aria-hidden="true"></i>
+						<h3>Contact the storage provider<br>and book your space</h3>
+					</div>
+					<div class="col-lg-4 col-md-4 wow flipInY">
+						<i class="fab fa-github-square fa-3x" aria-hidden="true"></i>
+						<h3>Move your items<br>to the booked space</h3>
+					</div>
+				</div>
+     </div>
+</div>
+
 <!-- <div id="container">
 <input type="text" name="search" id="search" />
 <ul id="finalResult"></ul>

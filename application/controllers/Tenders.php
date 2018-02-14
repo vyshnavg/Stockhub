@@ -37,8 +37,7 @@
                 redirect('users/login');
             }
 
-            //Check if the user is manufacturer or not
-            
+            //Check if the user is vendor or not
             if($this->session->userdata('usertype') === 'manufacturer'){
                 // Set message
                 $this->session->set_flashdata('flash-warning', 'Only Vendors can send requests.');

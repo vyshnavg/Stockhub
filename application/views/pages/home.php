@@ -40,7 +40,7 @@
         
 </div>
 
-<div id="titleHomeDiv" class="container"> 
+<div id="titleHomeDiv" style="text-align:center;" class="container"> 
     <div > 
         Raw Material 
     </div>

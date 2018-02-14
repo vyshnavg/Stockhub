@@ -118,6 +118,9 @@ $(document).ready(function(){
 		if(e.keyCode == 13){
 		if($("#homesearch").val().length<=2){
 			$('#finalResult2').html('');
+			// $("#titleHomeDiv").addClass("animated fadeInUp");
+			// $("#titleHomeDiv").show();
+			$("#titleHomeDiv").fadeIn(1000);
 		}
 		if($("#homesearch").val().length>2){
 			$.ajax({
@@ -127,6 +130,9 @@ $(document).ready(function(){
 				data:'search='+$("#homesearch").val(),
 				
 				success: function(response){
+					// $("#titleHomeDiv").addClass("animated fadeOutUp");
+					// $("#titleHomeDiv").hide();
+					$("#titleHomeDiv").fadeOut(1000);
 					$('#finalResult2').html("");
 					var obj = JSON.parse(response);
 					
@@ -135,8 +141,8 @@ $(document).ready(function(){
 							var items=[];
 							
 							
-							items.push('<h2 id="homeSearchResultH2" class="animated fadeInUp">'+obj[0].product_cat_name+'</h2>');
-							items.push('<h4 id="homeSearchResultH4" class="animated fadeInUp">Raw Materials Required : </h4>');
+							items.push('<h2 id="homeSearchResultH2" class="animated 2s fadeInUp">'+obj[0].product_cat_name+'</h2>');
+							items.push('<h4 id="homeSearchResultH4" class="animated 2s fadeInUp">Raw Materials Required : </h4>');
 
 							$.each(obj, function(i,val){           
 								// items.push($('<a/>').text(val.rm_name));

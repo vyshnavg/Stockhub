@@ -164,6 +164,7 @@ footer{
 /* home text animations */
 
 #titleHomeDiv div {
+    margin-top: 10%;    
     display:inline-block;
     overflow:hidden;
     white-space:nowrap;

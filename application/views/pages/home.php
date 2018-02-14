@@ -42,10 +42,10 @@
 
 <div id="titleHomeDiv" class="container"> 
     <div > 
-        StockHUB
+        Raw Material 
     </div>
     <div> 
-        <span>into amazing experiences</span>
+        <span> Breakdown and Procurement</span>
     </div>
 </div>
 

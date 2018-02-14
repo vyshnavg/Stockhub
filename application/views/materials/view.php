@@ -22,7 +22,7 @@
                         </div>
                     </div>
 
-                    <a class="btn btn-primary" role="button" href="<?php echo site_url('/tenderOpen/'.$material['rm_slug']); ?>">Put a Tender</a>
+                    <a class="btn btn-primary" role="button" href="<?php echo site_url('/tenderOpen/'.$material['rm_slug']); ?>">Create Tender</a>
                     <a class="btn btn-default" role="button" href="<?php echo site_url('/materials'); ?>">Go Back</a>
                 </div>
 </div></div>

@@ -57,7 +57,7 @@
                                 
                                     <!-- <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12"> -->
-                                            <button class="btn btn-primary btn-block" role="button" onclick="location.href = '<?php echo site_url('/tenderOpen/'.$material['rm_slug']); ?>';">Create a Tender</button> 
+                                            <button class="btn btn-primary btn-block" role="button" onclick="location.href = '<?php echo site_url('/tenderOpen/'.$material['rm_slug']); ?>';">Create Tender</button> 
                                         <!-- </div>
                                     </div> -->
                                 

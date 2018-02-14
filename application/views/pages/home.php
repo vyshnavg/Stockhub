@@ -45,7 +45,7 @@
         Raw Material 
     </div>
     <div> 
-        <span> Breakdown and Procurement</span>
+        <span> Search &amp; Procure</span>
     </div>
 </div>
 

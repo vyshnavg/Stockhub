@@ -171,16 +171,13 @@ footer{
     text-align:center;
     font-family:'Roboto';
     font-weight:300;
-    font-size:32px;
+    font-size:52px;
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 1000;
     -webkit-transform: translate3d(0,0,0);
   }
   
-  #titleHomeDiv div:first-of-type {    /* For increasing performance 
-                         ID/Class should've been used. 
-                         For a small demo 
-                         it's okaish for now */
+  #titleHomeDiv div:first-of-type {    
     animation: showup 7s infinite;
   }
   
@@ -190,7 +187,7 @@ footer{
   }
   
   #titleHomeDiv div:last-of-type span {
-    margin-left:-355px;
+    /* margin-left:-15px; */
     animation: slidein 7s infinite;
   }
   

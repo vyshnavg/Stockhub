@@ -44,7 +44,7 @@
     <div > 
         Raw Material 
     </div>
-    <div> 
+    <div class="inverseColor"> 
         <span> Search &amp; Procure</span>
     </div>
 </div>
@@ -54,19 +54,19 @@
      <div class="container">
 				<div class="row">
 					<div class="col-lg-3 col-md-4 text-center">
-                        <i class="fas fa-search fa-4x" aria-hidden="true"></i> 
+                        <i class="fas fa-search fa-5x inverseColor" data-fa-transform="shrink-9 up-.5" data-fa-mask="fas fa-circle"  aria-hidden="true"></i> 
 						<h3>Search &amp; find <br>Raw materials <br>according to business needs</h3>
 					</div>
 					<div class="col-lg-3 col-md-4 text-center">
-						<i class="far fa-file-alt fa-4x" aria-hidden="true"></i>
+						<i class="far fa-file-alt fa-5x inverseColor"  data-fa-transform="shrink-9 up-.5" data-fa-mask="fas fa-circle"  aria-hidden="true"></i>
 						<h3>Create a Tender for<br>the material</h3>
 					</div>
 					<div class="col-lg-3 col-md-4 text-center">
-						<i class="fas fa-users fa-4x" aria-hidden="true"></i>
+						<i class="fas fa-users fa-5x inverseColor"  data-fa-transform="shrink-9 up-.5" data-fa-mask="fas fa-circle"  aria-hidden="true"></i>
 						<h3>All the vendors<br>selling that material<br>will be notified</h3>
                     </div>
                     <div class="col-lg-3 col-md-4 text-center">
-						<i class="fas fa-truck fa-4x" aria-hidden="true"></i>
+						<i class="fas fa-truck fa-5x inverseColor"  data-fa-transform="shrink-9 up-.5" data-fa-mask="fas fa-circle"  aria-hidden="true"></i>
 						<h3>After the preffered vendor<br>is selected<br>the material will be delivered</h3>
 					</div>
                 </div>

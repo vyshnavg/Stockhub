@@ -183,6 +183,7 @@ footer{
   
   #titleHomeDiv div:first-of-type {    
     animation: showup 7s infinite;
+    padding-right: 20px;
   }
   
   #titleHomeDiv div:last-of-type {
@@ -215,7 +216,7 @@ footer{
       30% {width:400px;}
       80% {opacity:1;}
       100% {opacity:0;width:400px;}
-      
+
   }
 
   /* icons */
@@ -225,3 +226,9 @@ footer{
     margin-top: 2%;    
 }
 
+
+/* inverse color */
+
+.inverseColor{
+    color:#19BC9C;
+}

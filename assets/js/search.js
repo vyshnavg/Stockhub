@@ -143,8 +143,8 @@ $(document).ready(function(){
 							var items=[];
 							
 							
-							items.push('<h2 id="homeSearchResultH2" class="animated 2s fadeInUp">'+obj[0].product_cat_name+'</h2>');
-							items.push('<h4 id="homeSearchResultH4" class="animated 2s fadeInUp">Raw Materials Required : </h4>');
+							items.push('<h2 id="homeSearchResultH2" class="animated 2s fadeInUp inverseColor">'+obj[0].product_cat_name+'</h2>');
+							items.push('<small class="material-date animated 2s fadeInUp">Raw Materials Required</small>');
 
 							$.each(obj, function(i,val){           
 								// items.push($('<a/>').text(val.rm_name));

@@ -29,7 +29,7 @@
 
 
 
-<div  data-spy="scroll" data-target="#sidebar-menu" data-offset="20">
+<div class="row" data-spy="scroll" data-target="#sidebar-menu" data-offset="20">
     <nav id="sidebar-menu" class="col-md-1 col-md-offset-1 hidden-xs hidden-sm"  >
         <ul class="main-menu nav nav-stacked affix"> <!-- GETTING THE VALUES FROM RANDOM.JS -->
     	</ul>

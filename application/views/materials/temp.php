@@ -1,4 +1,4 @@
-
+<div class="row display-flex">
     <?php foreach($materials as $material) : ?>
         <div class="col-sm-6 col-md-3 display-flex">
             <div class="thumbnail">

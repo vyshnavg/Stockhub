@@ -51,7 +51,8 @@
 
 
 <div id="howitworks" class="howitworks bgimg-2">
-     
+     <div class="container">
+				<div class="row">
 					<div class="col-lg-3 col-md-4 text-center">
                         <i class="fas fa-search fa-4x" aria-hidden="true"></i> 
 						<h3>Search &amp; find <br>Raw materials <br>according to business needs</h3>

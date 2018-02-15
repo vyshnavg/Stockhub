@@ -1,6 +1,7 @@
 body{
     background: #FAFAFA;
-    padding-bottom: 120px;
+    padding-bottom: 30px;
+    
 }
 
 .material-date{
@@ -21,7 +22,11 @@ body{
 }
 
 /* ================================== */
+.row{
+    
+    margin-right: 0px;
 
+}
 .row.is-flex {
     display: flex;
     flex-wrap: wrap;
@@ -216,8 +221,8 @@ footer{
   /* icons */
 
   
-#howitworks div{
+  #howitworks div{
 
-    margin-top: 6%;    
+    margin-top: 2%;    
 }
 

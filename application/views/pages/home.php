@@ -52,7 +52,6 @@
 
 <div id="howitworks" class="howitworks bgimg-2 animated fadeIn">
      <div class="container">
-				<div class="row">
 					<div class="col-lg-3 col-md-4 text-center">
                         <i class="fas fa-search fa-5x inverseColor" data-fa-transform="shrink-9 up-.5" data-fa-mask="fas fa-circle"  aria-hidden="true"></i> 
 						<h3>Search &amp; find <br>Raw materials <br>according to business needs</h3>

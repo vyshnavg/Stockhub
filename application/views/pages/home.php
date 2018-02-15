@@ -50,7 +50,7 @@
 </div>
 
 
-<div id="howitworks" class="howitworks bgimg-2">
+<div id="howitworks" class="howitworks bgimg-2 animated fadeIn">
      <div class="container">
 				<div class="row">
 					<div class="col-lg-3 col-md-4 text-center">

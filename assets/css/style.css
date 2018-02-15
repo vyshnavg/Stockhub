@@ -168,6 +168,7 @@ footer{
 
 /* home text animations */
 
+
 #titleHomeDiv div {
     margin-top: 4%;    
     display:inline-block;
@@ -175,7 +176,7 @@ footer{
     white-space:nowrap;
     text-align:center;
     font-weight:300;
-    font-size:52px;
+    font-size:3.4vmax;
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 1000;
     -webkit-transform: translate3d(0,0,0);

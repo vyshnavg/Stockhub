@@ -52,25 +52,25 @@
 
 <div id="howitworks" class="howitworks bgimg-2">
      <div class="container">
-         <h1 class="wow fadeInUp">How it works</h1>
-         
-        	     <h2>Searching for Space</h2>
-				<hr>
-
 				<div class="row">
 					<div class="col-lg-4 col-md-4 wow flipInY">
-						<i class="fas fa-user fa-3x" aria-hidden="true"></i>
-						<h3>Find space<br>near your location</h3>
+                        <i class="fas fa-search fa-3x" aria-hidden="true"></i> 
+						<h3>Search &amp; find <br>Raw materials <br>according to business needs</h3>
 					</div>
 					<div class="col-lg-4 col-md-4 wow flipInY">
-						<i class="far fa-user fa-3x" aria-hidden="true"></i>
-						<h3>Contact the storage provider<br>and book your space</h3>
+						<i class="far fa-file-alt fa-3x" aria-hidden="true"></i>
+						<h3>Create a Tender for<br>the material</h3>
 					</div>
 					<div class="col-lg-4 col-md-4 wow flipInY">
-						<i class="fab fa-github-square fa-3x" aria-hidden="true"></i>
-						<h3>Move your items<br>to the booked space</h3>
+						<i class="fas fa-users fa-3x" aria-hidden="true"></i>
+						<h3>All the vendors<br>selling that material<br>will be notified</h3>
+                    </div>
+                    <div class="col-lg-4 col-md-4 wow flipInY">
+						<i class="fas fa-truck fa-3x" aria-hidden="true"></i>
+						<h3>After the preffered vendor<br>is selected<br>the material will be delivered</h3>
 					</div>
-				</div>
+                </div>
+                
      </div>
 </div>
 

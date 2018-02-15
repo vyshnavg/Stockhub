@@ -121,6 +121,7 @@ $(document).ready(function(){
 			// $("#titleHomeDiv").addClass("animated fadeInUp");
 			// $("#titleHomeDiv").show();
 			$("#titleHomeDiv").fadeIn(1000);
+			$("#howitworks").fadeIn(1000);
 		}
 		if($("#homesearch").val().length>2){
 			$.ajax({
@@ -133,6 +134,7 @@ $(document).ready(function(){
 					// $("#titleHomeDiv").addClass("animated fadeOutUp");
 					// $("#titleHomeDiv").hide();
 					$("#titleHomeDiv").fadeOut(1000);
+					$("#howitworks").fadeOut(1000);
 					$('#finalResult2').html("");
 					var obj = JSON.parse(response);
 					

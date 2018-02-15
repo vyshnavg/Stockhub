@@ -44,7 +44,9 @@
                 redirect('home');
             }
 
-            
+            $this->tender_model->tenderRequest($tenderID);
+            $this->session->set_flashdata('flash-success', 'Tender Request Send');
+			redirect('home');
         }
         
 

@@ -33,11 +33,12 @@
                                     $expdate = $tender['date_expire'];
                                     $exptime = $tender['time_expire'];
                                     $exp = date('Y-m-d H:i:s', strtotime("$expdate $exptime "));
-                                    
+                                    $temp=0;
                                     $datetime1 = new DateTime();
                                     $datetime2 = new DateTime($exp);
                                     if ( $datetime1 >  $datetime2){
                                         echo("Expired");
+                                        $temp=1;
                                     }
                                     else{
                                         $interval = $datetime1->diff($datetime2);
@@ -63,7 +64,7 @@
                         <dd><?php echo $tender['rm_desc']; ?></dd>
                     </dl>
                 <br><br>
-                <button class="btn btn-primary" role="button" data-toggle="modal" data-target="#requestModal" >Send Request <span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
+                <button class="btn btn-primary" role="button" data-toggle="modal" data-target="#requestModal" <?php if($temp==1){echo("disabled='true'");} ?> >Send Request <span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
                 <a class="btn btn-default" role="button" href="<?php echo site_url('/tenders'); ?>">Go Back</a>
 
                             <!-- Request Modal -->
@@ -91,7 +92,7 @@
                                                         <label for="inpuFname">Enter the quantity that you can deliver</label>
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
-                                                            <input type="number" value="1" class="form-control" min="1" name="tender_quantity">
+                                                            <input type="number" value="1" class="form-control" min="1" name="tender_quantity"  id="tender_quantity">
                                                         </div>
                                                     </div>
 
@@ -100,14 +101,14 @@
                                                         <label>Enter the Quoted Price</label>
                                                         <div class="input-group"> 
                                                             <span class="input-group-addon">₹</span>
-                                                            <input type="number" class="form-control" name="estimated-price" value="0" min="0" required/>
+                                                            <input type="number" class="form-control" name="quoted-price" id="quoted-price" value="0" min="0" required/>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label>Date of Delivery</label>
                                                         <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                            <input type="date" class="form-control" name="doe" min="<?php echo date("Y-m-d",strtotime('tomorrow')); ?>" required/>
+                                                            <input type="date" class="form-control" name="dod" id="dod" min="<?php echo date("Y-m-d",strtotime('tomorrow')); ?>" required/>
                                                         </div>
                                                     </div>
 
@@ -115,7 +116,7 @@
                                                         <label>Extra Info / Comments (Optional)</label>
                                                         <div class="input-group"> 
                                                             <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                                                            <textarea class="form-control" rows="5" id="comments" placeholder="Max 300 characters" maxlength="300" name="extra_info"></textarea>
+                                                            <textarea class="form-control" rows="5" placeholder="Max 300 characters" maxlength="300" name="extra_info" id="extra_info"></textarea>
                                                         </div>
                                                     </div>
 

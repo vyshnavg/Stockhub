@@ -19,5 +19,19 @@
 			$query = $this->db->get_where('tender', array('tender_id' => $id));
 			return $query->row_array();
 		}
+
+		public function tenderRequest($tenderID){
+			// tender request data array
+			$data = array(
+				'vendor_id' => $this->session->userdata('user_id'),
+				'tender_id' => $tenderID,
+				'quantity' => $this->input->post('tender_quantity'),
+				'quoted_price' => $this->input->post('quoted-price'),
+				'delivery_date' => $this->input->post('dod'),
+                'req_desc' => $this->input->post('extra_info')
+			);
+			// Insert tender request
+			return $this->db->insert('diff_vendor_req', $data);
+		}
         
 	}

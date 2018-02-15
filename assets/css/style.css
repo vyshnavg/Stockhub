@@ -164,7 +164,7 @@ footer{
 /* home text animations */
 
 #titleHomeDiv div {
-    margin-top: 10%;    
+    margin-top: 4%;    
     display:inline-block;
     overflow:hidden;
     white-space:nowrap;
@@ -215,4 +215,9 @@ footer{
 
   /* icons */
 
+  
+#howitworks div{
+
+    margin-top: 6%;    
+}
 

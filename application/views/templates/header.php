@@ -74,7 +74,7 @@
                         <li class="<?php if ($title=="Dashboard") {echo "active"; } else  {echo "noactive";} ?>"><a href="<?php echo base_url(); ?>userdashboard">Dashboard</a></li>
                         <li role="separator" class="divider"></li>
                         <li > <a href="<?php echo base_url(); ?>users/logout">Logout
-                        <i class="fas fa-search fa-5x inverseColor" data-fa-transform="shrink-9 up-.5" data-fa-mask="fas fa-circle"  aria-hidden="true"></i> 
+                        <i class="fas fa-sign-out-alt"  aria-hidden="true"></i> 
                     </a></li>
                     </ul>
                     </li>

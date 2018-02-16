@@ -71,7 +71,8 @@
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo ucfirst($this->session->userdata('first_name'))." ".ucfirst($this->session->userdata('last_name')) ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="<?php if ($title=="Dashboard") {echo "active"; } else  {echo "noactive";} ?>"><a href="<?php echo base_url(); ?>userdashboard">Dashboard</a></li>
+                        <li><a href="<?php echo base_url(); ?>userdashboard">Dashboard</a></li>
+                        <li><a href="<?php echo base_url(); ?>users/userTenders">Manage your Tenders</a></li>
                         <li role="separator" class="divider"></li>
                         <li > <a href="<?php echo base_url(); ?>users/logout">Logout
                         <i class="fas fa-sign-out-alt"  aria-hidden="true"></i> 

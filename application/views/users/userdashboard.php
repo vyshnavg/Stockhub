@@ -11,7 +11,6 @@
 			<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
 			<li><a data-toggle="tab" href="#messages">Messages</a></li>
 			<li><a data-toggle="tab" href="#address">Address</a></li>
-			<li><a data-toggle="tab" href="#tenders">Tenders</a></li>
 			<!-- <li><a data-toggle="tab" href="#menu2">My Storage</a></li>
 			<li><a data-toggle="tab" href="#menu3">My Booking</a></li> -->
 		</ul>
@@ -261,23 +260,6 @@
 
 					</div>
 
-				</div>
-			</div>
-
-			<!-- ========================= TENDERS SECTION ========================= -->
-
-			<div id="tenders" class="tab-pane fade in">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="well well-lg">
-							Look, I'm in a large well!
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="well well-lg">
-							Look, I'm in a large well!
-						</div>
-					</div>
 				</div>
 			</div>
 

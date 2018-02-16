@@ -303,7 +303,16 @@
 		}
 
 
+		public function userTenders(){
+			
+			$data['title'] = "Manage Tenders";
+			
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('users/userTenders', $data);
+			$this->load->view('templates/footer');
 
+		}
 
 
 		

@@ -1,8 +1,14 @@
 body{
     background: #FAFAFA;
     padding-bottom: 33px;
-    
+    padding-top: 60px;   
 }
+
+@media (max-width: 979px) {
+    body {
+      padding-top: 0px;
+    }
+  }
 
 .material-date{
     background: #f4f4f4;
@@ -19,6 +25,14 @@ body{
 
 .post-thumb-view{
     width:100%;
+}
+
+/*navbar*/
+
+.navbar
+{
+    position: fixed;
+    bottom: 0;
 }
 
 /* ================================== */

@@ -52,7 +52,7 @@
                 <?php if($material['subcat_name']===$category['subcat_name']) : ?>
                     <div class="col-sm-6 col-md-4 col-lg-3 display-flex">
                         <div class="thumbnail">
-                            <img class="post-thumb thumbnail" src="<?php echo asset_url().'images/materials/'.$material['rm_pic'];?>" >
+                            <img class="img-rounded" src="<?php echo asset_url().'images/materials/'.$material['rm_pic'];?>" >
                             <div class="caption">
                                 <h3 class="h3-margin-top-change"><?php echo $material['rm_name']; ?></h3>
                                 <p class="flex-text"><?php echo word_limiter($material['rm_desc'],30); ?><a href = "<?php echo site_url('/materials/'.$material['rm_slug']); ?>"> Read More</a></p>

@@ -144,36 +144,4 @@
 			}
 
 		}
-
-		public function tester(){
-
-			$this->db->select('id');
-			$this->db->from('test');
-			$query = $this->db->get();
-
-			// print_r( $query->result_array());
-			$checker = 0;
-			foreach( $query->result_array() as $result):
-				// print_r($result["id"]);
-				// $len = strlen($result["id"]);
-				$num= substr($result["id"], 1, strlen($result["id"]));
-				if($checker < $num ):
-					$checker = $num;
-				endif;
-			endforeach;
-
-			$checker++;
-			
-
-
-			$idCreated = "T".$checker;
-
-			// User data array
-			$data = array(
-				'id' => $idCreated,
-				'name' => $this->input->post('username')
-			);
-			// Insert user
-			return $this->db->insert('test', $data);
-		}
 	}

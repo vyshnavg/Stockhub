@@ -141,26 +141,6 @@
 
 			<div id="messages" class="tab-pane fade in">
 				<h3> Under Construction</h3>
-
-				<?php echo form_open('vendors/tester'); ?>
-					<div class="row">
-
-						<div class="col-md-4 col-md-offset-4  col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
-
-							<div class="form-group">
-								<label>Username</label>
-								<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-									<input type="text" class="form-control" name="username" placeholder="Username" required/>
-								</div>
-							</div>
-		
-							<button type="submit" class="btn btn-success btn-block">Submit</button>
-
-						</div>
-
-					</div>
-					
-				<?php echo form_close(); ?>
 			</div>
 
 			<!-- ========================= ADDRESS SECTION ========================= -->

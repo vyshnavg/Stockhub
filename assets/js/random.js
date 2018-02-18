@@ -175,3 +175,24 @@ $(document).ready(function() {			//	manufacturer tender page , list group active
 		}
 	});
 });
+
+$(document).ready(function() {			//	MAKE EACH WELL CLICKABLE IN USER TENDER
+	$('div#clickableTenders').click(function() {
+			var href = $(this).find("a").attr("href");
+			if(href) {
+					window.location = href;
+			}
+	});
+});
+
+$(document).ready(function() {			//	WELL HOVER OVER COLOR CHANGE
+	$(".well").mouseenter(
+    function(){
+      $(this).css('background-color','#E0E0E0');
+    });
+  
+   $(".well").mouseleave(
+    function(){
+      $(this).css('background-color','#ECF0F1');
+    });
+});

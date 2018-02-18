@@ -21,6 +21,7 @@
 		}
 
 		public function tenderRequest($tenderID){
+
 			// tender request data array
 			$data = array(
 				'vendor_id' => $this->session->userdata('user_id'),

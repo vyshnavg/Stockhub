@@ -9,8 +9,6 @@
         public function get_materials($slug = FALSE){
 
 			$this->db->join('material_subcat','material_subcat.subcat_id = raw_material.material_subcat_id');
-			$this->db->join('adv_table','adv_table.raw_material_id = raw_material.raw_material_id');
-			$this->db->join('disadv_table','disadv_table.raw_material_id = raw_material.raw_material_id');
 			if($slug === FALSE){
 				$query = $this->db->get('raw_material');
 				return $query->result_array();

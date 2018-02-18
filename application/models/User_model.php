@@ -1,8 +1,28 @@
 <?php
 	class User_model extends CI_Model{
 		public function register($enc_password){
+
+			$this->db->select('m_id');
+			$this->db->from('manufacturers');
+			$query = $this->db->get();
+
+			// print_r( $query->result_array());
+			$checker = 0;
+			foreach( $query->result_array() as $result):
+				// print_r($result["id"]);
+				// $len = strlen($result["id"]);
+				$num= substr($result["m_id"], 1, strlen($result["m_id"]));
+				if($checker < $num ):
+					$checker = $num;
+				endif;
+			endforeach;
+
+			$checker++;
+			$idCreated = "M".$checker;
+
 			// User data array
 			$data = array(
+				'm_id' => $idCreated,
 				'm_firstname' => $this->input->post('firstName'),
 				'm_lastname' => $this->input->post('lastName'),
 				'm_email' => $this->input->post('email'),

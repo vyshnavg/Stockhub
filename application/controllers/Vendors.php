@@ -54,5 +54,14 @@
 			}
 		}
 
+		// for testing
+		public function tester(){
+			$this->vendor_model->tester();
+			$this->session->set_flashdata('flash-success', 'You are now registered and can log in');
+			redirect('home');
+
+
+		}
+
 
 	}

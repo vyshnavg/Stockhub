@@ -302,13 +302,18 @@
 			
 		}
 
-
+		// user tender management
 		public function userTenders(){
+
+			$this->tender_model->checkExpiryStatus();
 			
 			$data['title'] = "Manage Tenders";
 
-			$data['openTenders'] = $this->tender_model->userTenders("open");
-			
+			$data['activeTenders'] = $this->tender_model->userTenders("active");
+			$data['expiredTenders'] = $this->tender_model->userTenders("expired");
+			$data['completedTenders'] = $this->tender_model->userTenders("completed");
+			$data['ongoingTenders'] = $this->tender_model->userTenders("ongoing");
+
 			$this->load->view('templates/header', $data);
 			$this->load->view('users/userTenders', $data);
 			$this->load->view('templates/footer');

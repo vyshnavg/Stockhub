@@ -15,13 +15,15 @@
         }
 
         public function view($slug = NULL){
-            $data['tender'] =$this ->tender_model->get_tenders($slug);
+            $data['tender'] = $this->tender_model->get_tenders($slug);
+            $data['DiffVendorRequests'] = $this->tender_model->get_diffVendorReq($data['tender']['tender_id']);
 
             if(empty($data['tender'])){
                 show_404();
             }
 
             $data['title'] =$data['tender']['tender_id'];
+
 
             $this->load->view('templates/header' , $data);
 			$this->load->view('tenders/view', $data);
@@ -48,8 +50,35 @@
             $this->session->set_flashdata('flash-success', 'Tender Request Send');
 			redirect('home');
         }
+
+        public function acptRequests($reqID){
+            
+            // Check if the user is not logged in.
+			if(!$this->session->userdata('logged_in')){
+                // Set message
+                $this->session->set_flashdata('flash-warning', 'Please Log In to continue');
+                redirect('users/login');
+            }
+
+            $this->tender_model->acptRequests($reqID);
+
+            $this->session->set_flashdata('flash-success', 'Vendor Request Accepted');
+			redirect('users/userTenders');
+        }
+
+        public function declRequests($reqID){
+            
+            // Check if the user is not logged in.
+			if(!$this->session->userdata('logged_in')){
+                // Set message
+                $this->session->set_flashdata('flash-warning', 'Please Log In to continue');
+                redirect('users/login');
+            }
+
+            $this->tender_model->declRequests($reqID);
+            
+            $this->session->set_flashdata('flash-success', 'Vendor Request Declined');
+			redirect('users/userTenders');
+        }
         
-
-
-
 	}

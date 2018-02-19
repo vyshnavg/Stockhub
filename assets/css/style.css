@@ -1,4 +1,5 @@
 body{
+    
     background: #FAFAFA;
     padding-bottom: 33px;
     padding-top: 60px;   
@@ -175,7 +176,6 @@ footer{
 
 /* home text animations */
 
-
 #titleHomeDiv div {
     margin-top: 4%;    
     display:inline-block;
@@ -188,7 +188,7 @@ footer{
     -webkit-perspective: 1000;
     -webkit-transform: translate3d(0,0,0);
   }
-  
+   
   #titleHomeDiv div:first-of-type {    
     animation: showup 7s infinite;
     padding-right: 20px;
@@ -203,7 +203,7 @@ footer{
     /* margin-left:-15px; */
     animation: slidein 7s infinite;
   }
-  
+
   @keyframes showup {
       0% {opacity:0;}
       20% {opacity:1;}
@@ -226,6 +226,7 @@ footer{
       100% {opacity:0;width:400px;}
 
   }
+
 
   /* icons */
 

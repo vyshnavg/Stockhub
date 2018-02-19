@@ -91,12 +91,42 @@
                                         
 
 
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label for="inpuFname">Enter the quantity that you can deliver</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
                                                 <input type="number" value="1" class="form-control" min="1" name="tender_quantity"  id="tender_quantity">
                                             </div>
+                                        </div> -->
+
+                                        <div class="row">
+                                        <label>Enter the quantity that you can deliver</label>
+                                            <div class="col-xs-6 col-sm-7 col-md-7">
+                                                <div class="form-group">
+                                                    <!-- <label for="inpuFname">Quantity</label> -->
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                                                        <input type="number" value="1" class="form-control" min="1" name="tender_quantity"  id="tender_quantity">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-6 col-sm-5 col-md-5">
+                                                <div class="form-group">
+
+                                                    <!-- <label for="sel1">Select Unit:</label> -->
+                                                    <select class="form-control" name="tender_quantity_unit" id="tender_quantity_unit">
+                                                        <option value="Kilograms">Kilograms</option>
+                                                        <option value="Pounds">Pounds</option>
+                                                        <option value="Quintals">Quintals</option>
+                                                        <option value="Litres">Litres</option>
+                                                        <option value="Gallons">Gallons</option>
+                                                        <option value="Units">Units</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
                                         </div>
 
 

@@ -35,6 +35,7 @@
 				'vendor_id' => $this->session->userdata('user_id'),
 				'tender_id' => $tenderID,
 				'quantity' => $this->input->post('tender_quantity'),
+				'quantity_unit' => $this->input->post('tender_quantity_unit'),
 				'quoted_price' => $this->input->post('quoted-price'),
 				'delivery_date' => $this->input->post('dod'),
 				'req_desc' => $this->input->post('extra_info'),

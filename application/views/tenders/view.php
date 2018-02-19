@@ -46,11 +46,11 @@
                                     }
                                     
                                 ?>
-                        <dd>
+                        </dd>
                         <dt>Estimated Price</dt>
-                        <dd><?php echo ("₹ ".$tender['estimated_price']);?><dd>
+                        <dd><?php echo ("₹ ".$tender['estimated_price']);?></dd>
                         <dt>Requirements</dt>
-                        <dd><?php echo ($tender['extra_info']);?><dd>
+                        <dd><?php echo ($tender['extra_info']);?></dd>
                     </dl>
 
                     <hr>

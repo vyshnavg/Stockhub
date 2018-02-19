@@ -34,5 +34,17 @@
 			// Insert tender request
 			return $this->db->insert('diff_vendor_req', $data);
 		}
+
+
+		public function userTenders($passValue){
+
+			if($passValue === "open"){
+				$this->db->join('raw_material','raw_material.raw_material_id = tender.raw_material_id');
+				$query = $this->db->get_where('tender', array('tender_status' => $passValue));
+				return $query->result_array();
+			}
+		
+		}
+
         
 	}

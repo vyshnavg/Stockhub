@@ -306,12 +306,12 @@
 		public function userTenders(){
 			
 			$data['title'] = "Manage Tenders";
-			
+
+			$data['openTenders'] = $this->tender_model->userTenders("open");
 			
 			$this->load->view('templates/header', $data);
 			$this->load->view('users/userTenders', $data);
 			$this->load->view('templates/footer');
-
 		}
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2018 at 03:30 PM
+-- Generation Time: Feb 21, 2018 at 06:50 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -79,18 +79,21 @@ CREATE TABLE `diff_vendor_req` (
   `request_id` int(11) NOT NULL,
   `vendor_id` varchar(11) NOT NULL,
   `quantity` int(10) NOT NULL,
+  `quantity_unit` varchar(15) NOT NULL,
   `quoted_price` int(10) NOT NULL,
   `tender_id` int(11) NOT NULL,
   `delivery_date` date NOT NULL,
-  `req_desc` text NOT NULL
+  `req_desc` text NOT NULL,
+  `req_status` set('accepted','declined','pending','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `diff_vendor_req`
 --
 
-INSERT INTO `diff_vendor_req` (`request_id`, `vendor_id`, `quantity`, `quoted_price`, `tender_id`, `delivery_date`, `req_desc`) VALUES
-(1, 'V1', 1, 232, 3, '2018-03-01', 'sds');
+INSERT INTO `diff_vendor_req` (`request_id`, `vendor_id`, `quantity`, `quantity_unit`, `quoted_price`, `tender_id`, `delivery_date`, `req_desc`, `req_status`) VALUES
+(1, 'V1', 1, 'Pounds', 232, 3, '2018-03-01', 'sds', 'declined'),
+(2, 'V1', 3, 'Pounds', 60, 4, '2018-02-23', 'dfsdf', 'pending');
 
 -- --------------------------------------------------------
 
@@ -279,39 +282,19 @@ CREATE TABLE `tender` (
   `time_expire` time NOT NULL,
   `delivery_location` int(11) NOT NULL,
   `estimated_price` int(9) NOT NULL,
-  `extra_info` text
+  `extra_info` text,
+  `tender_status` set('active','ongoing','completed','expired') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tender`
 --
 
-INSERT INTO `tender` (`tender_id`, `m_id`, `raw_material_id`, `tender_quantity`, `tender_quantity_unit`, `date_of_submission`, `time_submission`, `date_expire`, `time_expire`, `delivery_location`, `estimated_price`, `extra_info`) VALUES
-(1, 'M2', 1, 10, 'Kilograms', '2018-02-01', '11:29:00', '2018-02-09', '11:29:00', 1, 200, 'Must be 10 meter wide piece'),
-(2, 'M2', 2, 20, 'Kilograms', '2018-02-02', '11:35:00', '2018-02-14', '11:35:00', 1, 23, '5m x 2m piece each'),
-(3, 'M2', 7, 12, 'Kilograms', '2018-02-10', '09:59:00', '2018-02-16', '09:58:00', 2, 300, 'sd');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `test`
---
-
-CREATE TABLE `test` (
-  `id` varchar(11) NOT NULL,
-  `name` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `test`
---
-
-INSERT INTO `test` (`id`, `name`) VALUES
-('T0', 'ok'),
-('T25', 'jko'),
-('T26', 'jndklsf'),
-('T27', 'jdnsf'),
-('T28', 'fdfdf');
+INSERT INTO `tender` (`tender_id`, `m_id`, `raw_material_id`, `tender_quantity`, `tender_quantity_unit`, `date_of_submission`, `time_submission`, `date_expire`, `time_expire`, `delivery_location`, `estimated_price`, `extra_info`, `tender_status`) VALUES
+(1, 'M2', 1, 10, 'Kilograms', '2018-02-01', '11:29:00', '2018-02-09', '11:29:00', 1, 200, 'Must be 10 meter wide piece', 'expired'),
+(2, 'M2', 2, 20, 'Kilograms', '2018-02-02', '11:35:00', '2018-02-14', '11:35:00', 1, 23, '5m x 2m piece each', 'expired'),
+(3, 'M2', 7, 12, 'Kilograms', '2018-02-10', '09:59:00', '2018-02-16', '09:58:00', 2, 300, 'sd', 'expired'),
+(4, 'M2', 10, 25, 'Pounds', '2018-02-18', '22:20:00', '2018-02-21', '09:54:00', 2, 2500, 'Max 5 meter width.', 'active');
 
 -- --------------------------------------------------------
 
@@ -461,12 +444,6 @@ ALTER TABLE `tender`
   ADD PRIMARY KEY (`tender_id`);
 
 --
--- Indexes for table `test`
---
-ALTER TABLE `test`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `transaction`
 --
 ALTER TABLE `transaction`
@@ -510,7 +487,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `diff_vendor_req`
 --
 ALTER TABLE `diff_vendor_req`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -558,7 +535,7 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `tender`
 --
 ALTER TABLE `tender`
-  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `transaction`

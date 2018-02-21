@@ -85,7 +85,7 @@
 				$id = $this->session->userdata('user_id');
 
 				$this->db->join('address', 'address.add_id = m_address_dict.add_id');
-				$query = $this->db->get_where('m_address_dict', array('m_id' => $id));
+				$query = $this->db->get_where('m_address_dict', array('manufacturer_id' => $id));
 				return $query->result_array();
 			}
 
@@ -102,19 +102,21 @@
 			if($return === FALSE){
 				$id = $this->session->userdata('user_id');
 
+				$this->db->join('m_address_dict','m_address_dict.manufacturer_id = manufacturers.m_id');
 				$this->db->select('*');
 				$this->db->from('manufacturers');
-				$this->db->where('m_id', $id);
-				$this->db->where('m_address_id !=', '');
+				$this->db->where('manufacturer_id', $id);
+				// $this->db->where('m_address_id !=', '');
 				$query = $this->db->get();
 				
 	
 				if(empty($query->row_array())){
-	
+
+					$this->db->join('m_address_dict','m_address_dict.manufacturer_id = manufacturers.m_id');
 					$this->db->select('*');
 					$this->db->from('manufacturers');
 					$this->db->where('m_id', $id);
-					$this->db->where('m_status !=', '');
+					// $this->db->where('m_status !=', '');
 					$query = $this->db->get();
 	
 					if(empty($query->row_array())){
@@ -130,7 +132,8 @@
 					$this->session->set_flashdata('flash-warning', 'You are currently inactive user. Please add Address Information to be active.');
 				}
 				else{
-	
+
+					$this->db->join('m_address_dict','m_address_dict.manufacturer_id = manufacturers.m_id');
 					$this->db->select('m_status');
 					$this->db->from('manufacturers');
 					$this->db->where('m_id', $id);
@@ -177,7 +180,7 @@
 			$insert_id = $this->db->insert_id();
 
 			$newdata = array(
-				'm_id' => $this->session->userdata('user_id'),
+				'manufacturer_id' => $this->session->userdata('user_id'),
 				'add_id' => $insert_id
 			);
 			// Insert address dict

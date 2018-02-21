@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2018 at 06:50 AM
+-- Generation Time: Feb 21, 2018 at 07:32 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -45,7 +45,10 @@ CREATE TABLE `address` (
 
 INSERT INTO `address` (`add_id`, `state`, `city`, `street`, `building_no`, `land_mark`, `pincode`, `country`) VALUES
 (1, 'Karnataka', 'Bangalore', '25th main, 3rd A Cross, J P Nagar', '1211', 'near playground', 650078, 'India'),
-(2, 'Jharkhand', 'Bokaro', '35th Street', '200', '', 680625, 'India');
+(2, 'Jharkhand', 'Bokaro', '35th Street', '200', '', 680625, 'India'),
+(4, 'Chhattisgarh', 'Bastar', 'fdgdfg', 'dggg', 'dsf', 343422, 'India'),
+(5, 'Madhya Pradesh', 'Alirajpur', 'sdf', 'fdsf', 'sdf', 323232, 'India'),
+(6, 'Kerala', 'Alappuzha', 'dsfdsf', 'dsfdsf', 'fdsf', 343423, 'India');
 
 -- --------------------------------------------------------
 
@@ -120,7 +123,6 @@ CREATE TABLE `manufacturers` (
   `m_email` varchar(100) NOT NULL,
   `m_username` varchar(21) NOT NULL,
   `m_password` varchar(255) NOT NULL,
-  `m_address_id` int(10) DEFAULT NULL,
   `m_org_name` int(50) DEFAULT NULL,
   `m_status` set('Active','Inactive') NOT NULL,
   `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -130,9 +132,10 @@ CREATE TABLE `manufacturers` (
 -- Dumping data for table `manufacturers`
 --
 
-INSERT INTO `manufacturers` (`m_id`, `m_firstname`, `m_lastname`, `m_email`, `m_username`, `m_password`, `m_address_id`, `m_org_name`, `m_status`, `register_date`) VALUES
-('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', 1, NULL, 'Active', '2018-02-18 14:18:58'),
-('M8', 'Tim', 'Cook', 'tim@cook.in', 'tim12345', '0a80250fe4bbd7759207d6bff43c8661', NULL, NULL, 'Inactive', '2018-02-18 14:19:03');
+INSERT INTO `manufacturers` (`m_id`, `m_firstname`, `m_lastname`, `m_email`, `m_username`, `m_password`, `m_org_name`, `m_status`, `register_date`) VALUES
+('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Inactive', '2018-02-21 05:57:59'),
+('M8', 'Tim', 'Cook', 'tim@cook.in', 'tim12345', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Inactive', '2018-02-18 14:19:03'),
+('M9', 'dfsd', 'sdf', 'df@sad.c', 'qweasdzxc', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', '2018-02-21 06:25:10');
 
 -- --------------------------------------------------------
 
@@ -163,7 +166,7 @@ INSERT INTO `material_subcat` (`subcat_id`, `subcat_name`, `created_date`) VALUE
 
 CREATE TABLE `m_address_dict` (
   `m_address_dict_id` int(11) NOT NULL,
-  `m_id` varchar(11) NOT NULL,
+  `manufacturer_id` varchar(11) NOT NULL,
   `add_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -171,9 +174,11 @@ CREATE TABLE `m_address_dict` (
 -- Dumping data for table `m_address_dict`
 --
 
-INSERT INTO `m_address_dict` (`m_address_dict_id`, `m_id`, `add_id`) VALUES
+INSERT INTO `m_address_dict` (`m_address_dict_id`, `manufacturer_id`, `add_id`) VALUES
 (1, 'M2', 1),
-(2, 'M2', 2);
+(2, 'M2', 2),
+(4, 'M9', 5),
+(5, 'M9', 6);
 
 -- --------------------------------------------------------
 
@@ -475,7 +480,7 @@ ALTER TABLE `vendor_materials`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `add_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `add_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -505,7 +510,7 @@ ALTER TABLE `material_subcat`
 -- AUTO_INCREMENT for table `m_address_dict`
 --
 ALTER TABLE `m_address_dict`
-  MODIFY `m_address_dict_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `m_address_dict_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `product_cat`

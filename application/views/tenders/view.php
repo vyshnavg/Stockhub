@@ -6,7 +6,7 @@
             <div class="col-md-3">
                 <img class="post-thumb-view thumbnail" src="<?php echo asset_url().'images/materials/'.$tender['rm_pic'];?>" >
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
                 
                 <small class="material-date">Posted on: 
 

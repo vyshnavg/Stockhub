@@ -2,8 +2,6 @@
     <h1 style="text-align:center;">StockHUB</h1>
 </div>
 
-
-
 <div class="container"> 
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">

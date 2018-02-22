@@ -2,8 +2,8 @@
 
 <h3><?php echo $material['rm_name']; ?></h3>
 
-        <div class="row">
-                <div class="col-md-3">
+        <div class="row display-flex">
+                <div class="col-sm-6 col-md-4 col-lg-3">
                     <img class="post-thumb-view thumbnail" src="<?php echo asset_url().'images/materials/'.$material['rm_pic'];?>" >
                 </div>
                 <div class="col-md-8">

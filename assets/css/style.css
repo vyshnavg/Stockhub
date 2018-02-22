@@ -5,12 +5,6 @@ body{
     padding-top: 60px;   
 }
 
-@media (max-width: 979px) {
-    body {
-      padding-top: 0px;
-    }
-  }
-
 .material-date{
     background: #f4f4f4;
     padding: 4px;
@@ -27,8 +21,6 @@ body{
 .post-thumb-view{
     width:100%;
 }
-
-
 /* ================================== */
 .row{
     
@@ -177,7 +169,7 @@ footer{
 /* home text animations */
 
 #titleHomeDiv div {
-    margin-top: 4%;    
+    margin-top: 1%;    
     display:inline-block;
     overflow:hidden;
     white-space:nowrap;

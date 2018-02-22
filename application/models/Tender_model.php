@@ -89,6 +89,18 @@
 				'req_status' => "accepted"
 			);
 			$this->db->update('diff_vendor_req', $data, array('request_id' => $reqID));
+
+			//convert the active tender to ongoing tender
+			$this->db->select('tender_id');
+			$this->db->from('diff_vendor_req');
+			$this->db->where('request_id', $reqID);
+			$query = $this->db->get();
+			$tender_id = $query->row_array();
+
+			$data = array(
+				'tender_status' => "ongoing"
+			);
+			$this->db->update('tender', $data, array('tender_id' => $tender_id["tender_id"] ));
 		}
 
 

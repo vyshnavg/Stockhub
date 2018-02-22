@@ -37,7 +37,7 @@
                                 $datetime1 = new DateTime();
                                 $datetime2 = new DateTime($exp);
                                 if ( $datetime1 >  $datetime2){
-                                    echo("DiffVendorRequest");
+                                    echo("Expired");
                                     $temp=1;
                                 }
                                 else{
@@ -185,46 +185,53 @@
         <h3>Tender Requests</h3>
         </br>
                 
+        <?php if($temp==1): ?>
+            <h5 class="text-center text-danger"><i>Tender Expired</i></h5>
+        <?php elseif(empty($DiffVendorRequests)): ?>
+            <h5 class="text-center text-warning"><i>No Requests</i></h5>
+        <?php else: ?>
 
-        <table class="table table-striped table-hover " id="diffVendorTable">
-                
-            <thead>
-                <tr>
-                    <th>SI No</th>
-                    <th onclick="sortTable(0)" >Request ID</th>
-                    <th onclick="sortTable(1)" >Vendor Name</th> <!-- quantity and unit combined-->
-                    <th onclick="sortTable(2)" >Quantity</th>
-                    <th onclick="sortTable(3)" >Quoted Price (₹)</th>
-                    <th onclick="sortTable(4)" >Delivery Date</th>
-                    <th>Additional Info</th>
-                    <th>Operations</th>
-                </tr>
-            </thead>
+            <table class="table table-striped table-hover " id="diffVendorTable">
+                    
+                <thead>
+                    <tr>
+                        <th>SI No</th>
+                        <th onclick="sortTable(0)" >Request ID</th>
+                        <th onclick="sortTable(1)" >Vendor Name</th> <!-- quantity and unit combined-->
+                        <th onclick="sortTable(2)" >Quantity</th>
+                        <th onclick="sortTable(3)" >Quoted Price (₹)</th>
+                        <th onclick="sortTable(4)" >Delivery Date</th>
+                        <th>Additional Info</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
 
-            <tbody id="diffVendoTableBody">
-                <?php $i = 1; ?>
-                <?php foreach($DiffVendorRequests as $DiffVendorRequest): 
-                        if($DiffVendorRequest['req_status'] != "declined"): ?>
-                        <tr> 
-                            <td>  <?php echo($i++);?></td>
-                            <td><?php echo ("#".$DiffVendorRequest['request_id']); ?></td>
-                            <td><?php echo ($DiffVendorRequest['v_firstname']." ".$DiffVendorRequest['v_lastname']); ?></td>
-                            <td><?php echo ($DiffVendorRequest['quantity']." ".$DiffVendorRequest['quantity_unit']);?></td>
-                            <td><?php echo ("₹ ".$DiffVendorRequest['quoted_price']);?></td>
-                            <td><?php echo ($DiffVendorRequest['delivery_date']); ?></td>
-                            <td><?php echo ($DiffVendorRequest['req_desc']); ?></td>
-                            <td>
-                                <!-- <button class="btn btn-success" role="button"  ><span class="glyphicon glyphicon-ok"></span></button> -->
-                                <!-- <button class="btn btn-danger" role="button"  ><span class="glyphicon glyphicon-remove"></span></button> -->
-                                <button class="btn btn-success" type="button" title="Do you want to accept this request?" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="<form action='<?php echo base_url(); ?>tenders/acptRequests/<?php echo($DiffVendorRequest['request_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-ok" aria-hidden="true"></span></button>
-                                <button class="btn btn-danger" type="button" title="Do you want to decline this request?" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="<form action='<?php echo base_url(); ?>tenders/declRequests/<?php echo($DiffVendorRequest['request_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                            </td>
-                            
-                        </tr>
-                        <?php endif;
-                    endforeach; ?>
-            </tbody>
-        </table> 
+                <tbody id="diffVendoTableBody">
+                    <?php $i = 1; ?>
+                    <?php foreach($DiffVendorRequests as $DiffVendorRequest): 
+                            if($DiffVendorRequest['req_status'] != "declined"): ?>
+                            <tr> 
+                                <td>  <?php echo($i++);?></td>
+                                <td><?php echo ("#".$DiffVendorRequest['request_id']); ?></td>
+                                <td><?php echo ($DiffVendorRequest['v_firstname']." ".$DiffVendorRequest['v_lastname']); ?></td>
+                                <td><?php echo ($DiffVendorRequest['quantity']." ".$DiffVendorRequest['quantity_unit']);?></td>
+                                <td><?php echo ("₹ ".$DiffVendorRequest['quoted_price']);?></td>
+                                <td><?php echo ($DiffVendorRequest['delivery_date']); ?></td>
+                                <td><?php echo ($DiffVendorRequest['req_desc']); ?></td>
+                                <td>
+                                    <!-- <button class="btn btn-success" role="button"  ><span class="glyphicon glyphicon-ok"></span></button> -->
+                                    <!-- <button class="btn btn-danger" role="button"  ><span class="glyphicon glyphicon-remove"></span></button> -->
+                                    <button class="btn btn-success" type="button" title="Do you want to accept this request?" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="<form action='<?php echo base_url(); ?>tenders/acptRequests/<?php echo($DiffVendorRequest['request_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                                    <button class="btn btn-danger" type="button" title="Do you want to decline this request?" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="<form action='<?php echo base_url(); ?>tenders/declRequests/<?php echo($DiffVendorRequest['request_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                </td>
+                                
+                            </tr>
+                            <?php endif;
+                        endforeach; ?>
+                </tbody>
+
+            </table> 
+        <?php endif;?>
 
 <?php endif; ?>
 

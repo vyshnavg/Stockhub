@@ -196,3 +196,9 @@ $(document).ready(function() {			//	WELL HOVER OVER COLOR CHANGE
       $(this).css('background-color','#ECF0F1');
     });
 });
+
+
+$('#tenderSearchTableBody td#tenderSearchTableTD').each(function () {  //color change in tender index page
+	var dtTd = String($(this).text()).replace(/\s/g,'');
+	(dtTd === "Expired") ? $(this).parent('tr').addClass('text-danger') : $(this).parent('tr').addClass('text-success');
+});

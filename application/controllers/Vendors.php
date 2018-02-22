@@ -29,7 +29,7 @@
 				$this->vendor_model->register($enc_password);
 				// Set message
 				$this->session->set_flashdata('flash-success', 'You are now registered and can log in');
-				redirect('home');
+				redirect('userdashboard');
 			}
 		}
 

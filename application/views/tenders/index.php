@@ -56,7 +56,7 @@
                                 <td> <a href="<?php echo base_url(); ?>tenders/view/<?php echo($tender['tender_id']); ?>"></a> <?php echo($i++);?></td>
                                 <td><?php echo ($tender['rm_name']);?></td>
                                 <td><?php echo ($tender['tender_quantity']." ".$tender['tender_quantity_unit']);?> </td>
-                                <td>
+                                <td id="tenderSearchTableTD">
                                 <?php
                                     
                                     $expdate = $tender['date_expire'];
@@ -70,7 +70,7 @@
                                     }
                                     else{
                                         $interval = $datetime1->diff($datetime2);
-                                    echo $interval->format('%d day %h hours %i minutes');
+                                        echo $interval->format('%d day %h hours %i minutes');
                                     }
                                     
                                     

@@ -89,7 +89,8 @@
 				'time_expire' => $this->input->post('toe'),
 				'delivery_location' => $this->input->post('deliveryLocation'),
 				'estimated_price' => $this->input->post('estimated-price'),
-				'extra_info' => $this->input->post('extra_info')
+				'extra_info' => $this->input->post('extra_info'),
+				'tender_status' => 'active'
 			);
 			// Insert user
 			return $this->db->insert('tender', $data);

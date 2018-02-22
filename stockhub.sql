@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2018 at 07:32 AM
+-- Generation Time: Feb 22, 2018 at 05:10 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -96,7 +96,7 @@ CREATE TABLE `diff_vendor_req` (
 
 INSERT INTO `diff_vendor_req` (`request_id`, `vendor_id`, `quantity`, `quantity_unit`, `quoted_price`, `tender_id`, `delivery_date`, `req_desc`, `req_status`) VALUES
 (1, 'V1', 1, 'Pounds', 232, 3, '2018-03-01', 'sds', 'declined'),
-(2, 'V1', 3, 'Pounds', 60, 4, '2018-02-23', 'dfsdf', 'pending');
+(2, 'V1', 3, 'Pounds', 60, 4, '2018-02-23', 'dfsdf', 'accepted');
 
 -- --------------------------------------------------------
 
@@ -133,7 +133,7 @@ CREATE TABLE `manufacturers` (
 --
 
 INSERT INTO `manufacturers` (`m_id`, `m_firstname`, `m_lastname`, `m_email`, `m_username`, `m_password`, `m_org_name`, `m_status`, `register_date`) VALUES
-('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Inactive', '2018-02-21 05:57:59'),
+('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', '2018-02-21 06:55:04'),
 ('M8', 'Tim', 'Cook', 'tim@cook.in', 'tim12345', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Inactive', '2018-02-18 14:19:03'),
 ('M9', 'dfsd', 'sdf', 'df@sad.c', 'qweasdzxc', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', '2018-02-21 06:25:10');
 
@@ -299,7 +299,8 @@ INSERT INTO `tender` (`tender_id`, `m_id`, `raw_material_id`, `tender_quantity`,
 (1, 'M2', 1, 10, 'Kilograms', '2018-02-01', '11:29:00', '2018-02-09', '11:29:00', 1, 200, 'Must be 10 meter wide piece', 'expired'),
 (2, 'M2', 2, 20, 'Kilograms', '2018-02-02', '11:35:00', '2018-02-14', '11:35:00', 1, 23, '5m x 2m piece each', 'expired'),
 (3, 'M2', 7, 12, 'Kilograms', '2018-02-10', '09:59:00', '2018-02-16', '09:58:00', 2, 300, 'sd', 'expired'),
-(4, 'M2', 10, 25, 'Pounds', '2018-02-18', '22:20:00', '2018-02-21', '09:54:00', 2, 2500, 'Max 5 meter width.', 'active');
+(4, 'M2', 10, 25, 'Pounds', '2018-02-18', '22:20:00', '2018-02-23', '09:54:00', 2, 2500, 'Max 5 meter width.', 'ongoing'),
+(5, 'M2', 1, 43, 'Kilograms', '2018-02-21', '12:25:00', '2018-02-23', '12:25:00', 1, 3434, '', '');
 
 -- --------------------------------------------------------
 
@@ -540,7 +541,7 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `tender`
 --
 ALTER TABLE `tender`
-  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `transaction`

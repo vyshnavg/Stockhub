@@ -11,4 +11,6 @@
 Stockhub will show them the various <a href="<?php echo base_url();?>materials">raw materials</a> that can be used and the advantages and disadvantages of using each of them. This will give them a clarity of the materials that will be required and once that is achieved, the second function of the website starts.<br><br>
 A tender can be created to procure the product. The notification will be broadcasted to every vendor who deals with these materials. All this will create a network of interactions and save tons of research
 </h4>
+<hr><br>
+<h3 style="text-align:center;"><a href=#>Contact Us</a></h3>
 </div>  

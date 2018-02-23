@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2018 at 05:10 AM
+-- Generation Time: Feb 23, 2018 at 06:34 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -48,7 +48,8 @@ INSERT INTO `address` (`add_id`, `state`, `city`, `street`, `building_no`, `land
 (2, 'Jharkhand', 'Bokaro', '35th Street', '200', '', 680625, 'India'),
 (4, 'Chhattisgarh', 'Bastar', 'fdgdfg', 'dggg', 'dsf', 343422, 'India'),
 (5, 'Madhya Pradesh', 'Alirajpur', 'sdf', 'fdsf', 'sdf', 323232, 'India'),
-(6, 'Kerala', 'Alappuzha', 'dsfdsf', 'dsfdsf', 'fdsf', 343423, 'India');
+(6, 'Kerala', 'Alappuzha', 'dsfdsf', 'dsfdsf', 'fdsf', 343423, 'India'),
+(8, 'Karnataka', 'Bangalore', 'Sg Palya', '103', '', 560029, 'India');
 
 -- --------------------------------------------------------
 
@@ -96,7 +97,8 @@ CREATE TABLE `diff_vendor_req` (
 
 INSERT INTO `diff_vendor_req` (`request_id`, `vendor_id`, `quantity`, `quantity_unit`, `quoted_price`, `tender_id`, `delivery_date`, `req_desc`, `req_status`) VALUES
 (1, 'V1', 1, 'Pounds', 232, 3, '2018-03-01', 'sds', 'declined'),
-(2, 'V1', 3, 'Pounds', 60, 4, '2018-02-23', 'dfsdf', 'accepted');
+(2, 'V1', 3, 'Pounds', 60, 4, '2018-02-23', 'dfsdf', 'pending'),
+(3, 'V1', 1, 'Kilograms', 15000, 6, '2018-02-24', '', 'accepted');
 
 -- --------------------------------------------------------
 
@@ -133,9 +135,10 @@ CREATE TABLE `manufacturers` (
 --
 
 INSERT INTO `manufacturers` (`m_id`, `m_firstname`, `m_lastname`, `m_email`, `m_username`, `m_password`, `m_org_name`, `m_status`, `register_date`) VALUES
-('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', '2018-02-21 06:55:04'),
+('M10', 'Sukhjeet', 'Gulati', 'sukhjeetsinghgulati@gmail.com', 'ssinghgulati', '32420fbae3e0789799c8d31147560bf2', NULL, 'Active', '2018-02-22 04:39:06'),
+('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Inactive', '2018-02-21 05:57:59'),
 ('M8', 'Tim', 'Cook', 'tim@cook.in', 'tim12345', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Inactive', '2018-02-18 14:19:03'),
-('M9', 'dfsd', 'sdf', 'df@sad.c', 'qweasdzxc', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', '2018-02-21 06:25:10');
+('M9', 'dfsd', 'sdf', 'df@sad.c', 'qweasdzxc', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Inactive', '2018-02-22 04:06:44');
 
 -- --------------------------------------------------------
 
@@ -178,7 +181,8 @@ INSERT INTO `m_address_dict` (`m_address_dict_id`, `manufacturer_id`, `add_id`) 
 (1, 'M2', 1),
 (2, 'M2', 2),
 (4, 'M9', 5),
-(5, 'M9', 6);
+(5, 'M9', 6),
+(7, 'M10', 8);
 
 -- --------------------------------------------------------
 
@@ -299,8 +303,10 @@ INSERT INTO `tender` (`tender_id`, `m_id`, `raw_material_id`, `tender_quantity`,
 (1, 'M2', 1, 10, 'Kilograms', '2018-02-01', '11:29:00', '2018-02-09', '11:29:00', 1, 200, 'Must be 10 meter wide piece', 'expired'),
 (2, 'M2', 2, 20, 'Kilograms', '2018-02-02', '11:35:00', '2018-02-14', '11:35:00', 1, 23, '5m x 2m piece each', 'expired'),
 (3, 'M2', 7, 12, 'Kilograms', '2018-02-10', '09:59:00', '2018-02-16', '09:58:00', 2, 300, 'sd', 'expired'),
-(4, 'M2', 10, 25, 'Pounds', '2018-02-18', '22:20:00', '2018-02-23', '09:54:00', 2, 2500, 'Max 5 meter width.', 'ongoing'),
-(5, 'M2', 1, 43, 'Kilograms', '2018-02-21', '12:25:00', '2018-02-23', '12:25:00', 1, 3434, '', '');
+(4, 'M2', 10, 25, 'Pounds', '2018-02-18', '22:20:00', '2018-02-21', '09:54:00', 2, 2500, 'Max 5 meter width.', 'expired'),
+(5, 'M10', 15, 1, 'Kilograms', '2018-02-22', '09:37:00', '2018-02-24', '09:37:00', 6, 0, '', ''),
+(6, 'M10', 1, 5, 'Kilograms', '2018-02-22', '10:10:00', '2018-02-23', '00:09:00', 7, 10000, 'Set of 5 peices 2m each', 'ongoing'),
+(7, 'M10', 11, 1, 'Kilograms', '2018-02-22', '10:13:00', '2018-02-25', '10:13:00', 7, 221, 'dsf', '');
 
 -- --------------------------------------------------------
 
@@ -357,7 +363,8 @@ CREATE TABLE `vendors` (
 --
 
 INSERT INTO `vendors` (`v_id`, `v_email`, `v_username`, `v_password`, `v_firstname`, `v_lastname`, `v_address_id`, `v_status`, `v_org_name`, `v_website`, `v_exprt_mthd`, `created_at`) VALUES
-('V1', 'sam@time.in', 'samlaw12', '0a80250fe4bbd7759207d6bff43c8661', 'Sam', 'Lawrence', NULL, 'Inactive', NULL, NULL, NULL, '2018-02-18 14:12:30');
+('V1', 'sam@time.in', 'samlaw12', '0a80250fe4bbd7759207d6bff43c8661', 'Sam', 'Lawrence', NULL, 'Inactive', NULL, NULL, NULL, '2018-02-18 14:12:30'),
+('V2', 'abcdef@gmail.com', 'abcdefgh', '32420fbae3e0789799c8d31147560bf2', 'abc', 'def', NULL, '', NULL, NULL, NULL, '2018-02-22 03:43:53');
 
 -- --------------------------------------------------------
 
@@ -481,7 +488,7 @@ ALTER TABLE `vendor_materials`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `add_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `add_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -493,7 +500,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `diff_vendor_req`
 --
 ALTER TABLE `diff_vendor_req`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -511,7 +518,7 @@ ALTER TABLE `material_subcat`
 -- AUTO_INCREMENT for table `m_address_dict`
 --
 ALTER TABLE `m_address_dict`
-  MODIFY `m_address_dict_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `m_address_dict_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `product_cat`
@@ -541,7 +548,7 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `tender`
 --
 ALTER TABLE `tender`
-  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `transaction`

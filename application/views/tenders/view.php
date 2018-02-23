@@ -64,7 +64,8 @@
                     <dd><?php echo $tender['rm_desc']; ?></dd>
                 </dl>
 
-<?php if($this->session->userdata('user_id') != $tender['m_id']): ?>
+<!-- for vendors and other visitors. if the tender is in active mode -->
+<?php if($this->session->userdata('user_id') != $tender['m_id']  && $tender['tender_status'] === "active" ): ?>
 
             <br><br>
             <button class="btn btn-primary" role="button" data-toggle="modal" data-target="#requestModal" <?php if($temp==1){echo("disabled='true'");} ?> >Send Request <span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
@@ -177,7 +178,8 @@
             </div>
         </div>
 
-<?php else: ?>
+<!-- for manufacterur who created the tender. if the tender is in active mode -->
+<?php elseif($this->session->userdata('user_id') === $tender['m_id']  && $tender['tender_status'] === "active"): ?>
 
         </div>
         </div>
@@ -232,6 +234,14 @@
 
             </table> 
         <?php endif;?>
+
+<!-- for manufacterur who created the tender. if the tender is in ONGOING mode -->
+<?php elseif($this->session->userdata('user_id') === $tender['m_id']  && $tender['tender_status'] === "ongoing"): ?>
+        </div>
+        </div>
+        <hr>
+        <h3>Ongoing Tender</h3>
+        </br>
 
 <?php endif; ?>
 

@@ -66,7 +66,7 @@
 			$tenders = $query->result_array();
 
 			foreach($tenders as $tender){
-				if($tender["tender_status"] != "expired" ){
+				if($tender["tender_status"] === "active" ){
 					$expdate = $tender['date_expire'];
 					$exptime = $tender['time_expire'];
 					$exp = date('Y-m-d H:i:s', strtotime("$expdate $exptime "));

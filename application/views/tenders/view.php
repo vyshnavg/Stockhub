@@ -61,7 +61,7 @@
                     <dt>Category</dt>
                     <dd><?php echo ($tender['subcat_name']);?><dd>
                     <dt>Desciption</dt>
-                    <dd><?php echo $tender['rm_desc']; ?></dd>
+                    <dd><?php echo "<p style='text-align:justify;'>".$tender['rm_desc']."</p>"; ?></dd>
                 </dl>
 
 <!-- for vendors and other visitors. if the tender is in active mode -->

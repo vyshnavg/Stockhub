@@ -8,17 +8,17 @@
                 </div>
                 <div class="col-md-8">
                     <small class="material-date">Posted on: <?php echo $material['rm_created_at']; ?> in <strong><?php echo $material['subcat_name'];?></strong></small><br>
-                    <?php echo $material['rm_desc']; ?>
+                    <?php echo "<p style='text-align:justify;'>".$material['rm_desc']."</p>"; ?>
                     <br><br>
 
                     <div class="row well">
                         <div class="col-md-6">
                             <h4 class="text-success">Pros</h4>
-                            <p><?php echo $material['rm_adv']; ?></p>
+                            <p><?php echo "<p style='text-align:justify;'>".$material['rm_adv']."</p>"; ?></p>
                         </div>
                         <div class="col-md-6">
                             <h4 class="text-danger">Cons</h4>
-                            <p><?php echo $material['rm_disadv']; ?></p>
+                            <p><?php echo "<p style='text-align:justify;'>".$material['rm_disadv']."</p>"; ?></p>
                         </div>
                     </div>
 

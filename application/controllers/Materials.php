@@ -40,7 +40,7 @@
             // Check if the user is not logged in.
 			if(!$this->session->userdata('logged_in')){
                 // Set message
-                $this->session->set_flashdata('flash-warning', 'Please Log In to continue');
+                $this->session->set_flashdata('flash-warning', 'Log In to continue');
                 redirect('users/login');
             }
 
@@ -48,7 +48,7 @@
             
             if($this->session->userdata('usertype') === 'vendor'){
                 // Set message
-                $this->session->set_flashdata('flash-warning', 'Only Manufacturers can put tenders.');
+                $this->session->set_flashdata('flash-warning', 'Log In as a maufacturer to create tenders');
                 redirect('home');
             }
 
@@ -58,7 +58,7 @@
 
             if(!$quary){
                 // Set message
-                $this->session->set_flashdata('flash-warning', 'Please be Active user. Add Address in your Dashboard.');
+                $this->session->set_flashdata('flash-warning', 'You are not an Active User. Add an address in your dashboard');
                 redirect('home');
             }
 
@@ -115,7 +115,7 @@
             
             $this->material_model->tenderRegister($material_id);
             // Set message
-            $this->session->set_flashdata('flash-success', 'Created a Tender');
+            $this->session->set_flashdata('flash-success', 'Tender Created');
             redirect('home');
 		}
 	}

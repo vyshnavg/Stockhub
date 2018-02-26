@@ -28,7 +28,7 @@
 				$enc_password = md5($this->input->post('password'));
 				$this->user_model->register($enc_password);
 				// Set message
-				$this->session->set_flashdata('flash-success', 'You are now registered and can log in');
+				$this->session->set_flashdata('flash-success', 'You are now registered. Log In to continue');
 				redirect('userdashboard');
 			}
 		}
@@ -116,7 +116,7 @@
 									redirect('home');
 								} else {
 									// Set message
-									$this->session->set_flashdata('flash-danger', 'Login is invalid');
+									$this->session->set_flashdata('flash-danger', 'Login details invalid');
 									redirect('users/login');
 								}
 						}	
@@ -221,13 +221,13 @@
 				redirect('home');
 			}
 			elseif(sizeof($data['addresses_arr']) >= 2){
-				$this->session->set_flashdata('flash-warning', 'Only can add 2 Address');
+				$this->session->set_flashdata('flash-warning', 'Maximum of 2 addresses can be added');
 				redirect('userdashboard');
 			}
 			
 			$this->user_model->newAddress();
 			// Set message
-			$this->session->set_flashdata('flash-success', 'You added new Address');
+			$this->session->set_flashdata('flash-success', 'New address added');
 			redirect('userdashboard');
 			
 		}
@@ -241,14 +241,14 @@
 			}
 			// No address passed
 			elseif($address === NULL){
-				$this->session->set_flashdata('flash-warning', 'Non Existing Address');
+				$this->session->set_flashdata('flash-warning', 'Address does not exist');
 				redirect('userdashboard');
 			}
 			//execute code
 			else{
 				$this->user_model->delAddress($address);
 				// Set message
-				$this->session->set_flashdata('flash-success', 'You deleted a Address');
+				$this->session->set_flashdata('flash-success', 'Address Deleted');
 				redirect('userdashboard');
 			}
 			
@@ -264,7 +264,7 @@
 			}
 			// No address passed
 			elseif($address === NULL){
-				$this->session->set_flashdata('flash-warning', 'Non Existing Address');
+				$this->session->set_flashdata('flash-warning', 'Address does not exist');
 				redirect('userdashboard');
 			}
 			//execute code
@@ -289,14 +289,14 @@
 			}
 			// No address passed
 			elseif($address === NULL){
-				$this->session->set_flashdata('flash-warning', 'Non Existing Address');
+				$this->session->set_flashdata('flash-warning', 'Address does not exist');
 				redirect('userdashboard');
 			}
 			//execute code
 			else{
 				$this->user_model->editAddress($address);
 				// Set message
-				$this->session->set_flashdata('flash-success', 'You edited a Address');
+				$this->session->set_flashdata('flash-success', 'Address details changed');
 				redirect('userdashboard');
 			}
 			

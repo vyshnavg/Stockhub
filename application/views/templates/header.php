@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
             </button>
             <?php if($title!="Home") :?>
-                <a class="navbar-brand" href="<?php echo base_url(); ?>">StockHUB</a>
+                <a class="navbar-brand" href="<?php echo base_url(); ?>"><img style="height:290%; padding-top:0px; padding-bottom:21px;" src="http://localhost/Stockhub/assets/images/altlogo.png"></a>
             <?php endif;?>
             </div>
 

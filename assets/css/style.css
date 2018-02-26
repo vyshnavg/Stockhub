@@ -235,3 +235,29 @@ footer{
 .inverseColor{
     color:#19BC9C;
 }
+
+.navt {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: black;
+  }
+  .navt li {
+    display: inline;
+  }
+  .navt a {
+    display: inline-block;
+    padding: 0 12px;
+    font-weight: normal;
+    color: white;
+    height: 44px;
+    line-height: 44px;
+  }
+  .navt li a:hover {
+    color: white;
+    background-color: pink;
+  }
+  .navt img {
+    vertical-align: middle;
+  }

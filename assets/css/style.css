@@ -235,3 +235,22 @@ footer{
 .inverseColor{
     color:#19BC9C;
 }
+
+
+/* progress bar */
+/* .progress  .progress-bar{
+    animation-name: animateBar;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+    animation-duration: 5.0s;
+}
+
+@keyframes animateBar {
+    0% {transform: translateX(-100%);}
+    100% {transform: translateX(0);}
+} */
+
+.progress-bar {
+    transition-duration: 2s;
+    transition-timing-function: ease-out;
+  }

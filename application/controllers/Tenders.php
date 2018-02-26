@@ -17,6 +17,8 @@
         public function view($slug = NULL){
             $data['tender'] = $this->tender_model->get_tenders($slug);
             $data['DiffVendorRequests'] = $this->tender_model->get_diffVendorReq($data['tender']['tender_id']);
+            $data['transaction'] = $this->tender_model->get_transaction($data['tender']['tender_id']);
+            print_r( $data['transaction']);
 
             if(empty($data['tender'])){
                 show_404();

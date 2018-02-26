@@ -28,6 +28,12 @@
 			return $query->result_array();
 		}
 
+		public function get_transaction($id){
+			$this->db->join('diff_vendor_req','diff_vendor_req.request_id = transaction.diff_vendor_reqid');
+			$query = $this->db->get_where('transaction', array('tender_created_id' => $id));
+			return $query->row_array();
+		}
+
 		public function tenderRequest($tenderID){
 
 			// tender request data array
@@ -91,7 +97,7 @@
 			$this->db->update('diff_vendor_req', $data, array('request_id' => $reqID));
 
 			//convert the active tender to ongoing tender
-			$this->db->select('tender_id');
+			$this->db->select('*');
 			$this->db->from('diff_vendor_req');
 			$this->db->where('request_id', $reqID);
 			$query = $this->db->get();
@@ -101,6 +107,17 @@
 				'tender_status' => "ongoing"
 			);
 			$this->db->update('tender', $data, array('tender_id' => $tender_id["tender_id"] ));
+
+			//putting the tender to transaction table
+			$data2 = array(
+				'diff_vendor_reqid' => $reqID,
+				'start_date' => date("Y-m-d"),
+				'start_time' => date("H:i"),
+				'delvy_date' => $tender_id["delivery_date"],
+				'delvy_time' => date("H:i"),
+				'trans_status' => 'orderConfirmed',
+			);
+			return $this->db->insert('transaction', $data2);
 		}
 
 

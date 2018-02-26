@@ -202,3 +202,11 @@ $('#tenderSearchTableBody td#tenderSearchTableTD').each(function () {  //color c
 	var dtTd = String($(this).text()).replace(/\s/g,'');
 	(dtTd === "Expired") ? $(this).parent('tr').addClass('text-danger') : $(this).parent('tr').addClass('text-success');
 });
+
+$(document).ready(function() {
+	$('.progress .progress-bar').css("width",
+						function() {
+								return $(this).attr("aria-valuenow") + "%";
+						}
+		)
+});

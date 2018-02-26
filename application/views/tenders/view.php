@@ -243,6 +243,37 @@
         <h3>Ongoing Tender</h3>
         </br>
 
+        <h5>Transaction Status : <?php echo($transaction['trans_status']);?></h5>    
+        <?php if($transaction['trans_status'] === 'orderConfirmed'):?>   
+            <div class="progress progress-vertical progress-striped active">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        <?php elseif($transaction['trans_status'] === 'orderConfirmed'): ?>
+            <div class="progress progress-vertical progress-striped active">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        <?php endif; ?>
+
+<!-- for vendor who requested. if the tender is in ONGOING mode -->
+<?php elseif($this->session->userdata('user_id') === $transaction['vendor_id']  && $tender['tender_status'] === "ongoing"): ?>
+
+        </div>
+        </div>
+        <hr>
+        <h3>Ongoing Tender</h3>
+        </br>
+
+        <h5>Transaction Status : <?php echo($transaction['trans_status']);?></h5>    
+        <?php if($transaction['trans_status'] === 'orderConfirmed'):?>   
+            <div class="progress progress-vertical progress-striped active">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        <?php elseif($transaction['trans_status'] === 'orderConfirmed'): ?>
+            <div class="progress progress-vertical progress-striped active">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        <?php endif; ?>
+
 <?php endif; ?>
 
         

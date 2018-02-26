@@ -156,7 +156,7 @@
 					<div class="col-sm-6 col-md-3">
 						<div class="well">
 							<div class="caption">
-								<h3 class="h3-margin-top-change"><?php echo ($address_arr['building_no']." , ".$address_arr['street']." , ".$address_arr['city']." , ".$address_arr['state']." , ".$address_arr['country'].". Pincode : ".$address_arr['pincode']); ?></h3>
+								<h4 class="h4-margin-top-change"><?php echo ($address_arr['building_no']." , ".$address_arr['street']." , ".$address_arr['city']." , ".$address_arr['state']." , ".$address_arr['country'].". Pincode : ".$address_arr['pincode']); ?></h4>
 									
 									<div class="row">
 										
@@ -177,7 +177,7 @@
 
 					<div class="col-sm-6 col-md-3">
 						
-						<button class="btn btn-info plus-button-larger" type="button" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i></button>  
+						<button class="btn btn-info btn-lg btn-block" type="button" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i></button>  
 
 
 						<!-- Add Modal -->

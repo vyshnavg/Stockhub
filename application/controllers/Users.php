@@ -306,6 +306,10 @@
 		public function userTenders(){
 
 			$this->tender_model->checkExpiryStatus();
+
+			if($this->session->userdata('usertype') === 'vendor'){
+				redirect('vendors/vendorTenders');
+			}
 			
 			$data['title'] = "Manage Tenders";
 

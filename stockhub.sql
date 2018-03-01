@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2018 at 11:31 AM
+-- Generation Time: Mar 01, 2018 at 06:36 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -95,9 +95,8 @@ CREATE TABLE `diff_vendor_req` (
 --
 
 INSERT INTO `diff_vendor_req` (`request_id`, `vendor_id`, `quantity`, `quantity_unit`, `quoted_price`, `tender_id`, `delivery_date`, `req_desc`, `req_status`) VALUES
-(1, 'V1', 1, 'Pounds', 232, 3, '2018-03-01', 'sds', 'declined'),
-(2, 'V1', 3, 'Pounds', 60, 4, '2018-02-23', 'dfsdf', 'accepted'),
-(3, 'V1', 203, 'Pounds', 2500, 8, '2018-03-02', '', 'accepted');
+(3, 'V1', 203, 'Pounds', 2500, 8, '2018-03-02', '', 'accepted'),
+(4, 'V1', 100, 'Kilograms', 12000, 9, '2018-03-04', '', 'accepted');
 
 -- --------------------------------------------------------
 
@@ -297,14 +296,8 @@ CREATE TABLE `tender` (
 --
 
 INSERT INTO `tender` (`tender_id`, `m_id`, `raw_material_id`, `tender_quantity`, `tender_quantity_unit`, `date_of_submission`, `time_submission`, `date_expire`, `time_expire`, `delivery_location`, `estimated_price`, `extra_info`, `tender_status`) VALUES
-(1, 'M2', 1, 10, 'Kilograms', '2018-02-01', '11:29:00', '2018-02-09', '11:29:00', 1, 200, 'Must be 10 meter wide piece', 'expired'),
-(2, 'M2', 2, 20, 'Kilograms', '2018-02-02', '11:35:00', '2018-02-14', '11:35:00', 1, 23, '5m x 2m piece each', 'expired'),
-(3, 'M2', 7, 12, 'Kilograms', '2018-02-10', '09:59:00', '2018-02-16', '09:58:00', 2, 300, 'sd', 'expired'),
-(4, 'M2', 10, 25, 'Pounds', '2018-02-18', '22:20:00', '2018-02-23', '23:54:00', 2, 2500, 'Max 5 meter width.', 'ongoing'),
-(5, 'M2', 1, 43, 'Kilograms', '2018-02-21', '12:25:00', '2018-02-23', '12:25:00', 1, 3434, '', 'expired'),
-(6, 'M2', 5, 10, 'Pounds', '2018-02-22', '09:57:00', '2018-02-24', '09:57:00', 1, 500, '', 'expired'),
-(7, 'M2', 13, 10, 'Litres', '2018-02-22', '10:03:00', '2018-02-26', '10:02:00', 1, 2000, '', 'expired'),
-(8, 'M2', 12, 202, 'Pounds', '2018-02-26', '14:40:00', '2018-03-02', '14:39:00', 1, 2000, 'In 500 ml bottles.', 'ongoing');
+(8, 'M2', 12, 202, 'Pounds', '2018-02-26', '14:40:00', '2018-03-02', '14:39:00', 1, 2000, 'In 500 ml bottles.', 'completed'),
+(9, 'M2', 10, 100, 'Kilograms', '2018-03-01', '22:55:00', '2018-03-03', '22:55:00', 2, 14000, '', 'cancelled');
 
 -- --------------------------------------------------------
 
@@ -331,8 +324,8 @@ CREATE TABLE `transaction` (
 --
 
 INSERT INTO `transaction` (`trans_id`, `tender_created_id`, `diff_vendor_reqid`, `start_date`, `start_time`, `delvy_date`, `delvy_time`, `trans_delay_time`, `trans_delay_unit`, `trans_message`, `trans_status`) VALUES
-(2, 0, 2, '2018-02-23', '20:24:00', '2018-02-25', '20:24:00', 0, '', NULL, 'orderConfirmed'),
-(3, 8, 3, '2018-02-26', '14:50:00', '2018-03-02', '14:50:00', 1, 'Days', '', 'delivered');
+(3, 8, 3, '2018-02-26', '14:50:00', '2018-03-02', '14:50:00', 1, 'Days', '', 'delivered'),
+(4, 9, 4, '2018-03-01', '22:56:00', '2018-03-04', '22:56:00', 1, 'Hours', '', 'dispatched');
 
 -- --------------------------------------------------------
 
@@ -508,7 +501,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `diff_vendor_req`
 --
 ALTER TABLE `diff_vendor_req`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -556,13 +549,13 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `tender`
 --
 ALTER TABLE `tender`
-  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `trde_mrkt`

@@ -52,6 +52,7 @@
                 <tbody id="tenderSearchTableBody">
                     <?php $i = 1; ?>
                     <?php foreach($tenders as $tender): ?>
+                    <?php if($tender['tender_status'] === 'active' || $tender['tender_status'] === 'ongoing' ): ?>
                             <tr> 
                                 <td> <a href="<?php echo base_url(); ?>tenders/view/<?php echo($tender['tender_id']); ?>"></a> <?php echo($i++);?></td>
                                 <td><?php echo ($tender['rm_name']);?></td>
@@ -79,6 +80,7 @@
                                 <td><?php echo ($tender['estimated_price']);?></td>
                                 
                             </tr>
+                    <?php endif; ?>
                     <?php endforeach; ?>
                 </tbody>
             </table> 

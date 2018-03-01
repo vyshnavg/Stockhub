@@ -18,9 +18,9 @@
             $data['tender'] = $this->tender_model->get_tenders($slug);
             $data['DiffVendorRequests'] = $this->tender_model->get_diffVendorReq($data['tender']['tender_id']);
             $data['transaction'] = $this->tender_model->get_transaction($data['tender']['tender_id']);
-            print_r( $data['transaction']);
-            print_r( $data['DiffVendorRequests']);
-            print_r( $data['tender']);
+            // print_r( $data['transaction']);
+            // print_r( $data['DiffVendorRequests']);
+            // print_r( $data['tender']);
 
             if(empty($data['tender'])){
                 show_404();

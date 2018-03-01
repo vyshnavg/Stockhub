@@ -56,6 +56,18 @@
 			
 			$id = $this->session->userdata('user_id');
 
+			$this->db->join('diff_vendor_req','diff_vendor_req.tender_id = tender.tender_id');
+			$this->db->join('raw_material','raw_material.raw_material_id = tender.raw_material_id');
+			$this->db->where('vendor_id', $id);
+			$query = $this->db->get_where('tender', array('tender_status' => $passValue));
+			return $query->result_array();
+		
+		}
+
+		public function vendorTenders($passValue){
+			
+			$id = $this->session->userdata('user_id');
+
 			$this->db->join('raw_material','raw_material.raw_material_id = tender.raw_material_id');
 			$this->db->where('m_id', $id);
 			$query = $this->db->get_where('tender', array('tender_status' => $passValue));

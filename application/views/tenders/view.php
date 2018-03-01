@@ -265,6 +265,7 @@
                         <dt>Estimated Time of Delivery</dt>
                         <dd><?php echo ($transaction['delvy_date']." ".$transaction['delvy_time']);?></dd>
                         
+                        <?php $tempDelayed=0;?>
                         <?php if($transaction['trans_delay_time'] != null && $transaction['trans_delay_unit'] != null): 
                                 $tempDelayed=1;?>
                             <dt class="text-danger">Delayed by : </dt>
@@ -315,6 +316,8 @@
                 
                 <!-- for manufacturer who requested. if the tender is in ONGOING mode -->
                 <?php if($this->session->userdata('user_id') === $tender['m_id']): ?>
+                    
+                    <?php if($tempDelayed == 1): ?>    
                     <button class="btn btn-danger btn-block" type="button"  data-toggle="modal" data-target="#cancelTender">Cancel Tender</button>
 
 
@@ -360,6 +363,10 @@
                                 
                                 </div>
                             </div>
+                    
+                    <?php else: ?>
+                        <button class="btn btn-danger btn-block" type="button" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Tender can only be cancelled if the delivery is delayed." disabled='true'>Cancel Tender</button>
+                    <?php endif; ?>
 
                 <!-- for vendor who requested. if the tender is in ONGOING mode -->
                 <?php elseif($this->session->userdata('user_id') === $transaction['vendor_id']): ?>
@@ -530,12 +537,48 @@
 
 <!-- if the tender is in COMPLETED mode -->
 <?php elseif($tender['tender_status'] === "completed"): ?>
+</div>
+        </div>
+        <hr>
         <h3 class="text-center">Tender completed</h3>
+        <div class="well">
+                    <h4 class="text-center">Transaction Summary</h4></br>
+                    <?php foreach($DiffVendorRequests as $DiffVendorRequest): 
+                            if($DiffVendorRequest['request_id'] === $transaction['diff_vendor_reqid']): ?>
+                    <dl class="dl">
+                        <dt>Vendor</dt>
+                        <dd><?php echo ($DiffVendorRequest['v_firstname']." ".$DiffVendorRequest['v_lastname']); ?></dd>
+                        <dt>Quantity</dt>
+                        <dd><?php echo ($DiffVendorRequest['quantity']." ".$DiffVendorRequest['quantity_unit']);?></dd>
+                        <dt>Price Fixed</dt>
+                        <dd><?php echo ("₹ ".$DiffVendorRequest['quoted_price']);?></dd>
+                        <dt>Requirements</dt>
+                        <dd><?php echo ($tender['extra_info']);?></dd>
+                        <dt>Transaction created Date</dt>
+                        <dd><?php echo ($transaction['start_date']." ".$transaction['start_time']);?>
+                        </dd>
+                        <dt>Time of Delivery</dt>
+                        <dd><?php echo ($transaction['delvy_date']." ".$transaction['delvy_time']);?></dd>
+                        
+                        <?php if($transaction['trans_delay_time'] != null && $transaction['trans_delay_unit'] != null): 
+                                $tempDelayed=1;?>
+                            <dt class="text-danger">Delayed by : </dt>
+                            <dd class="text-danger"><?php echo ("+".$transaction['trans_delay_time']." ".$transaction['trans_delay_unit']);?></dd>
+                        <?php endif;?>
+
+                    </dl>
+                    <?php endif;
+                        endforeach; ?>
+                </div>
+            </div>
 
 
 <!-- if the tender is in CANCELLED mode -->
 <?php elseif($tender['tender_status'] === "cancelled"): ?>
-        <h3 class="text-center">Tender cancelled</h3>
+</div>
+        </div>
+        <hr>
+        <h3 class="text-center text-danger">Tender cancelled</h3>
 
 <?php endif; ?>
 

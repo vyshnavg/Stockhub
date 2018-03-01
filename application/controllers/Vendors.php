@@ -54,5 +54,20 @@
 			}
 		}
 
+		// user tender management
+		public function vendorTenders(){
+
+			$this->tender_model->checkExpiryStatus();
+			
+			$data['title'] = "Manage Tenders";
+			
+			$data['completedTenders'] = $this->tender_model->userTenders("completed");
+			$data['ongoingTenders'] = $this->tender_model->userTenders("ongoing");
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('vendors/vendorTenders', $data);
+			$this->load->view('templates/footer');
+		}
+
 
 	}

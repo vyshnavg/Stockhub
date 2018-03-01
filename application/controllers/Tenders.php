@@ -19,6 +19,8 @@
             $data['DiffVendorRequests'] = $this->tender_model->get_diffVendorReq($data['tender']['tender_id']);
             $data['transaction'] = $this->tender_model->get_transaction($data['tender']['tender_id']);
             print_r( $data['transaction']);
+            print_r( $data['DiffVendorRequests']);
+            print_r( $data['tender']);
 
             if(empty($data['tender'])){
                 show_404();
@@ -82,5 +84,67 @@
             $this->session->set_flashdata('flash-success', 'Vendor Request Declined');
 			redirect('users/userTenders');
         }
+
+        public function changeStatus($transID){
+            $tender_id = $this->tender_model->changeStatus($transID);            
+            $this->session->set_flashdata('flash-success', 'Transaction Status Changed.');
+            redirect('tenders/view/'.$tender_id);
+        }
+
+        public function changeETA($transID){
+            $tender_id = $this->tender_model->changeETA($transID);            
+            $this->session->set_flashdata('flash-success', 'Transaction ETA Changed.');
+            redirect('tenders/view/'.$tender_id);
+        }
+
+        public function cancelTender($tenderID){
+            // Check if the user is not logged in.
+			if(!$this->session->userdata('logged_in')){
+                // Set message
+                $this->session->set_flashdata('flash-warning', 'Please Log In to continue');
+                redirect('users/login');
+            }
+
+            $tenders = $this->tender_model->get_tenders($tenderID);
+            // validation : only the manufacturer can run this
+            if($tenders['m_id'] != $this->session->userdata('user_id')){
+                $this->session->set_flashdata('flash-warning', 'Unauthorized access (Code 401)');
+                redirect('home');
+            }   
+            
+            $this->tender_model->cancelTender($tenderID);
+
+            $this->session->set_flashdata('flash-success', 'Tender Cancelled.');
+            redirect('home');
+        }
+
+        public function deliveryComplete($tenderID){
+            // Check if the user is not logged in.
+			if(!$this->session->userdata('logged_in')){
+                // Set message
+                $this->session->set_flashdata('flash-warning', 'Please Log In to continue');
+                redirect('users/login');
+            }
+
+            $tenders = $this->tender_model->get_tenders($tenderID);
+            
+            // validation : only the manufacturer can run this
+            if($tenders['m_id'] != $this->session->userdata('user_id')){
+                $this->session->set_flashdata('flash-warning', 'Unauthorized access (Code 401)');
+                redirect('home');
+            }   
+            
+            $this->tender_model->deliveryComplete($tenderID);
+
+            $this->session->set_flashdata('flash-success', 'Tender Completed.');
+            redirect('home');
+        }
+
+        public function deliveryNotGet($transID){
+            $tender_id = $this->tender_model->deliveryNotGet($transID);            
+            redirect('tenders/view/'.$tender_id);
+        }
+
+
         
 	}

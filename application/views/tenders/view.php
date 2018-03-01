@@ -33,12 +33,12 @@
                                 $expdate = $tender['date_expire'];
                                 $exptime = $tender['time_expire'];
                                 $exp = date('Y-m-d H:i:s', strtotime("$expdate $exptime "));
-                                $temp=0;
+                                $tempExpired=0;
                                 $datetime1 = new DateTime();
                                 $datetime2 = new DateTime($exp);
                                 if ( $datetime1 >  $datetime2){
                                     echo("Expired");
-                                    $temp=1;
+                                    $tempExpired=1;
                                 }
                                 else{
                                     $interval = $datetime1->diff($datetime2);
@@ -68,7 +68,7 @@
 <?php if($this->session->userdata('user_id') != $tender['m_id']  && $tender['tender_status'] === "active" ): ?>
 
             <br><br>
-            <button class="btn btn-primary" role="button" data-toggle="modal" data-target="#requestModal" <?php if($temp==1){echo("disabled='true'");} ?> >Send Request <span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
+            <button class="btn btn-primary" role="button" data-toggle="modal" data-target="#requestModal" <?php if($tempExpired==1){echo("disabled='true'");} ?> >Send Request <span class="glyphicon glyphicon-send" aria-hidden="true"></span></button>
             <a class="btn btn-default" role="button" href="<?php echo site_url('/tenders'); ?>">Go Back</a>
 
                 <!-- Request Modal -->
@@ -187,7 +187,7 @@
         <h3>Tender Requests</h3>
         </br>
                 
-        <?php if($temp==1): ?>
+        <?php if($tempExpired==1): ?>
             <h5 class="text-center text-danger"><i>Tender Expired</i></h5>
         <?php elseif(empty($DiffVendorRequests)): ?>
             <h5 class="text-center text-warning"><i>No Requests</i></h5>
@@ -199,8 +199,8 @@
                     <tr>
                         <th>SI No</th>
                         <th onclick="sortTable(0)" >Request ID</th>
-                        <th onclick="sortTable(1)" >Vendor Name</th> <!-- quantity and unit combined-->
-                        <th onclick="sortTable(2)" >Quantity</th>
+                        <th onclick="sortTable(1)" >Vendor Name</th> 
+                        <th onclick="sortTable(2)" >Quantity</th> <!-- quantity and unit combined-->
                         <th onclick="sortTable(3)" >Quoted Price (₹)</th>
                         <th onclick="sortTable(4)" >Delivery Date</th>
                         <th>Additional Info</th>
@@ -235,44 +235,307 @@
             </table> 
         <?php endif;?>
 
-<!-- for manufacterur who created the tender. if the tender is in ONGOING mode -->
-<?php elseif($this->session->userdata('user_id') === $tender['m_id']  && $tender['tender_status'] === "ongoing"): ?>
-        </div>
-        </div>
-        <hr>
-        <h3>Ongoing Tender</h3>
-        </br>
-
-        <h5>Transaction Status : <?php echo($transaction['trans_status']);?></h5>    
-        <?php if($transaction['trans_status'] === 'orderConfirmed'):?>   
-            <div class="progress progress-vertical progress-striped active">
-                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        <?php elseif($transaction['trans_status'] === 'orderConfirmed'): ?>
-            <div class="progress progress-vertical progress-striped active">
-                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-        <?php endif; ?>
-
-<!-- for vendor who requested. if the tender is in ONGOING mode -->
-<?php elseif($this->session->userdata('user_id') === $transaction['vendor_id']  && $tender['tender_status'] === "ongoing"): ?>
-
-        </div>
+<!-- if the tender is in ONGOING mode -->
+<?php elseif($tender['tender_status'] === "ongoing"): ?>
+</div>
         </div>
         <hr>
         <h3>Ongoing Tender</h3>
         </br>
 
-        <h5>Transaction Status : <?php echo($transaction['trans_status']);?></h5>    
-        <?php if($transaction['trans_status'] === 'orderConfirmed'):?>   
-            <div class="progress progress-vertical progress-striped active">
-                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="row">
+            
+            <div class="col-md-6">
+                <div class="well">
+                    <h4 class="text-center">Transaction Summary</h4></br>
+                    <?php foreach($DiffVendorRequests as $DiffVendorRequest): 
+                            if($DiffVendorRequest['request_id'] === $transaction['diff_vendor_reqid']): ?>
+                    <dl class="dl">
+                        <dt>Vendor</dt>
+                        <dd><?php echo ($DiffVendorRequest['v_firstname']." ".$DiffVendorRequest['v_lastname']); ?></dd>
+                        <dt>Quantity</dt>
+                        <dd><?php echo ($DiffVendorRequest['quantity']." ".$DiffVendorRequest['quantity_unit']);?></dd>
+                        <dt>Price Fixed</dt>
+                        <dd><?php echo ("₹ ".$DiffVendorRequest['quoted_price']);?></dd>
+                        <dt>Requirements</dt>
+                        <dd><?php echo ($tender['extra_info']);?></dd>
+                        <dt>Transaction created Date</dt>
+                        <dd><?php echo ($transaction['start_date']." ".$transaction['start_time']);?>
+                        </dd>
+                        <dt>Estimated Time of Delivery</dt>
+                        <dd><?php echo ($transaction['delvy_date']." ".$transaction['delvy_time']);?></dd>
+                        
+                        <?php if($transaction['trans_delay_time'] != null && $transaction['trans_delay_unit'] != null): 
+                                $tempDelayed=1;?>
+                            <dt class="text-danger">Delayed by : </dt>
+                            <dd class="text-danger"><?php echo ("+".$transaction['trans_delay_time']." ".$transaction['trans_delay_unit']);?></dd>
+                        <?php endif;?>
+
+                    </dl>
+                    <?php endif;
+                        endforeach; ?>
+                </div>
             </div>
-        <?php elseif($transaction['trans_status'] === 'orderConfirmed'): ?>
-            <div class="progress progress-vertical progress-striped active">
-                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            
+            <div class="col-md-6">
+                <div class="well">
+                    <h4 class="text-center">Transaction Status</h4></br>
+                    <?php if($transaction['trans_status'] === 'orderConfirmed'):?>
+                        <h5>Transaction Status : Order Confirmed</h5>
+                        <div class="progress progress-vertical progress-striped active">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    <?php elseif($transaction['trans_status'] === 'packed'): ?>
+                        <h5>Transaction Status : Packed</h5>
+                        <div class="progress progress-vertical progress-striped active">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    <?php elseif($transaction['trans_status'] === 'dispatched'): ?>
+                        <h5>Transaction Status : Dispatched</h5>
+                        <div class="progress progress-vertical progress-striped active">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    <?php elseif($transaction['trans_status'] === 'delivered'): ?>
+                        <h5>Transaction Status : Delivered</h5>
+                        <div class="progress progress-vertical progress-striped active">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <?php if($transaction['trans_message'] != ''):?>
+                        <?php if($transaction['trans_message'] === 'DNR'):?>
+                            <h5 class="text-danger" >Message From Manufacturer : Delivery not Recieved</h5>
+                            </br>
+                        <?php else:?>
+                            <h5>Message From Vendor : <?php echo($transaction['trans_message']);?></h5>
+                            </br>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    
+                
+                <!-- for manufacturer who requested. if the tender is in ONGOING mode -->
+                <?php if($this->session->userdata('user_id') === $tender['m_id']): ?>
+                    <button class="btn btn-danger btn-block" type="button"  data-toggle="modal" data-target="#cancelTender">Cancel Tender</button>
+
+
+                            <!-- changeStatus Modal -->
+                            <div class="modal fade" id="cancelTender" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                <!-- changeStatus Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Cancel Tender</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <?php echo form_open('/tenders/cancelTender/'.$tender['tender_id']); ?>
+                                            <div class="row">
+
+                                                <div class="col-md-8 col-md-offset-2">
+
+                                                    <p  class="text-center"> <?php echo validation_errors(); ?></p>
+                                                    <p class="text-danger text-center">Are you Sure? (This can't be undone)</p>
+                                                    <div class="btn-group btn-group-justified">
+                                                        <div class="btn-group">
+                                                            <button type="submit" class="btn btn-danger btn-block" >Yes</button>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">No</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            
+                                        <?php echo form_close(); ?>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                
+                                </div>
+                            </div>
+
+                <!-- for vendor who requested. if the tender is in ONGOING mode -->
+                <?php elseif($this->session->userdata('user_id') === $transaction['vendor_id']): ?>
+                    <div class="btn-group btn-group-justified">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" type="button"  data-toggle="modal" data-target="#changeStatusModal">Change Status</button>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#changeETAModal">Change ETA</button>
+                        </div>
+                    </div>
+
+                            <!-- changeStatus Modal -->
+                            <div class="modal fade" id="changeStatusModal" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                <!-- changeStatus Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Change Status</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <?php echo form_open('/tenders/changeStatus/'.$transaction['trans_id']); ?>
+                                            <div class="row">
+
+                                                <div class="col-md-8 col-md-offset-2">
+
+                                                    <p  class="text-center"> <?php echo validation_errors(); ?></p>
+
+                                                    
+                                                    <div class="form-group">
+                                                        <label>Select the status</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-send"></i></span>
+                                                            <select class="form-control" name="trans_status_change" id="trans_status_change">
+                                                                <option value="orderConfirmed">Order Confirmed</option>
+                                                                <option value="packed">Packed</option>
+                                                                <option value="dispatched">Dispatched</option>
+                                                                <option value="delivered">Delivered</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Message (Optional)</label>
+                                                        <div class="input-group"> 
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                                                            <textarea class="form-control" rows="5" placeholder="Max 300 characters" maxlength="300" name="message" id="message"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-success btn-block" >Submit</button>
+
+                                                </div>
+
+                                            </div>
+                                            
+                                        <?php echo form_close(); ?>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                
+                                </div>
+                            </div>
+
+                            <!-- changeETA Modal -->
+                            <div class="modal fade" id="changeETAModal" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                <!-- changeETA Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Change Estimated time of Delivery</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <?php echo form_open('/tenders/changeETA/'.$transaction['trans_id']); ?>
+                                            <div class="row">
+
+                                                <div class="col-md-8 col-md-offset-2">
+
+                                                    <p  class="text-center"> <?php echo validation_errors(); ?></p>
+                                                    <p class="text-warning">Note : By changing the ETA the Manufacturer gets the option to remove this tender</p>
+
+                                                    <div class="row">
+                                                    <label>Enter the quantity that you can deliver</label>
+                                                        <div class="col-xs-6 col-sm-7 col-md-7">
+                                                            <div class="form-group">
+                                                                <!-- <label for="inpuFname">Quantity</label> -->
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
+                                                                    <input type="number" value="1" class="form-control" min="1" max="100" name="trans_delay_time"  id="trans_delay_time">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xs-6 col-sm-5 col-md-5">
+                                                            <div class="form-group">
+
+                                                                <!-- <label for="sel1">Select Unit:</label> -->
+                                                                <select class="form-control" name="trans_delay_unit" id="trans_delay_unit">
+                                                                    <option value="Hours">Hours</option>
+                                                                    <option value="Days">Days</option>
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Message/Reason (Optional)</label>
+                                                        <div class="input-group"> 
+                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                                                            <textarea class="form-control" rows="5" placeholder="Max 300 characters" maxlength="300" name="message" id="message"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-success btn-block" >Submit</button>
+
+                                                </div>
+
+                                            </div>
+                                            
+                                        <?php echo form_close(); ?>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                
+                                </div>
+                            </div>
+                <?php endif; ?>
+
+                </div>
+
+                <?php if($transaction['trans_status'] === 'delivered' && $this->session->userdata('user_id') === $tender['m_id']): ?>
+                
+                    <?php echo form_open('/tenders/deliveryComplete/'.$tender['tender_id']); ?>
+                    <div class="well">
+                        <h4 class="text-center">Did you receive the delivery ?</h4></br>
+                        <div class="btn-group btn-group-justified">
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-success ger btn-block" >Yes</button>
+                    <?php echo form_close(); ?>
+                    <?php echo form_open('/tenders/deliveryNotGet/'.$transaction['trans_id']); ?>
+                    
+                            </div>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-danger btn-block" >No</button>
+                            </div>
+                        </div>
+                    </div>
+                    <?php echo form_close(); ?>
+
+                <?php endif; ?>
+
             </div>
-        <?php endif; ?>
+        </div>
+
+<!-- if the tender is in COMPLETED mode -->
+<?php elseif($tender['tender_status'] === "completed"): ?>
+        <h3 class="text-center">Tender completed</h3>
+
+
+<!-- if the tender is in CANCELLED mode -->
+<?php elseif($tender['tender_status'] === "cancelled"): ?>
+        <h3 class="text-center">Tender cancelled</h3>
 
 <?php endif; ?>
 

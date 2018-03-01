@@ -110,6 +110,7 @@
 
 			//putting the tender to transaction table
 			$data2 = array(
+				'tender_created_id' => $tender_id["tender_id"],
 				'diff_vendor_reqid' => $reqID,
 				'start_date' => date("Y-m-d"),
 				'start_time' => date("H:i"),
@@ -127,6 +128,74 @@
 			);
 			$this->db->update('diff_vendor_req', $data, array('request_id' => $reqID));
 		}
+
+		public function changeStatus($transID){
+			$data = array(
+				'trans_status' => $this->input->post('trans_status_change'),
+				'trans_message' => $this->input->post('message')
+			);
+			$this->db->update('transaction', $data, array('trans_id' => $transID));
+
+
+			$this->db->select('tender_created_id');
+			$this->db->from('transaction');
+			$this->db->where('trans_id', $transID);
+			$query = $this->db->get();
+			$tender_id = $query->row_array();
+
+			return $tender_id['tender_created_id'];
+		}
+
+		public function changeETA($transID){
+			$data = array(
+				'trans_delay_time' => $this->input->post('trans_delay_time'),
+				'trans_delay_unit' => $this->input->post('trans_delay_unit'),
+				'trans_message' => $this->input->post('message')
+			);
+			$this->db->update('transaction', $data, array('trans_id' => $transID));
+
+
+			$this->db->select('tender_created_id');
+			$this->db->from('transaction');
+			$this->db->where('trans_id', $transID);
+			$query = $this->db->get();
+			$tender_id = $query->row_array();
+
+			return $tender_id['tender_created_id'];
+		}
+
+		public function cancelTender($tenderID){
+			$data = array(
+				'tender_status' => 'cancelled'
+			);
+			return $this->db->update('tender', $data, array('tender_id' => $tenderID));
+		}
+		
+		public function deliveryComplete($tenderID){
+			$data = array(
+				'tender_status' => 'completed'
+			);
+			return $this->db->update('tender', $data, array('tender_id' => $tenderID));
+		}
+
+		public function deliveryNotGet($transID){
+			$data = array(
+				'trans_status' => 'dispatched',
+				'trans_message' => 'DNR'
+			);
+			$this->db->update('transaction', $data, array('trans_id' => $transID));
+
+
+			$this->db->select('tender_created_id');
+			$this->db->from('transaction');
+			$this->db->where('trans_id', $transID);
+			$query = $this->db->get();
+			$tender_id = $query->row_array();
+
+			return $tender_id['tender_created_id'];
+		}
+
+
 
 
 

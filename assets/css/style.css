@@ -236,7 +236,6 @@ footer{
     color:#19BC9C;
 }
 
-<<<<<<< HEAD
 
 /* progress bar */
 /* .progress  .progress-bar{
@@ -255,7 +254,6 @@ footer{
     transition-duration: 2s;
     transition-timing-function: ease-out;
   }
-=======
 .navt {
     list-style: none;
     margin: 0;
@@ -281,4 +279,3 @@ footer{
   .navt img {
     vertical-align: middle;
   }
->>>>>>> d1f5332a912f484aaf6386a352bdabdfe680744d

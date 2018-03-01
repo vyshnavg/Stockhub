@@ -1,6 +1,5 @@
 <div class="container"> 
-    <br>
-    <br>
+    
     <h1>StockHub </h1><h4 style="color:black;"><b>is a raw material finder and procurement website which aids future and present manufacturers create links with vendors all across the country. It is an online platform for the manufacturing industry.</b></h4>
 <br>
     

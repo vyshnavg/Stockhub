@@ -112,7 +112,7 @@
 					}
 	
 					// Set message
-					$this->session->set_flashdata('flash-warning', 'You are currently inactive user. Please add Address Information to be active.');
+					$this->session->set_flashdata('flash-warning', 'You are not an Active User. Add an address in your dashboard');
 				}
 				else{
 	

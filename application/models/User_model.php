@@ -84,9 +84,16 @@
 			if($choice === 0){
 				$id = $this->session->userdata('user_id');
 
-				$this->db->join('address', 'address.add_id = m_address_dict.add_id');
-				$query = $this->db->get_where('m_address_dict', array('manufacturer_id' => $id));
-				return $query->result_array();
+				if($this->session->userdata('usertype') === 'vendor'){
+					$this->db->join('address', 'address.add_id = vendors.v_address_id');
+					$query = $this->db->get_where('vendors', array('v_id' => $id));
+					return $query->result_array();
+				}
+				else{
+					$this->db->join('address', 'address.add_id = m_address_dict.add_id');
+					$query = $this->db->get_where('m_address_dict', array('manufacturer_id' => $id));
+					return $query->result_array();
+				}
 			}
 
 			//WHEN HAVING A ADD_ID AND WANT ALL INFO

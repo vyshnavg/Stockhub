@@ -96,21 +96,12 @@
 	
 				if(empty($query->row_array())){
 	
-					$this->db->select('*');
-					$this->db->from('vendors');
-					$this->db->where('v_id', $id);
-					$this->db->where('v_status !=', '');
-					$query = $this->db->get();
-	
-					if(empty($query->row_array())){
-						
-						$data = array(
-							'v_status' => 'Inactive'
-						);
-	
-						$this->db->update('vendors',  $data);
-					}
-	
+					$data = array(
+						'v_status' => 'Inactive'
+					);
+
+					$this->db->update('vendors',  $data);
+
 					// Set message
 					$this->session->set_flashdata('flash-warning', 'You are not an Active User. Add an address in your dashboard');
 				}
@@ -121,7 +112,7 @@
 					$this->db->where('v_id', $id);
 					$query = $this->db->get();
 	
-					if($query->row_array()['v_status'] == 'Inactive'){
+					if($query->row_array()['v_status'] === 'Inactive'){
 						$this->db->set('v_status', 'Active');
 						$this->db->where('v_id', $id);
 						$this->db->update('vendors');
@@ -144,4 +135,70 @@
 			}
 
 		}
+
+		public function newAddress(){
+			// address data array
+			$data = array(
+				'state' => $this->input->post('listBox'),
+				'city' => $this->input->post('secondlist'),
+				'street' => $this->input->post('street'),
+                'building_no' => $this->input->post('buildno'),
+				'land_mark' => $this->input->post('landmark'),
+				'pincode' => $this->input->post('pincode'),
+				'country' => $this->input->post('country')
+			);
+			// Insert address
+			$this->db->insert('address', $data);
+
+			$insert_id = $this->db->insert_id();
+
+			$id = $this->session->userdata('user_id');
+
+			$newdata = array(
+				'v_address_id' => $insert_id
+			);
+			
+			$this->db->where('v_id', $id);
+			return $this->db->update('vendors', $newdata);
+		}
+		
+		public function delAddress($data){
+			// Delete address
+			$this->db->delete('address', array('add_id' => $data));
+			$id = $this->session->userdata('user_id');
+			// address data array
+			$newdata = array(
+				'v_address_id' => ''
+			);
+			// Edit address
+			$this->db->where('v_id', $id);
+			return $this->db->update('vendors', $newdata);
+		}
+		
+		public function newMaterial(){
+			// address data array
+			$data = array(
+				'vendor_id' => $id = $this->session->userdata('user_id'),
+				'v_raw_material_id' => $this->input->post('matsel1'),
+				'quality_info' => $this->input->post('quality_info')
+			);
+			// Insert address
+			$this->db->insert('vendor_materials', $data);
+		}
+		
+		public function delMaterial($data){
+			// Delete material
+			$this->db->delete('vendor_materials', array('v_material_id' => $data));
+		}
+
+		public function get_vendorMaterials(){
+
+			$id = $this->session->userdata('user_id');
+
+			$this->db->join('raw_material','raw_material.raw_material_id = vendor_materials.v_raw_material_id');
+			$query = $this->db->get_where('vendor_materials', array('vendor_id' => $id));
+			return $query->result_array();
+
+		}
+
 	}

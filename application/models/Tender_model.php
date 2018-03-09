@@ -207,8 +207,23 @@
 			return $tender_id['tender_created_id'];
 		}
 
+		public function sendNotificationMessage($toID, $message){
+			
+			$fromID = $this->session->userdata('user_id');
 
+			// messages data
+			$data = array(
+				'from_id ' => $fromID,
+				'to_id ' => $toID,
+				'message_body' => $message,
+				'message_type' => 'Notification',
 
+			);
+			
+			// Insert message request
+			return $this->db->insert('messages', $data);
+
+		}
 
 
         

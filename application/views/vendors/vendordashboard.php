@@ -11,6 +11,7 @@
 			<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
 			<li><a data-toggle="tab" href="#messages">Messages</a></li>
 			<li><a data-toggle="tab" href="#address">Address</a></li>
+			<li><a data-toggle="tab" href="#materials">Materials</a></li>
 			<!-- <li><a data-toggle="tab" href="#menu2">My Storage</a></li>
 			<li><a data-toggle="tab" href="#menu3">My Booking</a></li> -->
 		</ul>
@@ -35,24 +36,12 @@
 										include '..\stockhub\assets\dbh.php';
 										$sql="SELECT * from vendors where v_id = '$std'";
 										$result= mysqli_query($conn ,$sql)or die(mysqli_error($conn));
-										
+
 										if($row=mysqli_fetch_assoc($result)){
 											
 											echo "	<h3>Name : ".$row['v_firstname']." ".$row['v_lastname']."</h3>
 													<h3>Email : ".$row['v_email']."</h3>
 													<h3>Status : ".$row['v_status']."</h3>";
-									// 			if (is_null($row['dob'])) {
-									// 				echo "<h3>Date of Birth : <i>Null</i></h3>";
-									// 			}
-									// 			else{
-									// 				echo "<h3>Date of Birth : ".$row['dob']."</h3>";
-									// 			}
-									// 			if (is_null($row['aadhar_card'])) {
-									// 				echo "<h3>Aadhar Card : <i>Null</i></h3>";
-									// 			}
-									// 			else{
-									// 				echo "<h3>Aadhar Card : ".$row['aadhar_card']."</h3>";
-									// 			}
 											}
 							?>
 							<button type="button" class="btn btn-primary btn-lg btn-block login-button" data-toggle="modal" data-target="#editProModal" >Edit</button>
@@ -70,7 +59,7 @@
 									</div>
 									<div class="modal-body">
 										
-										<?php echo form_open('users/newAddress',' id="address_form"'); ?>
+										<?php echo form_open('vendors/newAddress',' id="address_form"'); ?>
 											<div class="row">
 
 												<div class="col-md-8 col-md-offset-2">
@@ -131,6 +120,7 @@
 								</div>
 							
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -140,7 +130,9 @@
 			<!-- ========================= MESSAGES SECTION ========================= -->
 
 			<div id="messages" class="tab-pane fade in">
-				<h3> Under Construction</h3>
+			
+
+			
 			</div>
 
 			<!-- ========================= ADDRESS SECTION ========================= -->
@@ -156,15 +148,15 @@
 					<div class="col-sm-6 col-md-3">
 						<div class="well">
 							<div class="caption">
-								<h3 class="h3-margin-top-change"><?php echo ($address_arr['building_no']." , ".$address_arr['street']." , ".$address_arr['city']." , ".$address_arr['state']." , ".$address_arr['country'].". Pincode : ".$address_arr['pincode']); ?></h3>
+								<h4 class="h4-margin-top-change"><?php echo ($address_arr['building_no']." , ".$address_arr['street']." , ".$address_arr['city']." , ".$address_arr['state']." , ".$address_arr['country'].". Pincode : ".$address_arr['pincode']); ?></h4>
 									
 									<div class="row">
 										
 										<div class="col-md-6">
-											<button class="btn btn-warning btn-block" type="button" onclick="location.href='<?php echo base_url(); ?>users/viewAddress/<?php echo ($address_arr['add_id'])?>'"><span class=" glyphicon glyphicon-wrench" aria-hidden="true"></span></button> 
+											<button class="btn btn-warning btn-block" type="button" onclick="location.href='<?php echo base_url(); ?>users/viewAddress/<?php echo ($address_arr['add_id'])?>'"><span class=" glyphicon glyphicon-pencil" aria-hidden="true"></span></button> 
 										</div>
 										<div class="col-md-6">
-											<button class="btn btn-danger btn-block" type="button" href="#" title="Do you want to delete this Address?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<form action='<?php echo base_url(); ?>users/delAddress/<?php echo($address_arr['add_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+											<button class="btn btn-danger btn-block" type="button" href="#" title="Do you want to delete this Address?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<form action='<?php echo base_url(); ?>vendors/delAddress/<?php echo($address_arr['add_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 										</div>
 
 									</div>
@@ -177,7 +169,7 @@
 
 					<div class="col-sm-6 col-md-3">
 						
-						<button class="btn btn-info plus-button-larger" type="button" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i></button>  
+						<button class="btn btn-info btn-lg btn-block" type="button" data-toggle="modal" data-target="#addModal" <?php if(!empty($addresses_arr)): echo("disabled='true'"); endif;?> ><i class="glyphicon glyphicon-plus"></i></button>  
 
 
 						<!-- Add Modal -->
@@ -192,7 +184,7 @@
 								</div>
 								<div class="modal-body">
 									
-									<?php echo form_open('users/newAddress',' id="address_form"'); ?>
+									<?php echo form_open('vendors/newAddress',' id="address_form"'); ?>
 										<div class="row">
 
 											<div class="col-md-8 col-md-offset-2">
@@ -262,6 +254,100 @@
 
 				</div>
 			</div>
+
+
+			<!-- ========================= MATERIALS SECTION ========================= -->
+
+			<div id="materials" class="tab-pane fade in">
+
+				<h3> Manage Materials</h3><small>Choose the materials which you would like to get notification on, if a tender is put on it.</small>
+				<br><br>
+
+				<div class="row is-flex">
+
+					<!-- == DISPLAY MATERIALS == -->
+
+					<?php foreach($vendorMaterials as $vendorMaterial) : ?>
+					<div class="col-sm-6 col-md-4">
+						<div class="well">
+							<div class="caption">
+								<h3 class="h4-margin-top-change"><?php echo ($vendorMaterial['rm_name']); ?></h3>
+								<h4 ><?php echo ("Quality Info : ".$vendorMaterial['quality_info']); ?></h4>
+									
+								<button class="btn btn-danger btn-block" type="button" href="#" title="Do you want to delete this Material?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<form action='<?php echo base_url(); ?>vendors/delMaterial/<?php echo($vendorMaterial['v_material_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+									
+							</div>
+						</div>
+					</div>
+					<?php endforeach; ?>
+
+					<!-- == ADD MATERIAL == -->
+
+					<div class="col-sm-6 col-md-3">
+						
+						<button class="btn btn-info btn-lg btn-block" type="button" data-toggle="modal" data-target="#addMaterialModal" ><i class="glyphicon glyphicon-plus"></i></button>  
+
+
+						<!-- Add Material Modal -->
+						<div class="modal fade" id="addMaterialModal" role="dialog">
+							<div class="modal-dialog">
+							
+							<!-- Add Material Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Add Material</h4>
+								</div>
+								<div class="modal-body">
+									
+									<?php echo form_open('vendors/newMaterial'); ?>
+										<div class="row">
+
+											<div class="col-md-8 col-md-offset-2">
+
+												<p  class="text-center"> <?php echo validation_errors(); ?></p>
+
+												<div class="form-group">
+													<label for="matsel1">Select Material</label>
+													<select class="form-control" id="matsel1" name="matsel1">
+													<?php foreach($materials as $material) : ?>
+														<option value="<?php echo ($material['raw_material_id']); ?>"><?php echo ($material['rm_name']); ?></option>
+													<?php endforeach; ?>
+													</select>
+												</div>
+
+												<div class="form-group">
+													<label>Quality Information</label>
+													<div class="input-group"> 
+														<span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+														<textarea class="form-control" rows="5" id="comments" placeholder="Max 300 characters" maxlength="300" name="quality_info"></textarea>
+													</div>
+												</div>
+
+												
+												<button type="submit" class="btn btn-success btn-block">Submit</button>
+
+											</div>
+
+										</div>
+										
+									<?php echo form_close(); ?>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+							
+							</div>
+						</div>
+
+
+					</div>
+
+				</div>
+			</div>
+
 
 		</div>
 	</div>

@@ -184,6 +184,9 @@
 					$data['title'] = "Vendor Dashboard";
 					
 					$data['addresses_arr'] =$this->user_model->get_address();
+					$data['vendorMaterials'] =$this->vendor_model->get_vendorMaterials();
+					$data['materials'] =$this->material_model->get_materials();
+
 					
 					$this->load->view('templates/header', $data);
 					$this->load->view('vendors/vendordashboard', $data);
@@ -205,6 +208,9 @@
 				else{
 					redirect('home');
 				}
+			}
+			else{
+				redirect('home');
 			}
 
 			

@@ -103,6 +103,14 @@
 			}
 
 		}
+		
+		public function get_messages(){
+			$id = $this->session->userdata('user_id');
+			$this->db->join('manufacturers', 'manufacturers.m_id = messages.from_id');
+			$query = $this->db->get_where('messages', array('to_id' => $id));
+			return $query->result_array();
+
+		}
 
 		// Check active status
 		public function check_active_status($return = FALSE){
@@ -216,6 +224,10 @@
 			// Edit address
 			$this->db->where('add_id', $address_id);
 			return $this->db->update('address', $data);
+		}
+
+		public function delMessage($data){
+			return $this->db->delete('messages', array('messages_id' => $data));
 		}
 
 

@@ -52,7 +52,7 @@
 		}
 
 
-		public function userTenders($passValue){
+		public function vendorTenders($passValue){
 			
 			$id = $this->session->userdata('user_id');
 
@@ -64,7 +64,7 @@
 		
 		}
 
-		public function vendorTenders($passValue){
+		public function userTenders($passValue){
 			
 			$id = $this->session->userdata('user_id');
 

@@ -61,8 +61,8 @@
 			
 			$data['title'] = "Manage Tenders";
 			
-			$data['completedTenders'] = $this->tender_model->userTenders("completed");
-			$data['ongoingTenders'] = $this->tender_model->userTenders("ongoing");
+			$data['completedTenders'] = $this->tender_model->vendorTenders("completed");
+			$data['ongoingTenders'] = $this->tender_model->vendorTenders("ongoing");
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('vendors/vendorTenders', $data);

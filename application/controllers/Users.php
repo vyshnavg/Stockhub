@@ -183,7 +183,12 @@
 
 					$data['title'] = "Vendor Dashboard";
 					
-					$data['addresses_arr'] =$this->user_model->get_address();
+					$data['addresses_arr'] = $this->user_model->get_address();
+					$data['vendorMaterials'] = $this->vendor_model->get_vendorMaterials();
+					$data['materials'] = $this->material_model->get_materials();
+					$data['messages'] = $this->user_model->get_messages();
+					print_r($data['messages']);
+
 					
 					$this->load->view('templates/header', $data);
 					$this->load->view('vendors/vendordashboard', $data);
@@ -205,6 +210,9 @@
 				else{
 					redirect('home');
 				}
+			}
+			else{
+				redirect('home');
 			}
 
 			
@@ -321,6 +329,28 @@
 			$this->load->view('templates/header', $data);
 			$this->load->view('users/userTenders', $data);
 			$this->load->view('templates/footer');
+		}
+
+		//Delete message
+		public function delMessage($message = NULL){
+
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			// No message passed
+			elseif($message === NULL){
+				$this->session->set_flashdata('flash-warning', 'Message does not exist');
+				redirect('userdashboard');
+			}
+			//execute code
+			else{
+				$this->user_model->delMessage($message);
+				// Set message
+				$this->session->set_flashdata('flash-success', 'Message Deleted');
+				redirect('userdashboard');
+			}
+			
 		}
 
 

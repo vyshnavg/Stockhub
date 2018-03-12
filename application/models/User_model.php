@@ -84,9 +84,16 @@
 			if($choice === 0){
 				$id = $this->session->userdata('user_id');
 
-				$this->db->join('address', 'address.add_id = m_address_dict.add_id');
-				$query = $this->db->get_where('m_address_dict', array('manufacturer_id' => $id));
-				return $query->result_array();
+				if($this->session->userdata('usertype') === 'vendor'){
+					$this->db->join('address', 'address.add_id = vendors.v_address_id');
+					$query = $this->db->get_where('vendors', array('v_id' => $id));
+					return $query->result_array();
+				}
+				else{
+					$this->db->join('address', 'address.add_id = m_address_dict.add_id');
+					$query = $this->db->get_where('m_address_dict', array('manufacturer_id' => $id));
+					return $query->result_array();
+				}
 			}
 
 			//WHEN HAVING A ADD_ID AND WANT ALL INFO
@@ -94,6 +101,14 @@
 				$query = $this->db->get_where('address', array('add_id' => $value));
 				return $query->row_array();
 			}
+
+		}
+		
+		public function get_messages(){
+			$id = $this->session->userdata('user_id');
+			$this->db->join('manufacturers', 'manufacturers.m_id = messages.from_id');
+			$query = $this->db->get_where('messages', array('to_id' => $id));
+			return $query->result_array();
 
 		}
 
@@ -209,6 +224,10 @@
 			// Edit address
 			$this->db->where('add_id', $address_id);
 			return $this->db->update('address', $data);
+		}
+
+		public function delMessage($data){
+			return $this->db->delete('messages', array('messages_id' => $data));
 		}
 
 

@@ -69,5 +69,78 @@
 			$this->load->view('templates/footer');
 		}
 
-
+		//Add new address
+		public function newAddress(){
+			
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			
+			$this->vendor_model->newAddress();
+			// Set message
+			$this->session->set_flashdata('flash-success', 'New address added');
+			redirect('userdashboard');
+			
+		}
+		
+		//Delete address
+		public function delAddress($address = NULL){
+			
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			// No address passed
+			elseif($address === NULL){
+				$this->session->set_flashdata('flash-warning', 'Address does not exist');
+				redirect('userdashboard');
+			}
+			//execute code
+			else{
+				$this->vendor_model->delAddress($address);
+				// Set message
+				$this->session->set_flashdata('flash-success', 'Address Deleted');
+				redirect('userdashboard');
+			}
+			
+		}
+		
+		//Delete materials
+		public function delMaterial($material = NULL){
+			
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			// No address passed
+			elseif($material === NULL){
+				$this->session->set_flashdata('flash-warning', 'Material does not exist');
+				redirect('userdashboard');
+			}
+			//execute code
+			else{
+				$this->vendor_model->delMaterial($material);
+				// Set message
+				$this->session->set_flashdata('flash-success', 'Material Deleted');
+				redirect('userdashboard');
+			}
+			
+		}
+		
+		//Add new vendor material
+		public function newMaterial(){
+			
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			
+			$this->vendor_model->newMaterial();
+			// Set message
+			$this->session->set_flashdata('flash-success', 'Material added. You will get notifications on the respective materials.');
+			redirect('userdashboard');
+			
+		}
+		
 	}

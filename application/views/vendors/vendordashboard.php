@@ -161,12 +161,12 @@ function time_elapsed_string($datetime, $full = false) {
 
 			<div id="messages" class="tab-pane fade in">
 												
-			<div class="container">
+					<div class="container">
 						<div class="row">
 							<div class="box-body no-padding">
 								<div class="mailbox-controls">
 									<!-- control button -->
-									<button class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
+									<button class="btn btn-primary btn-sm" onClick="window.location.reload()"><i class="glyphicon glyphicon-refresh"></i></button>
 									<div class="pull-right">
 										1-50/200
 										<div class="btn-group">
@@ -200,12 +200,18 @@ function time_elapsed_string($datetime, $full = false) {
 												<td class="mailbox-name"><a href="#"><?php echo($message['m_firstname']." ".$message['m_lastname'])?></a></td>
 												<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
 												<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>
+												<?php if($message['message_type'] === 'DM'): ?>
+													<td>
+													<div class="btn-group">
+														<button class="btn btn-info btn-sm" onclick="location.href='<?php echo base_url(); ?>users/sendMessage/<?php echo ($message['from_id'])?>/<?php echo($message['m_firstname'])?>/<?php echo($message['m_lastname'])?>'"><i class="glyphicon glyphicon-arrow-left"></i> </button>
+														<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
+													</div>
+													</td>
+												<?php elseif($message['message_type'] === 'Notification'): ?>
 												<td>
-												<div class="btn-group">
-												<button class="btn btn-info btn-sm" ><i class="glyphicon glyphicon-arrow-left"></i> </button>
-												<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
-												</div>
-												</td>
+													<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
+													</td>
+												<?php endif;?>
 											</tr>
 											<?php endforeach; ?>
 										</tbody>
@@ -371,7 +377,7 @@ function time_elapsed_string($datetime, $full = false) {
 								<h3 class="h4-margin-top-change"><?php echo ($vendorMaterial['rm_name']); ?></h3>
 								<h4 ><?php echo ("Quality Info : ".$vendorMaterial['quality_info']); ?></h4>
 									
-								<button class="btn btn-danger btn-block" type="button" href="#" title="Do you want to delete this Material?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<form action='<?php echo base_url(); ?>vendors/delMaterial/<?php echo($vendorMaterial['v_material_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								<button class="btn btn-danger btn-block" type="button" href="#" title="Do you want to delete this Material?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<form action='<?php echo base_url(); ?>vendors/delVendorMaterial/<?php echo($vendorMaterial['v_material_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 									
 							</div>
 						</div>
@@ -397,7 +403,7 @@ function time_elapsed_string($datetime, $full = false) {
 								</div>
 								<div class="modal-body">
 									
-									<?php echo form_open('vendors/newMaterial'); ?>
+									<?php echo form_open('vendors/newVendorMaterial'); ?>
 										<div class="row">
 
 											<div class="col-md-8 col-md-offset-2">

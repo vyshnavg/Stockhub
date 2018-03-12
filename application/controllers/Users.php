@@ -171,6 +171,7 @@
 					$data['title'] = "Manufacturer Dashboard";
 					
 					$data['addresses_arr'] =$this->user_model->get_address();
+					$data['messages'] = $this->user_model->get_messages();
 					
 					$this->load->view('templates/header', $data);
 					$this->load->view('users/userdashboard', $data);
@@ -187,7 +188,6 @@
 					$data['vendorMaterials'] = $this->vendor_model->get_vendorMaterials();
 					$data['materials'] = $this->material_model->get_materials();
 					$data['messages'] = $this->user_model->get_messages();
-					print_r($data['messages']);
 
 					
 					$this->load->view('templates/header', $data);
@@ -326,6 +326,7 @@
 			$data['completedTenders'] = $this->tender_model->userTenders("completed");
 			$data['ongoingTenders'] = $this->tender_model->userTenders("ongoing");
 
+
 			$this->load->view('templates/header', $data);
 			$this->load->view('users/userTenders', $data);
 			$this->load->view('templates/footer');
@@ -352,7 +353,39 @@
 			}
 			
 		}
+		
+		//Send message
+		public function sendMessage($toID = NULL, $name1 = NULL, $name2 = NULL){
 
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			// No toID passed
+			elseif($toID === NULL){
+				redirect('userdashboard');
+			}
+			// if message passed
+			elseif($name1 === NULL && $name2 === NULL){
+				$this->user_model->sendMessage($toID);
+				// Set message
+				$this->session->set_flashdata('flash-success', 'Message Sent');
+				redirect('userdashboard');
+			}
+			//execute code
+			else{
+				$data['toID'] = $toID;
+				$data['name1'] = $name1;
+				$data['name2'] = $name2;
+				$data['title'] = "Send Message";
+
+				$this->load->view('templates/header', $data);
+				$this->load->view('users/sendMessage', $data);
+				$this->load->view('templates/footer');
+				
+			}
+			
+		}
 
 		
 	}

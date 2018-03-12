@@ -107,7 +107,7 @@
 		}
 		
 		//Delete materials
-		public function delMaterial($material = NULL){
+		public function delVendorMaterial($material = NULL){
 			
 			// Check if the user is already logged in.
 			if(!$this->session->userdata('logged_in')){
@@ -120,7 +120,7 @@
 			}
 			//execute code
 			else{
-				$this->vendor_model->delMaterial($material);
+				$this->vendor_model->delVendorMaterial($material);
 				// Set message
 				$this->session->set_flashdata('flash-success', 'Material Deleted');
 				redirect('userdashboard');
@@ -129,14 +129,14 @@
 		}
 		
 		//Add new vendor material
-		public function newMaterial(){
+		public function newVendorMaterial(){
 			
 			// Check if the user is already logged in.
 			if(!$this->session->userdata('logged_in')){
 				redirect('home');
 			}
 			
-			$this->vendor_model->newMaterial();
+			$this->vendor_model->newVendorMaterial();
 			// Set message
 			$this->session->set_flashdata('flash-success', 'Material added. You will get notifications on the respective materials.');
 			redirect('userdashboard');

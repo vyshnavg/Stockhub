@@ -105,11 +105,19 @@
 		}
 		
 		public function get_messages(){
+			
 			$id = $this->session->userdata('user_id');
-			$this->db->join('manufacturers', 'manufacturers.m_id = messages.from_id');
-			$query = $this->db->get_where('messages', array('to_id' => $id));
-			return $query->result_array();
 
+			if($this->session->userdata('usertype') === 'vendor') {
+				$this->db->join('manufacturers', 'manufacturers.m_id = messages.from_id');
+				$query = $this->db->get_where('messages', array('to_id' => $id));
+				return $query->result_array();
+			}
+			elseif($this->session->userdata('usertype') === 'manufacturer') {
+				$this->db->join('vendors', 'vendors.v_id = messages.from_id');
+				$query = $this->db->get_where('messages', array('to_id' => $id));
+				return $query->result_array();
+			}
 		}
 
 		// Check active status
@@ -224,6 +232,18 @@
 			// Edit address
 			$this->db->where('add_id', $address_id);
 			return $this->db->update('address', $data);
+		}
+		
+		public function sendMessage($toID){
+			// message data array
+			$data = array(
+				'from_id' => $this->session->userdata('user_id'),
+				'to_id' => $toID,
+				'message_body' => $this->input->post('message'),
+                'message_type' => 'DM'
+			);
+			// sent message
+			return $this->db->insert('messages', $data);
 		}
 
 		public function delMessage($data){

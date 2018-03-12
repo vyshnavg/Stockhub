@@ -107,15 +107,20 @@
 
             $data['material'] =$this->material_model->get_materials($slug);
 
+            
             if(empty($data['material'])){
                 show_404();
             }
-
+            
             $material_id =$data['material']['raw_material_id'];
             
-            $this->material_model->tenderRegister($material_id);
+            $lastInsertID = $this->material_model->tenderRegister($material_id);
+            
+            $result = $this->tender_model->sendNotificationMessageToMultiple( $item_id = $material_id , $lastInsertID);
             // Set message
             $this->session->set_flashdata('flash-success', 'Tender Created');
             redirect('home');
-		}
+        }
+        
+
 	}

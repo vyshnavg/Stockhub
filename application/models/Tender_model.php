@@ -56,9 +56,8 @@
 			
 			$id = $this->session->userdata('user_id');
 
-			$this->db->join('diff_vendor_req','diff_vendor_req.tender_id = tender.tender_id');
 			$this->db->join('raw_material','raw_material.raw_material_id = tender.raw_material_id');
-			$this->db->where('vendor_id', $id);
+			$this->db->where('m_id', $id);
 			$query = $this->db->get_where('tender', array('tender_status' => $passValue));
 			return $query->result_array();
 		
@@ -67,9 +66,10 @@
 		public function vendorTenders($passValue){
 			
 			$id = $this->session->userdata('user_id');
-
+			
+			$this->db->join('diff_vendor_req','diff_vendor_req.tender_id = tender.tender_id');
 			$this->db->join('raw_material','raw_material.raw_material_id = tender.raw_material_id');
-			$this->db->where('m_id', $id);
+			$this->db->where('vendor_id', $id);
 			$query = $this->db->get_where('tender', array('tender_status' => $passValue));
 			return $query->result_array();
 		
@@ -207,24 +207,51 @@
 			return $tender_id['tender_created_id'];
 		}
 
-		public function sendNotificationMessage($toID, $message){
+		public function sendNotificationMessageToOne($toID = NULL, $message = NULL){
 			
 			$fromID = $this->session->userdata('user_id');
 
-			// messages data
-			$data = array(
-				'from_id ' => $fromID,
-				'to_id ' => $toID,
-				'message_body' => $message,
-				'message_type' => 'Notification',
-
-			);
-			
-			// Insert message request
-			return $this->db->insert('messages', $data);
+			if($toID != NULL && $message != NULL){
+				// messages data
+				$data = array(
+					'from_id ' => $fromID,
+					'to_id ' => $toID,
+					'message_body' => $message,
+					'message_type' => 'Notification',
+				);
+				
+				// Insert message request
+				return $this->db->insert('messages', $data);
+			}
 
 		}
+		
+		public function sendNotificationMessageToMultiple($item_id = NULL , $lastInsertID){
+			
+			$fromID = $this->session->userdata('user_id');
 
+			if($item_id != NULL){
+
+				$this->db->join('raw_material','raw_material.raw_material_id = vendor_materials.v_raw_material_id');
+				$query = $this->db->get_where('vendor_materials', array('v_raw_material_id' => $item_id));
+				$results = $query->result_array();
+
+				foreach($results as $result){
+					// messages data
+					$message = ('A Tender is available for '.$result['rm_name'].'. <a href="'.base_url().'tenders/view/'.$lastInsertID.'">View..</a>');
+					$data = array(
+						'from_id ' => $fromID,
+						'to_id ' => $result['vendor_id'],
+						'message_body' => $message,
+						'message_type' => 'Notification'
+					);
+					
+					// Insert message request
+					$this->db->insert('messages', $data);
+				}
+			}
+
+		}
 
         
 	}

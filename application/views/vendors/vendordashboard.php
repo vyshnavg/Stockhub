@@ -37,7 +37,7 @@ function time_elapsed_string($datetime, $full = false) {
 <div id="tabnav" class="tabnav">
 
 	<div class="container">
-		<ul class="nav nav-tabs">
+		<ul class="nav nav-tabs nav-justified">
 			<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
 			<li><a data-toggle="tab" href="#messages">Messages</a></li>
 			<li><a data-toggle="tab" href="#address">Address</a></li>
@@ -167,6 +167,8 @@ function time_elapsed_string($datetime, $full = false) {
 								<div class="mailbox-controls">
 									<!-- control button -->
 									<button class="btn btn-primary btn-sm" onClick="window.location.reload()"><i class="glyphicon glyphicon-refresh"></i></button>
+
+
 									<div class="pull-right">
 										1-50/200
 										<div class="btn-group">
@@ -178,25 +180,12 @@ function time_elapsed_string($datetime, $full = false) {
 								<hr>
 								<div class="table-responsive mailbox-messages">
 									<table class="table table-hover table-striped">
+										
 										<tbody>
-											<!-- <tr>
-												<td class="mailbox-star"><i class="fas fa-exclamation-circle"></i></td>
-												<td class="mailbox-name"><a href="read-mail.html">WM06</a></td>
-												<td class="mailbox-subject">Trying to find a solution to this problem...</td>
-												<td class="mailbox-date">5 mins ago</td>
-												<td><button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>
-											</tr>
-											<tr>
-												<td class="mailbox-star"><i class="far fa-envelope"></i></td>
-												<td class="mailbox-name"><a href="read-mail.html">WM06</a></td>
-												<td class="mailbox-subject">Trying to find a solution to this problem...</td>
-												<td class="mailbox-date">5 mins ago</td>
-												<td><button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>
-											</tr> -->
 
-											<?php foreach($messages as $message) : ?>
+											<?php foreach(array_reverse($messages) as $message) : ?>
 											<tr>
-												<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('far fa-exclamation-circle'); endif;?>"></i></td>
+												<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('fas fa-exclamation-circle'); endif;?>"></i></td>
 												<td class="mailbox-name"><a href="#"><?php echo($message['m_firstname']." ".$message['m_lastname'])?></a></td>
 												<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
 												<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>

@@ -355,37 +355,35 @@
 		}
 		
 		//Send message
-		public function sendMessage($toID = NULL, $name1 = NULL, $name2 = NULL){
+		public function sendMessage($toID = NULL){
+			$this->user_model->sendMessage($toID);	
+			$this->session->set_flashdata('flash-success', 'Message Sent');
+			redirect('users/messages/'.$toID);	
+		}
+		
+		//direct message
+		public function messages($id1 = NULL){
 
 			// Check if the user is already logged in.
 			if(!$this->session->userdata('logged_in')){
 				redirect('home');
 			}
 			// No toID passed
-			elseif($toID === NULL){
-				redirect('userdashboard');
-			}
-			// if message passed
-			elseif($name1 === NULL && $name2 === NULL){
-				$this->user_model->sendMessage($toID);
-				// Set message
-				$this->session->set_flashdata('flash-success', 'Message Sent');
-				redirect('userdashboard');
-			}
-			//execute code
 			else{
-				$data['toID'] = $toID;
-				$data['name1'] = $name1;
-				$data['name2'] = $name2;
-				$data['title'] = "Send Message";
+
+				$data['messages'] = $this->user_model->messages($id1);
+				$id2 = $this->session->userdata('user_id');
+				$data['id1'] = $this->user_model->userIDInfo($id1);
+				$data['toID'] = $id1;
+				// $data['id2'] = $this->user_model->userIDInfo($id2);
+				$data['title'] = "Message";
 
 				$this->load->view('templates/header', $data);
-				$this->load->view('users/sendMessage', $data);
+				$this->load->view('users/messages', $data);
 				$this->load->view('templates/footer');
 				
 			}
 			
 		}
-
 		
 	}

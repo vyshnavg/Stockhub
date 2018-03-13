@@ -243,12 +243,49 @@
                 'message_type' => 'DM'
 			);
 			// sent message
-			return $this->db->insert('messages', $data);
+			$this->db->insert('messages', $data);
 		}
 
 		public function delMessage($data){
 			return $this->db->delete('messages', array('messages_id' => $data));
 		}
+
+		public function messages($fromID){
+			$toID = $this->session->userdata('user_id');
+
+			if($this->session->userdata('usertype') === 'vendor') {
+				$this->db->select('*');
+				$this->db->from('messages');
+				$this->db->where("(from_id='$fromID' AND to_id='$toID' OR from_id='$toID' AND to_id='$fromID')", NULL, FALSE);
+				$this->db->where('message_type !=', 'Notification');
+				$query = $this->db->get();
+				return $query->result_array();
+			}
+			elseif($this->session->userdata('usertype') === 'manufacturer') {
+				$this->db->join('vendors', 'vendors.v_id = messages.from_id');
+				$query = $this->db->get_where('messages', array('to_id' => $id));
+				return $query->result_array();
+			}
+		}
+
+		public function userIDInfo($ID){
+			
+			$query = $this->db->get_where('manufacturers', array('m_id' => $ID));
+			if(empty($query->row_array())){
+				$query2 = $this->db->get_where('vendors', array('v_id' => $ID));
+				if(empty($query2->row_array())){
+					return NULL;
+				}
+				else{
+					return $query2->row_array();
+				}
+			}
+			else{
+				return $query->row_array();
+			}
+		}
+
+
 
 
 	}

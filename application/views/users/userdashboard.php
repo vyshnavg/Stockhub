@@ -36,7 +36,7 @@ function time_elapsed_string($datetime, $full = false) {
 <div id="tabnav" class="tabnav">
 
 	<div class="container">
-		<ul class="nav nav-tabs">
+		<ul class="nav nav-tabs nav-justified">
 			<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
 			<li><a data-toggle="tab" href="#messages">Messages</a></li>
 			<li><a data-toggle="tab" href="#address">Address</a></li>
@@ -205,7 +205,7 @@ function time_elapsed_string($datetime, $full = false) {
 							
 																		<?php foreach($messages as $message) : ?>
 																		<tr>
-																			<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('far fa-exclamation-circle'); endif;?>"></i></td>
+																			<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('fas fa-exclamation-circle'); endif;?>"></i></td>
 																			<td class="mailbox-name"><a href="#"><?php echo($message['v_firstname']." ".$message['v_lastname'])?></a></td>
 																			<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
 																			<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>

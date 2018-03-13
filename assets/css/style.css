@@ -279,3 +279,27 @@ footer{
   .navt img {
     vertical-align: middle;
   }
+
+
+  /* =====================chat style ================ */
+
+.chat_style_send{
+    border: 2px solid #19BC9C;
+    border-radius: 5px;
+    padding: 10px;
+    background: #EEEEEE;
+    margin-top: 10px;
+}
+
+.chat_style_receive{
+    border: 2px solid #11427D;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: right;
+    background: #EEEEEE;
+    margin-top: 10px;
+}
+
+.h3-margin-bottom-change{
+    margin-bottom: 0px;
+}

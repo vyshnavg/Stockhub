@@ -138,6 +138,72 @@
 			redirect('home');
 		}
 
+		// forgot password
+		public function forgotpassword(){
+			$email = $this->input->post('email');
+			$id = $this->user_model->check_email_exists($email, 1);
+			if(!empty($id)){
+				
+				$seed = str_split('abcdefghijklmnopqrstuvwxyz'
+								.'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+								.'0123456789!@#$%^&*()');
+				$rand = '';
+				foreach (array_rand($seed, 10) as $k) $rand .= $seed[$k];
+
+				$hashpass = md5($rand);
+
+				$this->user_model->changePassword($hashpass , $id);
+				$this->send_mail($email, 'recovery' , $rand);
+
+			} else {
+				$this->session->set_flashdata('flash-warning', 'Incorrect Email. Please provide an email which is given while registration.');
+				redirect('home');
+			}
+		}
+
+		public function send_mail($to, $type = NULL , $password = NULL) { 
+
+			$config = Array(
+				'protocol' => 'smtp',
+				'smtp_host' => 'ssl://smtp.googlemail.com',
+				'smtp_port' => 465,
+				'smtp_user' => 'stockhub.christ@gmail.com',
+				'smtp_pass' => 'Qwe1234%',
+				'mailtype'  => 'html', 
+				'charset'   => 'iso-8859-1'
+			);
+			$this->load->library('email', $config);
+			$this->email->set_newline("\r\n");
+
+			if($type === NULL){
+				$this->session->set_flashdata("flash-danger","Internal Error : Mail Type not defined.");
+				redirect('home');
+			}
+			elseif($type === 'recovery'){
+				$subject = 'Password Recovery - StockHUB';
+				$message = 'Hello, Your Password is changed to "'.$password.'" (without the quotes). Please Log in with this password and change to your preferred password in dashboard. StockHUB - Automated ';
+			
+				// $this->email->initialize($config);
+				$this->email->from('stockhub.christ@gmail.com');
+				$this->email->to($to);
+				$this->email->subject($subject);
+				$this->email->message($message);
+		
+				//Send mail 
+				if($this->email->send()){
+					$this->session->set_flashdata("flash-success","Email sent successfully.");
+					redirect('home');
+				}
+				else {
+					// show_error($this->email->print_debugger());
+					$this->session->set_flashdata("flash-danger","Failed to sent Email.");
+					redirect('home');
+				}
+			}
+			
+
+		}
+
 		// Check if username exists
 		public function check_username_exists($username){
 			$this->form_validation->set_message('check_username_exists', 'That username is taken. Please choose a different one');
@@ -403,5 +469,7 @@
 			$this->load->view('users/profile', $data);
 			$this->load->view('templates/footer');
 		}
+
+
 		
 	}

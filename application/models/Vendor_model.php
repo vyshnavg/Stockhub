@@ -66,6 +66,22 @@
 			}
 		}
 
+		public function editUserDetails(){
+			$id = $this->session->userdata('user_id');
+			// user data array
+			$data = array(
+				'v_firstname' => $this->input->post('firstName'),
+				'v_lastname' => $this->input->post('lastName'),
+				'v_username' => $this->input->post('username'),
+                'v_org_name' => $this->input->post('orgname'),
+				'v_website' => $this->input->post('website'),
+				'v_exprt_mthd' => $this->input->post('exptMethod')
+			);
+			// Edit address
+			$this->db->where('v_id', $id);
+			return $this->db->update('vendors', $data);
+		}
+
 		public function get_address(){
 			$id = $this->session->userdata('user_id');
 

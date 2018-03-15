@@ -38,10 +38,10 @@ function time_elapsed_string($datetime, $full = false) {
 
 	<div class="container">
 		<ul class="nav nav-tabs nav-justified">
-			<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
-			<li><a data-toggle="tab" href="#messages">Messages</a></li>
-			<li><a data-toggle="tab" href="#address">Address</a></li>
-			<li><a data-toggle="tab" href="#materials">Materials</a></li>
+			<li class="active"><a data-toggle="tab" href="#profile"><b>Profile</b></a></li>
+			<li><a data-toggle="tab" href="#messages"><b>Messages</b></a></li>
+			<li><a data-toggle="tab" href="#address"><b>Address</b></a></li>
+			<li><a data-toggle="tab" href="#materials"><b>Materials</b></a></li>
 			<!-- <li><a data-toggle="tab" href="#menu2">My Storage</a></li>
 			<li><a data-toggle="tab" href="#menu3">My Booking</a></li> -->
 		</ul>
@@ -55,124 +55,211 @@ function time_elapsed_string($datetime, $full = false) {
 					
 					<div class="col-md-6 img-align-center">
 						<img class="img-circle" src="<?php echo asset_url().'images/web-req/noimg.png'?>" alt="no image">
+						
+
 					</div>
 					
 					<div class="col-md-6">
 						<div class="well">
 							
-							<h3>Name : <?php echo($userDetails['v_firstname']." ".$userDetails['v_lastname']) ?></h3>
-							<h3>Email : <?php echo($userDetails['v_email']) ?></h3>
-							<h3>Status : <?php echo($userDetails['v_status']) ?></h3>
+							<h3><b>Name</b> : <?php echo($userDetails['v_firstname']." ".$userDetails['v_lastname']) ?></h3>
+							<h3><b>Email</b> : <?php echo($userDetails['v_email']) ?></h3>
+							<h3><b>Status</b> : <?php echo($userDetails['v_status']) ?></h3>
 							<?php if($userDetails['v_org_name']):?>
-								<h3>Organisation : <?php echo($userDetails['v_org_name']); ?></h3>
+								<h3><b>Organisation</b> : <?php echo($userDetails['v_org_name']); ?></h3>
 							<?php endif;?>
 							<?php if($userDetails['v_website']):?>
-								<h3>Website : <?php echo($userDetails['v_website']); ?></h3>
+								<h3><b>Website</b> : <a href="<?php echo($userDetails['v_website']); ?>">Click Here</a> </h3>
 							<?php endif;?>
 							<?php if($userDetails['v_exprt_mthd']):?>
-								<h3>Export Method : <?php echo($userDetails['v_exprt_mthd']); ?></h3>
+								<h3><b>Export Method</b> : <?php echo($userDetails['v_exprt_mthd']); ?></h3>
 							<?php endif;?>
-
-							<button type="button" class="btn btn-primary btn-lg btn-block login-button" data-toggle="modal" data-target="#editProModal" >Edit</button>
-						</div>
-
-							<!-- Add Modal -->
-							<div class="modal fade" id="editProModal" role="dialog">
-								<div class="modal-dialog">
-								
-								<!-- Add Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Edit User Details</h4>
-									</div>
-									<div class="modal-body">
-										
-										<?php echo form_open('vendors/editUserDetails'); ?>
-											<div class="row">
-
-												<div class="col-md-8 col-md-offset-2">
-
-													<p  class="text-center"> <?php echo validation_errors(); ?></p>
-
-
-
-													<label>Full name</label>
-													<div class="row">
-														<div class="col-xs-6">
-															<div class="form-group">
-																<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-																	<input type="text" class="form-control" name="firstName" placeholder="First name" value="<?php echo($userDetails['v_firstname']) ?>" />
-																</div>
-															</div>
-														</div>
-														<div class="col-xs-6">
-															<div class="form-group">
-																<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-																	<input type="text" class="form-control" name="lastName" placeholder="Last name" value="<?php echo($userDetails['v_lastname']) ?>" />
-																</div>
-															</div>
-														</div>
-													</div>
-
-
-													<div class="form-group">
-														<label>Username</label>
-														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-															<input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo($userDetails['v_username']) ?>" required/>
-														</div>
-													</div>
-													<div class="form-group">
-														<label>Organization Name</label>
-														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-blackboard"></i></span>
-															<input type="text" class="form-control" name="orgname" placeholder="Organisation Name" value="<?php echo($userDetails['v_org_name']) ?>" required/>
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label>Website</label>
-														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-															<input type="url" class="form-control" name="website" placeholder="Website" value="<?php echo($userDetails['v_website']) ?>" required/>
-														</div>
-													</div>
-
-													
-													<div class="form-group">
-														<label for="sel1">Export Method</label>
-														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-send"></i></span>
-														<select class="form-control" id="sel1" name="exptMethod">
-															<option>Select</option>
-															<option value="Ship">By Ship</option>
-															<option value="Road">By Road</option>
-															<option value="Air">By Air</option>
-														</select>
-														</div>
-													</div>
-													
-												
-
-
-
-
-													
-													<button type="submit" class="btn btn-success btn-block">Submit</button>
-
-												</div>
-
-											</div>
-											
-										<?php echo form_close(); ?>
-
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									</div>
-								</div>
-							
-							</div>
+							<br>
+							<!-- <button type="button" class="btn btn-primary btn-lg btn-block login-button" data-toggle="modal" data-target="#editProModal" >Edit</button> -->
 
 						</div>
 					</div>
+
+					<div class="btn-group btn-group-justified">
+						<div class="btn-group">
+							<button type="button" class="btn btn-info" data-toggle="modal" data-target="#changeProfilePicModal">Change Profile Picture</button>
+						</div>
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProModal">Edit Details</button>
+						</div>
+						<div class="btn-group">
+							<button type="button" class="btn btn-default" data-toggle="modal" data-target="#changePassModal">Change Password</button>
+						</div>
+					</div> 
+
+					<!-- editPro Modal -->
+					<div class="modal fade" id="editProModal" role="dialog">
+						<div class="modal-dialog">
+							<!-- Add Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Edit User Details</h4>
+								</div>
+								<div class="modal-body">
+									
+									<?php echo form_open('vendors/editUserDetails'); ?>
+										<div class="row">
+
+											<div class="col-md-8 col-md-offset-2">
+
+												<p  class="text-center"> <?php echo validation_errors(); ?></p>
+
+
+
+												<label>Full name</label>
+												<div class="row">
+													<div class="col-xs-6">
+														<div class="form-group">
+															<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+																<input type="text" class="form-control" name="firstName" placeholder="First name" value="<?php echo($userDetails['v_firstname']) ?>" />
+															</div>
+														</div>
+													</div>
+													<div class="col-xs-6">
+														<div class="form-group">
+															<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+																<input type="text" class="form-control" name="lastName" placeholder="Last name" value="<?php echo($userDetails['v_lastname']) ?>" />
+															</div>
+														</div>
+													</div>
+												</div>
+
+
+												<div class="form-group">
+													<label>Username</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+														<input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo($userDetails['v_username']) ?>" required/>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Organization Name</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-blackboard"></i></span>
+														<input type="text" class="form-control" name="orgname" placeholder="Organisation Name" value="<?php echo($userDetails['v_org_name']) ?>" required/>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label>Website</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+														<input type="url" class="form-control" name="website" placeholder="http://www.example.com" value="<?php echo($userDetails['v_website']) ?>" required/>
+													</div>
+												</div>
+
+												
+												<div class="form-group">
+													<label for="sel1">Export Method</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-send"></i></span>
+													<select class="form-control" id="sel1" name="exptMethod">
+														<option value="Ship">By Ship</option>
+														<option value="Road">By Road</option>
+														<option value="Air">By Air</option>
+													</select>
+													</div>
+												</div>
+												
+											
+
+
+
+
+												
+												<button type="submit" class="btn btn-success btn-block">Submit</button>
+
+											</div>
+
+										</div>
+										
+									<?php echo form_close(); ?>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- changePassModal Modal -->
+					<div class="modal fade" id="changePassModal" role="dialog">
+						<div class="modal-dialog">
+							<!-- Add Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Change Password</h4>
+								</div>
+								<div class="modal-body">
+									
+									<?php echo form_open('vendors/editUserDetails'); ?>
+										<div class="row">
+
+											<div class="col-md-8 col-md-offset-2">
+
+												<p  class="text-center"> <?php echo validation_errors(); ?></p>
+
+
+												<div class="form-group">
+													<label>Current Password</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+														<input type="password" class="form-control" name="password" placeholder="Password" required/>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>New Password</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+														<input type="password" class="form-control" name="password" placeholder="Password" required/>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Confirm Password</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+														<input type="password" class="form-control" name="password2" placeholder="Confirm Password" required/>
+													</div>
+												</div>
+												
+												<button type="submit" class="btn btn-success btn-block">Submit</button>
+
+											</div>
+
+										</div>
+										
+									<?php echo form_close(); ?>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- changeProfilePicModal Modal -->
+					<div class="modal fade" id="changeProfilePicModal" role="dialog">
+						<div class="modal-dialog">
+							<!-- Add Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Change Profile Picture</h4>
+								</div>
+								<div class="modal-body">
+									
+									
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 				</div>
 			</div>
 

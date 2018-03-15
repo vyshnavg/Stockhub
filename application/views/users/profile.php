@@ -26,7 +26,7 @@
                         <?php endif;?>
                         <?php if($userDetails['v_website']):?>
                             <dt>Website</dt>
-                            <dd><?php echo($userDetails['v_website']); ?></dd>
+                            <dd><a href="<?php echo($userDetails['v_website']); ?>">Click Here</a></dd>
                         <?php endif;?>
                         <?php if($userDetails['v_exprt_mthd']):?>
                             <dt>Export Method</dt>

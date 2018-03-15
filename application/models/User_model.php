@@ -32,6 +32,7 @@
 			// Insert user
 			return $this->db->insert('manufacturers', $data);
 		}
+		
 		// Log user in
 		public function login($username, $password){
 			// Validate
@@ -47,6 +48,8 @@
 				return false;
 			}
 		}
+
+
 		// Check username exists
 		public function check_username_exists($username){
 			$query = $this->db->get_where('manufacturers', array('m_username' => $username));
@@ -63,17 +66,34 @@
 			}
 		}
 		// Check email exists
-		public function check_email_exists($email){
-			$query = $this->db->get_where('manufacturers', array('m_email' => $email));
-			if(empty($query->row_array())){
-				return true;
-			} else {
-				// return false;
-				$query = $this->db->get_where('vendors', array('v_email' => $username));
+		public function check_email_exists($email , $needID = NULL){
+			if($needID === NULL){
+				$query = $this->db->get_where('manufacturers', array('m_email' => $email));
 				if(empty($query->row_array())){
 					return true;
 				} else {
-					return false;
+					// return false;
+					$query = $this->db->get_where('vendors', array('v_email' => $email));
+					if(empty($query->row_array())){
+						return true;
+					} else {
+						return false;
+					}
+				}
+			}
+			else{
+				$query = $this->db->get_where('manufacturers', array('m_email' => $email));
+				if(empty($query->row_array())){
+					$query2 = $this->db->get_where('vendors', array('v_email' => $email));
+					if(empty($query2->row_array())){
+						return false;
+					} else {
+						$id = $query2->row_array();
+						return $id['v_id'];
+					}
+				} else {
+						$id = $query->row_array();
+						return $id['m_id'];
 				}
 			}
 		}
@@ -301,6 +321,25 @@
 			else{
 				return $query->row_array();
 			}
+		}
+
+		public function changePassword($password ,$id){
+			
+			if($id[0] === 'V'){ //for vendors
+				$data = array(
+					'v_password' => $password
+				);
+				$this->db->where('v_id', $id);
+				return $this->db->update('vendors', $data);
+			}
+			else{
+				$data = array(
+					'm_password' => $password
+				);
+				$this->db->where('m_id', $id);
+				return $this->db->update('manufacturers', $data);
+			}
+
 		}
 
 

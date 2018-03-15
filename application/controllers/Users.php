@@ -182,12 +182,15 @@
 
 					$this->vendor_model->check_active_status();
 
+					$id = $this->session->userdata('user_id');
+
 					$data['title'] = "Vendor Dashboard";
 					
 					$data['addresses_arr'] = $this->user_model->get_address();
 					$data['vendorMaterials'] = $this->vendor_model->get_vendorMaterials();
 					$data['materials'] = $this->material_model->get_materials();
 					$data['messages'] = $this->user_model->get_messages();
+					$data['userDetails'] = $this->user_model->userIDInfo($id);
 
 					
 					$this->load->view('templates/header', $data);
@@ -384,6 +387,21 @@
 				
 			}
 			
+		}
+
+		// view vendor profile
+		public function profile($id){
+			
+			$data['title'] = "Profile";
+			
+			$data['address_arr'] = $this->user_model->get_address(0,$id);
+			$data['userDetails'] = $this->user_model->userIDInfo($id);
+			$data['id'] = $id;
+			print_r($data);
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('users/profile', $data);
+			$this->load->view('templates/footer');
 		}
 		
 	}

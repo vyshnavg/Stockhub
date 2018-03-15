@@ -165,6 +165,7 @@ $(document).ready(function() {			//	MAKE EACH ROW CLICKABLE IN TENDER TABLE
 	});
 });
 
+
 $(document).ready(function() {			//	manufacturer tender page , list group active changes
 	$('div#listInUserTender > a').click(function() {
 		if ($(this).hasClass("active")) {

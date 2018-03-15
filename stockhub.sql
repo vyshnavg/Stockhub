@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2018 at 05:06 AM
+-- Generation Time: Mar 15, 2018 at 05:30 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -99,7 +99,8 @@ INSERT INTO `diff_vendor_req` (`request_id`, `vendor_id`, `quantity`, `quantity_
 (3, 'V1', 203, 'Pounds', 2500, 8, '2018-03-02', '', 'accepted'),
 (4, 'V1', 100, 'Kilograms', 12000, 9, '2018-03-04', '', 'accepted'),
 (5, 'V1', 1, 'Kilograms', 500, 29, '2018-03-15', '', 'accepted'),
-(6, 'V1', 20, 'Kilograms', 500, 30, '2018-03-14', '', 'accepted');
+(6, 'V1', 20, 'Kilograms', 500, 30, '2018-03-14', '', 'accepted'),
+(7, 'V1', 1, 'Kilograms', 3000, 31, '2018-03-15', '', 'accepted');
 
 -- --------------------------------------------------------
 
@@ -128,6 +129,7 @@ CREATE TABLE `manufacturers` (
   `m_password` varchar(255) NOT NULL,
   `m_org_name` int(50) DEFAULT NULL,
   `m_status` set('Active','Inactive') NOT NULL,
+  `m_profile_pic` varchar(200) DEFAULT NULL,
   `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -135,10 +137,10 @@ CREATE TABLE `manufacturers` (
 -- Dumping data for table `manufacturers`
 --
 
-INSERT INTO `manufacturers` (`m_id`, `m_firstname`, `m_lastname`, `m_email`, `m_username`, `m_password`, `m_org_name`, `m_status`, `register_date`) VALUES
-('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', '2018-02-21 06:55:04'),
-('M8', 'Tim', 'Cook', 'tim@cook.in', 'tim12345', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Inactive', '2018-02-18 14:19:03'),
-('M9', 'dfsd', 'sdf', 'df@sad.c', 'qweasdzxc', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', '2018-02-21 06:25:10');
+INSERT INTO `manufacturers` (`m_id`, `m_firstname`, `m_lastname`, `m_email`, `m_username`, `m_password`, `m_org_name`, `m_status`, `m_profile_pic`, `register_date`) VALUES
+('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', NULL, '2018-02-21 06:55:04'),
+('M8', 'Tim', 'Cook', 'tim@cook.in', 'tim12345', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Inactive', NULL, '2018-02-18 14:19:03'),
+('M9', 'dfsd', 'sdf', 'df@sad.c', 'qweasdzxc', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', NULL, '2018-02-21 06:25:10');
 
 -- --------------------------------------------------------
 
@@ -182,7 +184,14 @@ CREATE TABLE `messages` (
 
 INSERT INTO `messages` (`messages_id`, `from_id`, `to_id`, `message_body`, `message_type`, `message_time`) VALUES
 (3, 'V1', 'M2', 'hello', 'DM', '2018-03-10 15:10:21'),
-(18, 'M2', 'V1', 'hello world', 'DM', '2018-03-11 05:40:36');
+(18, 'M2', 'V1', 'hello world', 'DM', '2018-03-11 05:40:36'),
+(21, 'M2', 'V1', 'A Tender is available for Hide Glue. <a href=\"http://localhost/Stockhub/tenders/view/32\">View..</a>', 'Notification', '2018-03-12 04:26:30'),
+(22, 'V1', 'M2', 'hello to you too', 'DM', '2018-03-12 04:29:00'),
+(23, 'M2', 'V1', 'yolo', 'DM', '2018-03-12 09:11:26'),
+(24, 'V1', 'M8', 'Another manufacuturer', 'DM', '2018-03-12 10:04:26'),
+(25, 'V1', 'M2', 'test msg', 'DM', '2018-03-13 06:56:35'),
+(26, 'V1', 'M2', 'test message 2', 'DM', '2018-03-13 07:01:04'),
+(27, 'V1', 'M2', 'hello', 'DM', '2018-03-14 05:40:00');
 
 -- --------------------------------------------------------
 
@@ -323,7 +332,11 @@ CREATE TABLE `tender` (
 
 INSERT INTO `tender` (`tender_id`, `m_id`, `raw_material_id`, `tender_quantity`, `tender_quantity_unit`, `date_of_submission`, `time_submission`, `date_expire`, `time_expire`, `delivery_location`, `estimated_price`, `extra_info`, `tender_status`) VALUES
 (29, 'M2', 2, 500, 'Kilograms', '2018-03-12', '09:14:00', '2018-03-16', '09:14:00', 1, 2000, '', 'cancelled'),
-(30, 'M2', 2, 500, 'Kilograms', '2018-03-12', '09:22:00', '2018-03-15', '09:21:00', 1, 5500, '', 'completed');
+(30, 'M2', 2, 500, 'Kilograms', '2018-03-12', '09:22:00', '2018-03-15', '09:21:00', 1, 5500, '', 'completed'),
+(31, 'M2', 9, 5, 'Kilograms', '2018-03-12', '09:47:00', '2018-03-30', '09:47:00', 1, 5000, 'pieces of 5/2', 'cancelled'),
+(32, 'M2', 12, 50, 'Kilograms', '2018-03-12', '09:56:00', '2018-03-20', '09:56:00', 2, 500, '', 'active'),
+(33, 'M2', 8, 1, 'Kilograms', '2018-03-12', '09:57:00', '2018-03-29', '09:57:00', 2, 500, '', 'active'),
+(34, 'M2', 7, 15, 'Kilograms', '2018-03-12', '14:44:00', '2018-03-28', '14:44:00', 2, 500, '', 'active');
 
 -- --------------------------------------------------------
 
@@ -353,7 +366,8 @@ INSERT INTO `transaction` (`trans_id`, `tender_created_id`, `diff_vendor_reqid`,
 (3, 8, 3, '2018-02-26', '14:50:00', '2018-03-02', '14:50:00', 1, 'Days', '', 'delivered'),
 (4, 9, 4, '2018-03-01', '22:56:00', '2018-03-04', '22:56:00', 1, 'Hours', '', 'dispatched'),
 (5, 29, 5, '2018-03-12', '09:20:00', '2018-03-15', '09:20:00', 1, 'Days', '', 'orderConfirmed'),
-(6, 30, 6, '2018-03-12', '09:33:00', '2018-03-14', '09:33:00', NULL, NULL, '', 'delivered');
+(6, 30, 6, '2018-03-12', '09:33:00', '2018-03-14', '09:33:00', NULL, NULL, '', 'delivered'),
+(7, 31, 7, '2018-03-12', '09:48:00', '2018-03-15', '09:48:00', 2, 'Days', 'sorry', 'packed');
 
 -- --------------------------------------------------------
 
@@ -382,6 +396,7 @@ CREATE TABLE `vendors` (
   `v_lastname` varchar(25) NOT NULL,
   `v_address_id` varchar(10) DEFAULT NULL,
   `v_status` set('Active','Inactive') NOT NULL,
+  `v_profile_pic` varchar(100) DEFAULT NULL,
   `v_org_name` varchar(50) DEFAULT NULL,
   `v_website` varchar(100) DEFAULT NULL,
   `v_exprt_mthd` varchar(25) DEFAULT NULL,
@@ -392,8 +407,8 @@ CREATE TABLE `vendors` (
 -- Dumping data for table `vendors`
 --
 
-INSERT INTO `vendors` (`v_id`, `v_email`, `v_username`, `v_password`, `v_firstname`, `v_lastname`, `v_address_id`, `v_status`, `v_org_name`, `v_website`, `v_exprt_mthd`, `created_at`) VALUES
-('V1', 'sam@time.in', 'samlaw12', '0a80250fe4bbd7759207d6bff43c8661', 'Sam', 'Lawrence', '14', 'Active', NULL, NULL, NULL, '2018-03-07 18:54:58');
+INSERT INTO `vendors` (`v_id`, `v_email`, `v_username`, `v_password`, `v_firstname`, `v_lastname`, `v_address_id`, `v_status`, `v_profile_pic`, `v_org_name`, `v_website`, `v_exprt_mthd`, `created_at`) VALUES
+('V1', 'sam@time.in', 'samlaw12', '0a80250fe4bbd7759207d6bff43c8661', 'Sam', 'Lawrence', '14', 'Active', '', NULL, NULL, NULL, '2018-03-07 18:54:58');
 
 -- --------------------------------------------------------
 
@@ -413,7 +428,8 @@ CREATE TABLE `vendor_materials` (
 --
 
 INSERT INTO `vendor_materials` (`v_material_id`, `vendor_id`, `v_raw_material_id`, `quality_info`) VALUES
-(2, 'V1', 2, 'good\r\n');
+(2, 'V1', 2, 'good\r\n'),
+(3, 'V1', 12, 'Imported from aus');
 
 --
 -- Indexes for dumped tables
@@ -541,7 +557,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `diff_vendor_req`
 --
 ALTER TABLE `diff_vendor_req`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -559,13 +575,13 @@ ALTER TABLE `material_subcat`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `messages_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `messages_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `m_address_dict`
 --
 ALTER TABLE `m_address_dict`
-  MODIFY `m_address_dict_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `m_address_dict_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `product_cat`
@@ -595,13 +611,13 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `tender`
 --
 ALTER TABLE `tender`
-  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `trde_mrkt`
@@ -613,7 +629,7 @@ ALTER TABLE `trde_mrkt`
 -- AUTO_INCREMENT for table `vendor_materials`
 --
 ALTER TABLE `vendor_materials`
-  MODIFY `v_material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `v_material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

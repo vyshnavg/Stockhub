@@ -175,7 +175,7 @@
 			return $this->db->update('vendors', $newdata);
 		}
 		
-		public function newMaterial(){
+		public function newVendorMaterial(){
 			// address data array
 			$data = array(
 				'vendor_id' => $id = $this->session->userdata('user_id'),
@@ -186,7 +186,7 @@
 			$this->db->insert('vendor_materials', $data);
 		}
 		
-		public function delMaterial($data){
+		public function delVendorMaterial($data){
 			// Delete material
 			$this->db->delete('vendor_materials', array('v_material_id' => $data));
 		}

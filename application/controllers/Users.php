@@ -171,6 +171,7 @@
 					$data['title'] = "Manufacturer Dashboard";
 					
 					$data['addresses_arr'] =$this->user_model->get_address();
+					$data['messages'] = $this->user_model->get_messages();
 					
 					$this->load->view('templates/header', $data);
 					$this->load->view('users/userdashboard', $data);
@@ -187,7 +188,6 @@
 					$data['vendorMaterials'] = $this->vendor_model->get_vendorMaterials();
 					$data['materials'] = $this->material_model->get_materials();
 					$data['messages'] = $this->user_model->get_messages();
-					print_r($data['messages']);
 
 					
 					$this->load->view('templates/header', $data);
@@ -326,6 +326,7 @@
 			$data['completedTenders'] = $this->tender_model->userTenders("completed");
 			$data['ongoingTenders'] = $this->tender_model->userTenders("ongoing");
 
+
 			$this->load->view('templates/header', $data);
 			$this->load->view('users/userTenders', $data);
 			$this->load->view('templates/footer');
@@ -352,7 +353,37 @@
 			}
 			
 		}
+		
+		//Send message
+		public function sendMessage($toID = NULL){
+			$this->user_model->sendMessage($toID);	
+			$this->session->set_flashdata('flash-success', 'Message Sent');
+			redirect('users/messages/'.$toID);	
+		}
+		
+		//direct message
+		public function messages($id1 = NULL){
 
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			// No toID passed
+			else{
 
+				$data['messages'] = $this->user_model->messages($id1);
+				$id2 = $this->session->userdata('user_id');
+				$data['id1'] = $this->user_model->userIDInfo($id1);
+				$data['toID'] = $id1;
+				// $data['id2'] = $this->user_model->userIDInfo($id2);
+				$data['title'] = "Message";
+
+				$this->load->view('templates/header', $data);
+				$this->load->view('users/messages', $data);
+				$this->load->view('templates/footer');
+				
+			}
+			
+		}
 		
 	}

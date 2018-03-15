@@ -93,7 +93,8 @@
 				'tender_status' => 'active'
 			);
 			// Insert user
-			return $this->db->insert('tender', $data);
+			$this->db->insert('tender', $data);
+			return $this->db->insert_id();
 		}
         
 	}

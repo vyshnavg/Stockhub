@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2018 at 06:36 PM
+-- Generation Time: Mar 12, 2018 at 05:06 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -48,7 +48,8 @@ INSERT INTO `address` (`add_id`, `state`, `city`, `street`, `building_no`, `land
 (2, 'Jharkhand', 'Bokaro', '35th Street', '200', '', 680625, 'India'),
 (4, 'Chhattisgarh', 'Bastar', 'fdgdfg', 'dggg', 'dsf', 343422, 'India'),
 (5, 'Madhya Pradesh', 'Alirajpur', 'sdf', 'fdsf', 'sdf', 323232, 'India'),
-(6, 'Kerala', 'Alappuzha', 'dsfdsf', 'dsfdsf', 'fdsf', 343423, 'India');
+(6, 'Kerala', 'Alappuzha', 'dsfdsf', 'dsfdsf', 'fdsf', 343423, 'India'),
+(14, 'Madhya Pradesh', 'Alirajpur', 'fdf', '5d', 'hhh', 323232, 'India');
 
 -- --------------------------------------------------------
 
@@ -96,7 +97,9 @@ CREATE TABLE `diff_vendor_req` (
 
 INSERT INTO `diff_vendor_req` (`request_id`, `vendor_id`, `quantity`, `quantity_unit`, `quoted_price`, `tender_id`, `delivery_date`, `req_desc`, `req_status`) VALUES
 (3, 'V1', 203, 'Pounds', 2500, 8, '2018-03-02', '', 'accepted'),
-(4, 'V1', 100, 'Kilograms', 12000, 9, '2018-03-04', '', 'accepted');
+(4, 'V1', 100, 'Kilograms', 12000, 9, '2018-03-04', '', 'accepted'),
+(5, 'V1', 1, 'Kilograms', 500, 29, '2018-03-15', '', 'accepted'),
+(6, 'V1', 20, 'Kilograms', 500, 30, '2018-03-14', '', 'accepted');
 
 -- --------------------------------------------------------
 
@@ -157,6 +160,29 @@ INSERT INTO `material_subcat` (`subcat_id`, `subcat_name`, `created_date`) VALUE
 (1, 'Wood', '2017-12-31 16:11:51'),
 (2, 'Glass', '2018-01-27 14:40:38'),
 (3, 'Glue', '2018-02-16 12:53:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `messages_id` int(11) NOT NULL,
+  `from_id` varchar(11) NOT NULL,
+  `to_id` varchar(11) NOT NULL,
+  `message_body` text NOT NULL,
+  `message_type` set('Notification','DM') NOT NULL,
+  `message_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`messages_id`, `from_id`, `to_id`, `message_body`, `message_type`, `message_time`) VALUES
+(3, 'V1', 'M2', 'hello', 'DM', '2018-03-10 15:10:21'),
+(18, 'M2', 'V1', 'hello world', 'DM', '2018-03-11 05:40:36');
 
 -- --------------------------------------------------------
 
@@ -296,8 +322,8 @@ CREATE TABLE `tender` (
 --
 
 INSERT INTO `tender` (`tender_id`, `m_id`, `raw_material_id`, `tender_quantity`, `tender_quantity_unit`, `date_of_submission`, `time_submission`, `date_expire`, `time_expire`, `delivery_location`, `estimated_price`, `extra_info`, `tender_status`) VALUES
-(8, 'M2', 12, 202, 'Pounds', '2018-02-26', '14:40:00', '2018-03-02', '14:39:00', 1, 2000, 'In 500 ml bottles.', 'completed'),
-(9, 'M2', 10, 100, 'Kilograms', '2018-03-01', '22:55:00', '2018-03-03', '22:55:00', 2, 14000, '', 'cancelled');
+(29, 'M2', 2, 500, 'Kilograms', '2018-03-12', '09:14:00', '2018-03-16', '09:14:00', 1, 2000, '', 'cancelled'),
+(30, 'M2', 2, 500, 'Kilograms', '2018-03-12', '09:22:00', '2018-03-15', '09:21:00', 1, 5500, '', 'completed');
 
 -- --------------------------------------------------------
 
@@ -325,7 +351,9 @@ CREATE TABLE `transaction` (
 
 INSERT INTO `transaction` (`trans_id`, `tender_created_id`, `diff_vendor_reqid`, `start_date`, `start_time`, `delvy_date`, `delvy_time`, `trans_delay_time`, `trans_delay_unit`, `trans_message`, `trans_status`) VALUES
 (3, 8, 3, '2018-02-26', '14:50:00', '2018-03-02', '14:50:00', 1, 'Days', '', 'delivered'),
-(4, 9, 4, '2018-03-01', '22:56:00', '2018-03-04', '22:56:00', 1, 'Hours', '', 'dispatched');
+(4, 9, 4, '2018-03-01', '22:56:00', '2018-03-04', '22:56:00', 1, 'Hours', '', 'dispatched'),
+(5, 29, 5, '2018-03-12', '09:20:00', '2018-03-15', '09:20:00', 1, 'Days', '', 'orderConfirmed'),
+(6, 30, 6, '2018-03-12', '09:33:00', '2018-03-14', '09:33:00', NULL, NULL, '', 'delivered');
 
 -- --------------------------------------------------------
 
@@ -365,7 +393,7 @@ CREATE TABLE `vendors` (
 --
 
 INSERT INTO `vendors` (`v_id`, `v_email`, `v_username`, `v_password`, `v_firstname`, `v_lastname`, `v_address_id`, `v_status`, `v_org_name`, `v_website`, `v_exprt_mthd`, `created_at`) VALUES
-('V1', 'sam@time.in', 'samlaw12', '0a80250fe4bbd7759207d6bff43c8661', 'Sam', 'Lawrence', NULL, 'Inactive', NULL, NULL, NULL, '2018-02-18 14:12:30');
+('V1', 'sam@time.in', 'samlaw12', '0a80250fe4bbd7759207d6bff43c8661', 'Sam', 'Lawrence', '14', 'Active', NULL, NULL, NULL, '2018-03-07 18:54:58');
 
 -- --------------------------------------------------------
 
@@ -376,10 +404,16 @@ INSERT INTO `vendors` (`v_id`, `v_email`, `v_username`, `v_password`, `v_firstna
 CREATE TABLE `vendor_materials` (
   `v_material_id` int(11) NOT NULL,
   `vendor_id` varchar(11) NOT NULL,
-  `raw_material_id` int(11) NOT NULL,
-  `quality_info` text NOT NULL,
-  `material_desc` text NOT NULL
+  `v_raw_material_id` int(11) NOT NULL,
+  `quality_info` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vendor_materials`
+--
+
+INSERT INTO `vendor_materials` (`v_material_id`, `vendor_id`, `v_raw_material_id`, `quality_info`) VALUES
+(2, 'V1', 2, 'good\r\n');
 
 --
 -- Indexes for dumped tables
@@ -420,6 +454,12 @@ ALTER TABLE `manufacturers`
 --
 ALTER TABLE `material_subcat`
   ADD PRIMARY KEY (`subcat_id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`messages_id`);
 
 --
 -- Indexes for table `m_address_dict`
@@ -489,7 +529,7 @@ ALTER TABLE `vendor_materials`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `add_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `add_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -501,7 +541,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `diff_vendor_req`
 --
 ALTER TABLE `diff_vendor_req`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -516,10 +556,16 @@ ALTER TABLE `material_subcat`
   MODIFY `subcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `messages_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT for table `m_address_dict`
 --
 ALTER TABLE `m_address_dict`
-  MODIFY `m_address_dict_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `m_address_dict_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product_cat`
@@ -549,13 +595,13 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `tender`
 --
 ALTER TABLE `tender`
-  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `trde_mrkt`
@@ -567,7 +613,7 @@ ALTER TABLE `trde_mrkt`
 -- AUTO_INCREMENT for table `vendor_materials`
 --
 ALTER TABLE `vendor_materials`
-  MODIFY `v_material_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `v_material_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

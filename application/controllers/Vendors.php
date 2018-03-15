@@ -69,6 +69,23 @@
 			$this->load->view('templates/footer');
 		}
 
+		//Edit UserDetails
+		public function editUserDetails(){
+
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			//execute code
+			else{
+				$this->vendor_model->editUserDetails();
+				// Set message
+				$this->session->set_flashdata('flash-success', 'User details changed');
+				redirect('userdashboard');
+			}
+			
+		}
+
 		//Add new address
 		public function newAddress(){
 			
@@ -143,4 +160,6 @@
 			
 		}
 		
+		
+
 	}

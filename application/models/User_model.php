@@ -81,7 +81,7 @@
 		public function get_address($choice = 0,$value = NULL){
 			
 			//ALL ADDRESS UNDER A USER ID
-			if($choice === 0){
+			if($choice === 0 && $value === NULL){
 				$id = $this->session->userdata('user_id');
 
 				if($this->session->userdata('usertype') === 'vendor'){
@@ -94,6 +94,24 @@
 					$query = $this->db->get_where('m_address_dict', array('manufacturer_id' => $id));
 					return $query->result_array();
 				}
+			}
+
+			//WHEN HAVING A user ID AND WANT ALL INFO
+			elseif($choice === 0 and $value != NULL){
+
+				$id=$value;
+				
+				if($id[0] === 'V'){
+					$this->db->join('address', 'address.add_id = vendors.v_address_id');
+					$query = $this->db->get_where('vendors', array('v_id' => $id));
+					return $query->row_array();
+				}
+				else{
+					$this->db->join('address', 'address.add_id = m_address_dict.add_id');
+					$query = $this->db->get_where('m_address_dict', array('manufacturer_id' => $id));
+					return $query->result_array();
+				}
+
 			}
 
 			//WHEN HAVING A ADD_ID AND WANT ALL INFO

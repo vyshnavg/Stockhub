@@ -59,21 +59,20 @@ function time_elapsed_string($datetime, $full = false) {
 					
 					<div class="col-md-6">
 						<div class="well">
-							<?php
+							
+							<h3>Name : <?php echo($userDetails['v_firstname']." ".$userDetails['v_lastname']) ?></h3>
+							<h3>Email : <?php echo($userDetails['v_email']) ?></h3>
+							<h3>Status : <?php echo($userDetails['v_status']) ?></h3>
+							<?php if($userDetails['v_org_name']):?>
+								<h3>Organisation : <?php echo($userDetails['v_org_name']); ?></h3>
+							<?php endif;?>
+							<?php if($userDetails['v_website']):?>
+								<h3>Website : <?php echo($userDetails['v_website']); ?></h3>
+							<?php endif;?>
+							<?php if($userDetails['v_exprt_mthd']):?>
+								<h3>Export Method : <?php echo($userDetails['v_exprt_mthd']); ?></h3>
+							<?php endif;?>
 
-										$std = ucfirst($this->session->userdata('user_id'));
-
-										include '..\stockhub\assets\dbh.php';
-										$sql="SELECT * from vendors where v_id = '$std'";
-										$result= mysqli_query($conn ,$sql)or die(mysqli_error($conn));
-
-										if($row=mysqli_fetch_assoc($result)){
-											
-											echo "	<h3>Name : ".$row['v_firstname']." ".$row['v_lastname']."</h3>
-													<h3>Email : ".$row['v_email']."</h3>
-													<h3>Status : ".$row['v_status']."</h3>";
-											}
-							?>
 							<button type="button" class="btn btn-primary btn-lg btn-block login-button" data-toggle="modal" data-target="#editProModal" >Edit</button>
 						</div>
 
@@ -85,11 +84,11 @@ function time_elapsed_string($datetime, $full = false) {
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Add New Address</h4>
+										<h4 class="modal-title">Edit User Details</h4>
 									</div>
 									<div class="modal-body">
 										
-										<?php echo form_open('vendors/newAddress',' id="address_form"'); ?>
+										<?php echo form_open('vendors/editUserDetails'); ?>
 											<div class="row">
 
 												<div class="col-md-8 col-md-offset-2">
@@ -103,14 +102,14 @@ function time_elapsed_string($datetime, $full = false) {
 														<div class="col-xs-6">
 															<div class="form-group">
 																<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-																	<input type="text" class="form-control" name="firstName" placeholder="First name" />
+																	<input type="text" class="form-control" name="firstName" placeholder="First name" value="<?php echo($userDetails['v_firstname']) ?>" />
 																</div>
 															</div>
 														</div>
 														<div class="col-xs-6">
 															<div class="form-group">
 																<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-																	<input type="text" class="form-control" name="lastName" placeholder="Last name" />
+																	<input type="text" class="form-control" name="lastName" placeholder="Last name" value="<?php echo($userDetails['v_lastname']) ?>" />
 																</div>
 															</div>
 														</div>
@@ -118,17 +117,38 @@ function time_elapsed_string($datetime, $full = false) {
 
 
 													<div class="form-group">
-														<label>Email</label>
-														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-															<input type="email" class="form-control" name="email" placeholder="Email" readonly="readonly"/>
+														<label>Username</label>
+														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+															<input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo($userDetails['v_username']) ?>" required/>
 														</div>
 													</div>
 													<div class="form-group">
-														<label>Username</label>
-														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-															<input type="text" class="form-control" name="username" placeholder="Username" required/>
+														<label>Organization Name</label>
+														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-blackboard"></i></span>
+															<input type="text" class="form-control" name="orgname" placeholder="Organisation Name" value="<?php echo($userDetails['v_org_name']) ?>" required/>
 														</div>
 													</div>
+
+													<div class="form-group">
+														<label>Website</label>
+														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+															<input type="url" class="form-control" name="website" placeholder="Website" value="<?php echo($userDetails['v_website']) ?>" required/>
+														</div>
+													</div>
+
+													
+													<div class="form-group">
+														<label for="sel1">Export Method</label>
+														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-send"></i></span>
+														<select class="form-control" id="sel1" name="exptMethod">
+															<option>Select</option>
+															<option value="Ship">By Ship</option>
+															<option value="Road">By Road</option>
+															<option value="Air">By Air</option>
+														</select>
+														</div>
+													</div>
+													
 												
 
 
@@ -182,26 +202,36 @@ function time_elapsed_string($datetime, $full = false) {
 									<table class="table table-hover table-striped">
 										
 										<tbody>
+											
+											<?php $a = array(); ?>
 
 											<?php foreach(array_reverse($messages) as $message) : ?>
-											<tr>
-												<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('fas fa-exclamation-circle'); endif;?>"></i></td>
-												<td class="mailbox-name"><a href="#"><?php echo($message['m_firstname']." ".$message['m_lastname'])?></a></td>
-												<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
-												<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>
-												<?php if($message['message_type'] === 'DM'): ?>
-													<td>
-													<div class="btn-group">
-														<button class="btn btn-info btn-sm" onclick="location.href='<?php echo base_url(); ?>users/sendMessage/<?php echo ($message['from_id'])?>/<?php echo($message['m_firstname'])?>/<?php echo($message['m_lastname'])?>'"><i class="glyphicon glyphicon-arrow-left"></i> </button>
-														<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
-													</div>
-													</td>
+											
+												<?php if($message['message_type'] === 'DM' && !in_array($message['from_id'], $a)): ?>
+													<?php array_push($a,$message['from_id']); ?>
+													<tr>
+														<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('fas fa-exclamation-circle'); endif;?>"></i></td>
+														<td class="mailbox-name"><a href="#"><?php echo($message['m_firstname']." ".$message['m_lastname'])?></a></td>
+														<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
+														<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>
+														<td>
+														<div class="btn-group">
+															<button class="btn btn-info btn-sm" onclick="location.href='<?php echo base_url(); ?>users/messages/<?php echo ($message['from_id'])?>/<?php echo($message['m_firstname'])?>/<?php echo($message['m_lastname'])?>'"><i class="glyphicon glyphicon-arrow-left"></i> </button>
+															<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
+														</div>
+														</td>
+													</tr>
 												<?php elseif($message['message_type'] === 'Notification'): ?>
-												<td>
-													<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
-													</td>
+												<tr>
+														<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('fas fa-exclamation-circle'); endif;?>"></i></td>
+														<td class="mailbox-name"><a href="#"><?php echo($message['m_firstname']." ".$message['m_lastname'])?></a></td>
+														<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
+														<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>
+														<td>
+														<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
+														</td>
+													</tr>
 												<?php endif;?>
-											</tr>
 											<?php endforeach; ?>
 										</tbody>
 									</table><!-- /.table -->

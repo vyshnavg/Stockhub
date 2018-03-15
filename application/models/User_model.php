@@ -300,8 +300,11 @@
 				return $query->result_array();
 			}
 			elseif($this->session->userdata('usertype') === 'manufacturer') {
-				$this->db->join('vendors', 'vendors.v_id = messages.from_id');
-				$query = $this->db->get_where('messages', array('to_id' => $id));
+				$this->db->select('*');
+				$this->db->from('messages');
+				$this->db->where("(from_id='$fromID' AND to_id='$toID' OR from_id='$toID' AND to_id='$fromID')", NULL, FALSE);
+				$this->db->where('message_type !=', 'Notification');
+				$query = $this->db->get();
 				return $query->result_array();
 			}
 		}

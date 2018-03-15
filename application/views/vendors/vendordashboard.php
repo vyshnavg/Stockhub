@@ -298,7 +298,7 @@ function time_elapsed_string($datetime, $full = false) {
 													<?php array_push($a,$message['from_id']); ?>
 													<tr>
 														<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('fas fa-exclamation-circle'); endif;?>"></i></td>
-														<td class="mailbox-name"><a href="#"><?php echo($message['m_firstname']." ".$message['m_lastname'])?></a></td>
+														<td class="mailbox-name"><a href="<?php echo base_url(); ?>users/profile/<?php echo ($message['from_id'])?>"><?php echo($message['m_firstname']." ".$message['m_lastname'])?></a></td>
 														<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
 														<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>
 														<td>

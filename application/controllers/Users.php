@@ -233,11 +233,13 @@
 				if($this->session->userdata('usertype') === 'manufacturer') {
 
 					$this->user_model->check_active_status();
+					$id = $this->session->userdata('user_id');
 
 					$data['title'] = "Manufacturer Dashboard";
 					
 					$data['addresses_arr'] =$this->user_model->get_address();
 					$data['messages'] = $this->user_model->get_messages();
+					$data['userDetails'] = $this->user_model->userIDInfo($id);
 					
 					$this->load->view('templates/header', $data);
 					$this->load->view('users/userdashboard', $data);
@@ -463,7 +465,17 @@
 			$data['address_arr'] = $this->user_model->get_address(0,$id);
 			$data['userDetails'] = $this->user_model->userIDInfo($id);
 			$data['id'] = $id;
-			print_r($data);
+			
+			if($id[0] === 'V'){
+				$data['completedTenders'] = $this->tender_model->vendorTenders("completed",$id);
+				$data['ongoingTenders'] = $this->tender_model->vendorTenders("ongoing",$id);
+			}
+			else{
+				$data['activeTenders'] = $this->tender_model->userTenders("active",$id);
+				$data['completedTenders'] = $this->tender_model->userTenders("completed",$id);
+				$data['ongoingTenders'] = $this->tender_model->userTenders("ongoing",$id);
+			}
+			
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('users/profile', $data);

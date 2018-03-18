@@ -34,7 +34,7 @@
 			$this->load->view('templates/footer');
         }
 
-        public function tenderRequest($tenderID){
+        public function tenderRequest($tenderID , $id){
             
             // Check if the user is not logged in.
 			if(!$this->session->userdata('logged_in')){
@@ -52,6 +52,7 @@
 
             $this->tender_model->tenderRequest($tenderID);
             $this->session->set_flashdata('flash-success', 'Tender Request Send');
+            $this->tender_model->sendNotificationMessageToOne($id, "A Tender Request Recieved. <a href='tenders/view/$tenderID'>View</a>");
 			redirect('home');
         }
 

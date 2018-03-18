@@ -291,22 +291,15 @@
 		public function messages($fromID){
 			$toID = $this->session->userdata('user_id');
 
-			if($this->session->userdata('usertype') === 'vendor') {
-				$this->db->select('*');
-				$this->db->from('messages');
-				$this->db->where("(from_id='$fromID' AND to_id='$toID' OR from_id='$toID' AND to_id='$fromID')", NULL, FALSE);
-				$this->db->where('message_type !=', 'Notification');
-				$query = $this->db->get();
-				return $query->result_array();
-			}
-			elseif($this->session->userdata('usertype') === 'manufacturer') {
-				$this->db->select('*');
-				$this->db->from('messages');
-				$this->db->where("(from_id='$fromID' AND to_id='$toID' OR from_id='$toID' AND to_id='$fromID')", NULL, FALSE);
-				$this->db->where('message_type !=', 'Notification');
-				$query = $this->db->get();
-				return $query->result_array();
-			}
+
+			$this->db->select('*');
+			$this->db->from('messages');
+			$this->db->where("(from_id='$fromID' AND to_id='$toID' OR from_id='$toID' AND to_id='$fromID')", NULL, FALSE);
+			$this->db->where('message_type !=', 'Notification');
+			$query = $this->db->get();
+			return $query->result_array();
+
+			
 		}
 
 		public function userIDInfo($ID){
@@ -338,6 +331,26 @@
 			else{
 				$data = array(
 					'm_password' => $password
+				);
+				$this->db->where('m_id', $id);
+				return $this->db->update('manufacturers', $data);
+			}
+
+		}
+
+		public function userProPic($file_name){
+			$id = $this->session->userdata('user_id');
+
+			if($id[0] === 'V'){ //for vendors
+				$data = array(
+					'v_profile_pic' => $file_name
+				);
+				$this->db->where('v_id', $id);
+				return $this->db->update('vendors', $data);
+			}
+			else{
+				$data = array(
+					'm_profile_pic' => $file_name
 				);
 				$this->db->where('m_id', $id);
 				return $this->db->update('manufacturers', $data);

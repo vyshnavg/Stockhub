@@ -157,7 +157,7 @@
 
 			} else {
 				$this->session->set_flashdata('flash-warning', 'Incorrect Email. Please provide an email which is given while registration.');
-				redirect('home');
+				redirect('users/login');
 			}
 		}
 
@@ -192,7 +192,7 @@
 				//Send mail 
 				if($this->email->send()){
 					$this->session->set_flashdata("flash-success","Email sent successfully.");
-					redirect('home');
+					redirect('users/login');
 				}
 				else {
 					// show_error($this->email->print_debugger());
@@ -481,6 +481,84 @@
 			$this->load->view('users/profile', $data);
 			$this->load->view('templates/footer');
 		}
+
+		public function do_upload(){
+			$id=$this->session->userdata('user_id');
+			$config = array(
+			'upload_path' => ("./assets/images/Profile_Pic/"),
+			'allowed_types' => "jpg|png|jpeg",
+			'overwrite' => TRUE,
+			'max_size' => "2048000", // 2mb
+			'max_height' => "1024",
+			'max_width' => "1024",
+			'file_name' => $id
+			);
+			$this->load->library('upload', $config);
+			if($this->upload->do_upload())
+			{
+				$upload_data = $this->upload->data();
+				$file_name = $upload_data['file_name'];
+
+				$this->user_model->userProPic($file_name);
+				$this->session->set_flashdata('flash-success', 'upload success');
+				redirect('userdashboard');
+			}
+			else
+			{
+				$error = $this->upload->display_errors();
+				$error=str_ireplace('<p>','',$error);
+				$error=str_ireplace('</p>','',$error);  
+				$this->session->set_flashdata('flash-danger', $error);
+				redirect('userdashboard');
+			}
+		}
+
+		public function changePass(){
+			$this->form_validation->set_rules('password', 'Password', 'required');
+            $this->form_validation->set_rules('password2', 'Confirm Password', 'matches[password]');
+            
+			if($this->form_validation->run() === FALSE){
+				$this->session->set_flashdata('flash-danger', "Incorrect Details");
+				redirect('userdashboard');
+			} else {
+				$id=$this->session->userdata('user_id');
+				$data['userDetails'] = $this->user_model->userIDInfo($id);
+				$password = md5($this->input->post('password'));
+
+				if($id[0] === 'V'){
+					if($data['userDetails']['v_password'] === md5($this->input->post('cpassword'))){
+						$this->user_model->changePassword($password, $id);
+						$this->session->set_flashdata('flash-success', "Password Changed");
+						redirect('userdashboard');
+					}
+					else{
+						$this->session->set_flashdata('flash-danger', "Wrong Password");
+						redirect('userdashboard');
+					}
+				}
+				else{
+					if($data['userDetails']['m_password'] === md5($this->input->post('cpassword'))){
+						$this->user_model->changePassword($password, $id);
+						$this->session->set_flashdata('flash-success', "Password Changed");
+						redirect('userdashboard');
+					}
+					else{
+						$this->session->set_flashdata('flash-danger', "Wrong Password");
+						redirect('userdashboard');
+					}
+				}
+
+				// Encrypt password
+				$enc_password = md5($this->input->post('password'));
+				$this->user_model->register($enc_password);
+				// Set message
+				$this->session->set_flashdata('flash-success', 'You are now registered. Log In to continue');
+				redirect('userdashboard');
+			}
+		}
+
+
+
 
 
 		

@@ -26,7 +26,7 @@
                         <?php endif;?>
                         <?php if($userDetails['v_website']):?>
                             <dt>Website</dt>
-                            <dd><a href="<?php echo($userDetails['v_website']); ?>">Click Here</a></dd>
+                            <dd><a href="<?php echo($userDetails['v_website']); ?>" target="_blank">Click Here</a></dd>
                         <?php endif;?>
                         <?php if($userDetails['v_exprt_mthd']):?>
                             <dt>Export Method</dt>
@@ -87,7 +87,8 @@
 
                         <?php foreach($address_arr as $addresses_arr) : ?>
 								<dd class="h4-margin-top-change"> - <?php echo ($addresses_arr['building_no']." , ".$addresses_arr['street']." , ".$addresses_arr['city']." , ".$addresses_arr['state']." , ".$addresses_arr['country'].". Pincode : ".$addresses_arr['pincode']); ?></dd>
-					<?php endforeach; ?>
+                                <br>
+                        <?php endforeach; ?>
 
                     
                     </dl>			

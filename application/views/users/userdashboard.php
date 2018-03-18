@@ -52,8 +52,8 @@ function time_elapsed_string($datetime, $full = false) {
 				<div class="row">
 					
 					<div class="col-md-6 img-align-center">
-						<img class="img-circle" src="<?php echo asset_url().'images/web-req/noimg.png'?>" alt="no image">
-						
+
+						<img class="img-circle" src="<?php echo asset_url().'images/Profile_Pic/'.$userDetails['m_profile_pic'] ?>" alt="Image not found" onerror="this.onerror=null;this.src='<?php echo asset_url().'images/web-req/noimg.png' ?>';" width="200" height="200" />
 
 					</div>
 					
@@ -166,7 +166,7 @@ function time_elapsed_string($datetime, $full = false) {
 								</div>
 								<div class="modal-body">
 									
-									<?php echo form_open('vendors/editUserDetails'); ?>
+									<?php echo form_open('users/changePass',' id="reg_form"'); ?>
 										<div class="row">
 
 											<div class="col-md-8 col-md-offset-2">
@@ -177,7 +177,7 @@ function time_elapsed_string($datetime, $full = false) {
 												<div class="form-group">
 													<label>Current Password</label>
 													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-														<input type="password" class="form-control" name="password" placeholder="Password" required/>
+														<input type="password" class="form-control" name="cpassword" placeholder="Password" required/>
 													</div>
 												</div>
 												<div class="form-group">
@@ -219,11 +219,16 @@ function time_elapsed_string($datetime, $full = false) {
 									<h4 class="modal-title">Change Profile Picture</h4>
 								</div>
 								<div class="modal-body">
-									
-									
+								
+									<?php echo form_open_multipart('users/do_upload');?>
+									<?php echo "<input type='file' name='userfile' size='20' />"; ?>
+									<?php echo "<br>"; ?>
+									<?php echo "<input class='btn btn-primary' type='submit' name='submit' value='Upload' /> ";?>
+									<?php echo "</form>"?>
 
 								</div>
 								<div class="modal-footer">
+									<button type="button" class="btn btn-danger" >Remove Profile Picture</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 								</div>
 							</div>
@@ -261,9 +266,10 @@ function time_elapsed_string($datetime, $full = false) {
 											<tbody>
 												
 												<?php $a = array(); ?>
-	
+												<?php if(empty($messages)):?>
+													<h5 class="text-center text-warning"><i>No Messages</i></h5>
+												<?php else:?>
 												<?php foreach(array_reverse($messages) as $message) : ?>
-												
 													<?php if($message['message_type'] === 'DM' && !in_array($message['from_id'], $a)): ?>
 														<?php array_push($a,$message['from_id']); ?>
 														<tr>
@@ -281,7 +287,7 @@ function time_elapsed_string($datetime, $full = false) {
 													<?php elseif($message['message_type'] === 'Notification'): ?>
 													<tr>
 															<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('fas fa-exclamation-circle'); endif;?>"></i></td>
-															<td class="mailbox-name"><a href="#"><?php echo($message['v_firstname']." ".$message['v_lastname'])?></a></td>
+															<td class="mailbox-name"><a href="<?php echo base_url(); ?>users/profile/<?php echo ($message['from_id'])?>"><?php echo($message['v_firstname']." ".$message['v_lastname'])?></a></td>
 															<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
 															<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>
 															<td>
@@ -290,24 +296,12 @@ function time_elapsed_string($datetime, $full = false) {
 														</tr>
 													<?php endif;?>
 												<?php endforeach; ?>
+												<?php endif;?>
 											</tbody>
 										</table><!-- /.table -->
 									</div><!-- /.mail-box-messages -->
 								</div><!-- /.box-body -->
 								<hr>
-								<div class="box-footer no-padding">
-									<div class="mailbox-controls">
-										<!-- control button -->
-										<button class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
-										<div class="pull-right">
-											1-50/200
-											<div class="btn-group">
-												<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
-												<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
-											</div><!-- /.btn-group -->
-										</div><!-- /.pull-right -->
-									</div>
-								</div>
 							</div><!-- /. box -->
 						</div><!-- /.col -->
 	
@@ -348,7 +342,7 @@ function time_elapsed_string($datetime, $full = false) {
 
 					<div class="col-sm-6 col-md-3">
 						
-						<button class="btn btn-info btn-lg btn-block" type="button" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i></button>  
+						<button class="btn btn-info btn-lg btn-block" type="button" data-toggle="modal" data-target="#addModal" <?php if(count($addresses_arr) >= 2): echo("disabled='true'"); endif;?> ><i class="glyphicon glyphicon-plus"></i></button>  
 
 
 						<!-- Add Modal -->

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="col-md-6 col-md-offset-3  col-sm-5 col-sm-offset-3 col-xs-10 col-xs-offset-1">
 
-        <?php if($id1['v_id'][0] === 'V'): ?>
+        <?php if($toID[0] === 'V'): ?>
             <h1 class="text-center"><?= $title; ?> with <?php echo($id1['v_firstname']." ".$id1['v_lastname'])?> </h1>
         <?php else:?>
             <h1 class="text-center"><?= $title; ?> with <?php echo($id1['m_firstname']." ".$id1['m_lastname'])?> </h1>

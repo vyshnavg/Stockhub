@@ -54,8 +54,7 @@ function time_elapsed_string($datetime, $full = false) {
 				<div class="row">
 					
 					<div class="col-md-6 img-align-center">
-						<img class="img-circle" src="<?php echo asset_url().'images/web-req/noimg.png'?>" alt="no image">
-						
+					<img class="img-circle" src="<?php echo asset_url().'images/Profile_Pic/'.$userDetails['v_profile_pic'] ?>" alt="Image not found" onerror="this.onerror=null;this.src='<?php echo asset_url().'images/web-req/noimg.png' ?>';" width="200" height="200" />
 
 					</div>
 					
@@ -69,7 +68,7 @@ function time_elapsed_string($datetime, $full = false) {
 								<h3><b>Organisation</b> : <?php echo($userDetails['v_org_name']); ?></h3>
 							<?php endif;?>
 							<?php if($userDetails['v_website']):?>
-								<h3><b>Website</b> : <a href="<?php echo($userDetails['v_website']); ?>">Click Here</a> </h3>
+								<h3><b>Website</b> : <a href="<?php echo($userDetails['v_website']); ?>" target="_blank">Click Here</a> </h3>
 							<?php endif;?>
 							<?php if($userDetails['v_exprt_mthd']):?>
 								<h3><b>Export Method</b> : <?php echo($userDetails['v_exprt_mthd']); ?></h3>
@@ -196,7 +195,7 @@ function time_elapsed_string($datetime, $full = false) {
 								</div>
 								<div class="modal-body">
 									
-									<?php echo form_open('vendors/editUserDetails'); ?>
+									<?php echo form_open('users/changePass','id="reg_form"'); ?>
 										<div class="row">
 
 											<div class="col-md-8 col-md-offset-2">
@@ -207,7 +206,7 @@ function time_elapsed_string($datetime, $full = false) {
 												<div class="form-group">
 													<label>Current Password</label>
 													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-														<input type="password" class="form-control" name="password" placeholder="Password" required/>
+														<input type="password" class="form-control" name="cpassword" placeholder="Password" required/>
 													</div>
 												</div>
 												<div class="form-group">
@@ -250,7 +249,11 @@ function time_elapsed_string($datetime, $full = false) {
 								</div>
 								<div class="modal-body">
 									
-									
+									<?php echo form_open_multipart('users/do_upload');?>
+									<?php echo "<input type='file' name='userfile' size='20' />"; ?>
+									<?php echo "<br>"; ?>
+									<?php echo "<input class='btn btn-primary' type='submit' name='submit' value='Upload' /> ";?>
+									<?php echo "</form>"?>
 
 								</div>
 								<div class="modal-footer">
@@ -291,7 +294,9 @@ function time_elapsed_string($datetime, $full = false) {
 										<tbody>
 											
 											<?php $a = array(); ?>
-
+											<?php if(empty($messages)):?>
+												<h5 class="text-center text-warning"><i>No Messages</i></h5>
+											<?php else:?>
 											<?php foreach(array_reverse($messages) as $message) : ?>
 											
 												<?php if($message['message_type'] === 'DM' && !in_array($message['from_id'], $a)): ?>
@@ -311,7 +316,7 @@ function time_elapsed_string($datetime, $full = false) {
 												<?php elseif($message['message_type'] === 'Notification'): ?>
 												<tr>
 														<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('fas fa-exclamation-circle'); endif;?>"></i></td>
-														<td class="mailbox-name"><a href="#"><?php echo($message['m_firstname']." ".$message['m_lastname'])?></a></td>
+														<td class="mailbox-name"><a href="<?php echo base_url(); ?>users/profile/<?php echo ($message['from_id'])?>"><?php echo($message['m_firstname']." ".$message['m_lastname'])?></a></td>
 														<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
 														<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>
 														<td>
@@ -320,24 +325,12 @@ function time_elapsed_string($datetime, $full = false) {
 													</tr>
 												<?php endif;?>
 											<?php endforeach; ?>
+											<?php endif;?>
 										</tbody>
 									</table><!-- /.table -->
 								</div><!-- /.mail-box-messages -->
 							</div><!-- /.box-body -->
 							<hr>
-							<div class="box-footer no-padding">
-								<div class="mailbox-controls">
-									<!-- control button -->
-									<button class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
-									<div class="pull-right">
-										1-50/200
-										<div class="btn-group">
-											<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
-											<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
-										</div><!-- /.btn-group -->
-									</div><!-- /.pull-right -->
-								</div>
-							</div>
 						</div><!-- /. box -->
 					</div><!-- /.col -->
 

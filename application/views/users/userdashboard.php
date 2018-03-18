@@ -37,9 +37,9 @@ function time_elapsed_string($datetime, $full = false) {
 
 	<div class="container">
 		<ul class="nav nav-tabs nav-justified">
-			<li class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
-			<li><a data-toggle="tab" href="#messages">Messages</a></li>
-			<li><a data-toggle="tab" href="#address">Address</a></li>
+			<li class="active"><a data-toggle="tab" href="#profile"><b>Profile</b></a></li>
+			<li><a data-toggle="tab" href="#messages"><b>Messages</b></a></li>
+			<li><a data-toggle="tab" href="#address"><b>Address</b></a></li>
 			<!-- <li><a data-toggle="tab" href="#menu2">My Storage</a></li>
 			<li><a data-toggle="tab" href="#menu3">My Booking</a></li> -->
 		</ul>
@@ -52,194 +52,261 @@ function time_elapsed_string($datetime, $full = false) {
 				<div class="row">
 					
 					<div class="col-md-6 img-align-center">
-						<img class="img-circle" src="<?php echo asset_url().'images/web-req/noimg.png'?>" alt="no image">
+
+						<img class="img-circle" src="<?php echo asset_url().'images/Profile_Pic/'.$userDetails['m_profile_pic'] ?>" alt="Image not found" onerror="this.onerror=null;this.src='<?php echo asset_url().'images/web-req/noimg.png' ?>';" width="200" height="200" />
+
 					</div>
 					
 					<div class="col-md-6">
 						<div class="well">
-							<?php
+							
+							<h3><b>Name</b> : <?php echo($userDetails['m_firstname']." ".$userDetails['m_lastname']) ?></h3>
+							<h3><b>Email</b> : <?php echo($userDetails['m_email']) ?></h3>
+							<h3><b>Status</b> : <?php echo($userDetails['m_status']) ?></h3>
+							<?php if($userDetails['m_org_name']):?>
+								<h3><b>Organisation</b> : <?php echo($userDetails['m_org_name']); ?></h3>
+							<?php endif;?>
+							
+							<!-- <button type="button" class="btn btn-primary btn-lg btn-block login-button" data-toggle="modal" data-target="#editProModal" >Edit</button> -->
 
-										$std = ucfirst($this->session->userdata('user_id'));
-
-										include '..\stockhub\assets\dbh.php';
-										$sql="SELECT * from manufacturers where m_id = '$std'";
-										$result= mysqli_query($conn ,$sql)or die(mysqli_error($conn));
-										
-										if($row=mysqli_fetch_assoc($result)){
-											
-											echo "	<h3>Name : ".$row['m_firstname']." ".$row['m_lastname']."</h3>
-													<h3>Email : ".$row['m_email']."</h3>
-													<h3>Status : ".$row['m_status']."</h3>";
-									// 			if (is_null($row['dob'])) {
-									// 				echo "<h3>Date of Birth : <i>Null</i></h3>";
-									// 			}
-									// 			else{
-									// 				echo "<h3>Date of Birth : ".$row['dob']."</h3>";
-									// 			}
-									// 			if (is_null($row['aadhar_card'])) {
-									// 				echo "<h3>Aadhar Card : <i>Null</i></h3>";
-									// 			}
-									// 			else{
-									// 				echo "<h3>Aadhar Card : ".$row['aadhar_card']."</h3>";
-									// 			}
-											}
-							?>
-							<button type="button" class="btn btn-primary btn-lg btn-block login-button" data-toggle="modal" data-target="#editProModal" >Edit</button>
 						</div>
+					</div>
+					<br>
+					<br>
 
-							<!-- Add Modal -->
-							<div class="modal fade" id="editProModal" role="dialog">
-								<div class="modal-dialog">
-								
-								<!-- Add Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Add New Address</h4>
-									</div>
-									<div class="modal-body">
-										
-										<?php echo form_open('users/newAddress',' id="address_form"'); ?>
-											<div class="row">
+					<div class="btn-group btn-group-justified">
+						<div class="btn-group">
+							<button type="button" class="btn btn-info" data-toggle="modal" data-target="#changeProfilePicModal">Change Profile Picture</button>
+						</div>
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProModal">Edit Details</button>
+						</div>
+						<div class="btn-group">
+							<button type="button" class="btn btn-default" data-toggle="modal" data-target="#changePassModal">Change Password</button>
+						</div>
+					</div> 
 
-												<div class="col-md-8 col-md-offset-2">
+					<!-- editPro Modal -->
+					<div class="modal fade" id="editProModal" role="dialog">
+						<div class="modal-dialog">
+							<!-- Add Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Edit User Details</h4>
+								</div>
+								<div class="modal-body">
+									
+									<?php echo form_open('vendors/editUserDetails'); ?>
+										<div class="row">
 
-													<p  class="text-center"> <?php echo validation_errors(); ?></p>
+											<div class="col-md-8 col-md-offset-2">
+
+												<p  class="text-center"> <?php echo validation_errors(); ?></p>
 
 
 
-													<label>Full name</label>
-													<div class="row">
-														<div class="col-xs-6">
-															<div class="form-group">
-																<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-																	<input type="text" class="form-control" name="firstName" placeholder="First name" />
-																</div>
+												<label>Full name</label>
+												<div class="row">
+													<div class="col-xs-6">
+														<div class="form-group">
+															<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+																<input type="text" class="form-control" name="firstName" placeholder="First name" value="<?php echo($userDetails['m_firstname']) ?>" />
 															</div>
 														</div>
-														<div class="col-xs-6">
-															<div class="form-group">
-																<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-																	<input type="text" class="form-control" name="lastName" placeholder="Last name" />
-																</div>
+													</div>
+													<div class="col-xs-6">
+														<div class="form-group">
+															<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+																<input type="text" class="form-control" name="lastName" placeholder="Last name" value="<?php echo($userDetails['m_lastname']) ?>" />
 															</div>
 														</div>
 													</div>
-
-
-													<div class="form-group">
-														<label>Email</label>
-														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-															<input type="email" class="form-control" name="email" placeholder="Email" readonly="readonly"/>
-														</div>
-													</div>
-													<div class="form-group">
-														<label>Username</label>
-														<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-															<input type="text" class="form-control" name="username" placeholder="Username" required/>
-														</div>
-													</div>
-												
-
-
-
-
-													
-													<button type="submit" class="btn btn-success btn-block">Submit</button>
-
 												</div>
 
-											</div>
-											
-										<?php echo form_close(); ?>
 
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									</div>
+												<div class="form-group">
+													<label>Username</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+														<input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo($userDetails['m_username']) ?>" required/>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Organization Name</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-blackboard"></i></span>
+														<input type="text" class="form-control" name="orgname" placeholder="Organisation Name" value="<?php echo($userDetails['m_org_name']) ?>" required/>
+													</div>
+												</div>
+
+												
+												<button type="submit" class="btn btn-success btn-block">Submit</button>
+
+											</div>
+
+										</div>
+										
+									<?php echo form_close(); ?>
+
 								</div>
-							
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
 							</div>
 						</div>
 					</div>
+
+					<!-- changePassModal Modal -->
+					<div class="modal fade" id="changePassModal" role="dialog">
+						<div class="modal-dialog">
+							<!-- Add Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Change Password</h4>
+								</div>
+								<div class="modal-body">
+									
+									<?php echo form_open('users/changePass',' id="reg_form"'); ?>
+										<div class="row">
+
+											<div class="col-md-8 col-md-offset-2">
+
+												<p  class="text-center"> <?php echo validation_errors(); ?></p>
+
+
+												<div class="form-group">
+													<label>Current Password</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+														<input type="password" class="form-control" name="cpassword" placeholder="Password" required/>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>New Password</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+														<input type="password" class="form-control" name="password" placeholder="Password" required/>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Confirm Password</label>
+													<div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+														<input type="password" class="form-control" name="password2" placeholder="Confirm Password" required/>
+													</div>
+												</div>
+												
+												<button type="submit" class="btn btn-success btn-block">Submit</button>
+
+											</div>
+
+										</div>
+										
+									<?php echo form_close(); ?>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- changeProfilePicModal Modal -->
+					<div class="modal fade" id="changeProfilePicModal" role="dialog">
+						<div class="modal-dialog">
+							<!-- Add Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Change Profile Picture</h4>
+								</div>
+								<div class="modal-body">
+								
+									<?php echo form_open_multipart('users/do_upload');?>
+									<?php echo "<input type='file' name='userfile' size='20' />"; ?>
+									<?php echo "<br>"; ?>
+									<?php echo "<input class='btn btn-primary' type='submit' name='submit' value='Upload' /> ";?>
+									<?php echo "</form>"?>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger" >Remove Profile Picture</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 				</div>
 			</div>
 
 
 			<!-- ========================= MESSAGES SECTION ========================= -->
 
-			<div id="messages" class="tab-pane fade in">
+				<div id="messages" class="tab-pane fade in">
+						
+						<div class="container">
+							<div class="row">
+								<div class="box-body no-padding">
+									<div class="mailbox-controls">
+										<!-- control button -->
+										<button class="btn btn-primary btn-sm" onClick="window.location.reload()"><i class="glyphicon glyphicon-refresh"></i></button>
+	
+	
+										<div class="pull-right">
+											1-50/200
+											<div class="btn-group">
+												<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
+												<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
+											</div><!-- /.btn-group -->
+										</div><!-- /.pull-right -->
+									</div>
+									<hr>
+									<div class="table-responsive mailbox-messages">
+										<table class="table table-hover table-striped">
+											
+											<tbody>
 												
-												<div class="container">
-													<div class="row">
-														<div class="box-body no-padding">
-															<div class="mailbox-controls">
-																<!-- control button -->
-																<button class="btn btn-primary btn-sm" onClick="window.location.reload()"><i class="glyphicon glyphicon-refresh"></i></button>
-																<div class="pull-right">
-																	1-50/200
-																	<div class="btn-group">
-																		<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
-																		<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
-																	</div><!-- /.btn-group -->
-																</div><!-- /.pull-right -->
+												<?php $a = array(); ?>
+												<?php if(empty($messages)):?>
+													<h5 class="text-center text-warning"><i>No Messages</i></h5>
+												<?php else:?>
+												<?php foreach(array_reverse($messages) as $message) : ?>
+													<?php if($message['message_type'] === 'DM' && !in_array($message['from_id'], $a)): ?>
+														<?php array_push($a,$message['from_id']); ?>
+														<tr>
+															<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('fas fa-exclamation-circle'); endif;?>"></i></td>
+															<td class="mailbox-name"><a href="<?php echo base_url(); ?>users/profile/<?php echo ($message['from_id'])?>"><?php echo($message['v_firstname']." ".$message['v_lastname'])?></a></td>
+															<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
+															<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>
+															<td>
+															<div class="btn-group">
+																<button class="btn btn-info btn-sm" onclick="location.href='<?php echo base_url(); ?>users/messages/<?php echo ($message['from_id'])?>/<?php echo($message['v_firstname'])?>/<?php echo($message['v_lastname'])?>'"><i class="glyphicon glyphicon-arrow-left"></i> </button>
+																<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
 															</div>
-															<hr>
-															<div class="table-responsive mailbox-messages">
-																<table class="table table-hover table-striped">
-																	<tbody>
-																		<!-- <tr>
-																			<td class="mailbox-star"><i class="fas fa-exclamation-circle"></i></td>
-																			<td class="mailbox-name"><a href="read-mail.html">WM06</a></td>
-																			<td class="mailbox-subject">Trying to find a solution to this problem...</td>
-																			<td class="mailbox-date">5 mins ago</td>
-																			<td><button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>
-																		</tr>
-																		<tr>
-																			<td class="mailbox-star"><i class="far fa-envelope"></i></td>
-																			<td class="mailbox-name"><a href="read-mail.html">WM06</a></td>
-																			<td class="mailbox-subject">Trying to find a solution to this problem...</td>
-																			<td class="mailbox-date">5 mins ago</td>
-																			<td><button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>
-																		</tr> -->
-							
-																		<?php foreach($messages as $message) : ?>
-																		<tr>
-																			<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('fas fa-exclamation-circle'); endif;?>"></i></td>
-																			<td class="mailbox-name"><a href="#"><?php echo($message['v_firstname']." ".$message['v_lastname'])?></a></td>
-																			<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
-																			<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>
-																			<td>
-																			<div class="btn-group">
-																				<button class="btn btn-info btn-sm" onclick="location.href='<?php echo base_url(); ?>users/sendMessage/<?php echo ($message['from_id'])?>/<?php echo($message['v_firstname'])?>/<?php echo($message['v_lastname'])?>'"><i class="glyphicon glyphicon-arrow-left"></i> </button>
-																				<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
-																			</div>
-																			</td>
-																		</tr>
-																		<?php endforeach; ?>
-																	</tbody>
-																</table><!-- /.table -->
-															</div><!-- /.mail-box-messages -->
-														</div><!-- /.box-body -->
-														<hr>
-														<div class="box-footer no-padding">
-															<div class="mailbox-controls">
-																<!-- control button -->
-																<button class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
-																<div class="pull-right">
-																	1-50/200
-																	<div class="btn-group">
-																		<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
-																		<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
-																	</div><!-- /.btn-group -->
-																</div><!-- /.pull-right -->
-															</div>
-														</div>
-													</div><!-- /. box -->
-												</div><!-- /.col -->
-							
-							
-										</div>
+															</td>
+														</tr>
+													<?php elseif($message['message_type'] === 'Notification'): ?>
+													<tr>
+															<td class="mailbox-star"><i class="fas <?php if($message['message_type'] === 'DM') : echo('far fa-envelope'); else: echo('fas fa-exclamation-circle'); endif;?>"></i></td>
+															<td class="mailbox-name"><a href="<?php echo base_url(); ?>users/profile/<?php echo ($message['from_id'])?>"><?php echo($message['v_firstname']." ".$message['v_lastname'])?></a></td>
+															<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
+															<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>
+															<td>
+															<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
+															</td>
+														</tr>
+													<?php endif;?>
+												<?php endforeach; ?>
+												<?php endif;?>
+											</tbody>
+										</table><!-- /.table -->
+									</div><!-- /.mail-box-messages -->
+								</div><!-- /.box-body -->
+								<hr>
+							</div><!-- /. box -->
+						</div><!-- /.col -->
+	
+	
+				</div>
 
 			<!-- ========================= ADDRESS SECTION ========================= -->
 
@@ -275,7 +342,7 @@ function time_elapsed_string($datetime, $full = false) {
 
 					<div class="col-sm-6 col-md-3">
 						
-						<button class="btn btn-info btn-lg btn-block" type="button" data-toggle="modal" data-target="#addModal"><i class="glyphicon glyphicon-plus"></i></button>  
+						<button class="btn btn-info btn-lg btn-block" type="button" data-toggle="modal" data-target="#addModal" <?php if(count($addresses_arr) >= 2): echo("disabled='true'"); endif;?> ><i class="glyphicon glyphicon-plus"></i></button>  
 
 
 						<!-- Add Modal -->

@@ -72,16 +72,26 @@
 		//Edit UserDetails
 		public function editUserDetails(){
 
+			$this->form_validation->set_rules('username', 'Username', 'required|callback_check_username_exists');
+
 			// Check if the user is already logged in.
 			if(!$this->session->userdata('logged_in')){
 				redirect('home');
 			}
 			//execute code
 			else{
-				$this->vendor_model->editUserDetails();
-				// Set message
-				$this->session->set_flashdata('flash-success', 'User details changed');
-				redirect('userdashboard');
+
+				if($this->form_validation->run() === FALSE){
+					// Set message
+					$this->session->set_flashdata('flash-danger', 'Editing Fail : Username already exists');
+					redirect('userdashboard');
+				} else {
+					$this->vendor_model->editUserDetails();
+					// Set message
+					$this->session->set_flashdata('flash-success', 'User details changed');
+					redirect('userdashboard');
+				}
+
 			}
 			
 		}

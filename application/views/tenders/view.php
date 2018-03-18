@@ -24,7 +24,7 @@
                 
                 <dl class="dl-horizontal">
                     <dt>Manufacturer</dt>
-                    <dd><?php echo ($tender['m_firstname']." ".$tender['m_lastname']); ?></dd>
+                    <dd><a href="<?php echo base_url(); ?>users/profile/<?php echo ($tender['m_id'])?>"><?php echo ($tender['m_firstname']." ".$tender['m_lastname']); ?></a></dd>
                     <dt>Quantity</dt>
                     <dd><?php echo ($tender['tender_quantity']." ".$tender['tender_quantity_unit']);?></dd>
                     <dt>Time till Expiry</dt>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="modal-body">
                             
-                            <?php echo form_open('/tenders/tenderRequest/'.$tender['tender_id']); ?>
+                            <?php echo form_open('/tenders/tenderRequest/'.$tender['tender_id'].'/'.$tender['m_id']); ?>
                                 <div class="row">
 
                                     <div class="col-md-8 col-md-offset-2">
@@ -215,7 +215,7 @@
                             <tr> 
                                 <td>  <?php echo($i++);?></td>
                                 <td><?php echo ("#".$DiffVendorRequest['request_id']); ?></td>
-                                <td><?php echo ($DiffVendorRequest['v_firstname']." ".$DiffVendorRequest['v_lastname']); ?></td>
+                                <td><a href="<?php echo base_url(); ?>users/profile/<?php echo ($DiffVendorRequest['vendor_id'])?>"><?php echo ($DiffVendorRequest['v_firstname']." ".$DiffVendorRequest['v_lastname']); ?></a></td>
                                 <td><?php echo ($DiffVendorRequest['quantity']." ".$DiffVendorRequest['quantity_unit']);?></td>
                                 <td><?php echo ("₹ ".$DiffVendorRequest['quoted_price']);?></td>
                                 <td><?php echo ($DiffVendorRequest['delivery_date']); ?></td>

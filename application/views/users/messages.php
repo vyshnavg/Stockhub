@@ -1,7 +1,7 @@
 <div class="container">
     <div class="col-md-6 col-md-offset-3  col-sm-5 col-sm-offset-3 col-xs-10 col-xs-offset-1">
 
-        <?php if(ucfirst($this->session->userdata('usertype')) === 'manufacturer'): ?>
+        <?php if($toID[0] === 'V'): ?>
             <h1 class="text-center"><?= $title; ?> with <?php echo($id1['v_firstname']." ".$id1['v_lastname'])?> </h1>
         <?php else:?>
             <h1 class="text-center"><?= $title; ?> with <?php echo($id1['m_firstname']." ".$id1['m_lastname'])?> </h1>
@@ -9,10 +9,6 @@
 
             <?php foreach($messages as $message): ?>
 
-
-                <!-- <h3 style="border: 2px solid red; border-radius: 12px;" <?php if($message['from_id'] === ucfirst($this->session->userdata('user_id')) ) : echo("class='pull-right'"); else: echo("class='pull-left'"); endif; ?> ><?php echo($message['message_body'])?> </h3>
-
-                <br> -->
                 <?php if($message['from_id'] === ucfirst($this->session->userdata('user_id')) ) : ?>
 
                     <div class="chat_style_receive">

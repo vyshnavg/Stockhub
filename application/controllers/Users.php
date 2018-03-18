@@ -138,6 +138,72 @@
 			redirect('home');
 		}
 
+		// forgot password
+		public function forgotpassword(){
+			$email = $this->input->post('email');
+			$id = $this->user_model->check_email_exists($email, 1);
+			if(!empty($id)){
+				
+				$seed = str_split('abcdefghijklmnopqrstuvwxyz'
+								.'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+								.'0123456789!@#$%^&*()');
+				$rand = '';
+				foreach (array_rand($seed, 10) as $k) $rand .= $seed[$k];
+
+				$hashpass = md5($rand);
+
+				$this->user_model->changePassword($hashpass , $id);
+				$this->send_mail($email, 'recovery' , $rand);
+
+			} else {
+				$this->session->set_flashdata('flash-warning', 'Incorrect Email. Please provide an email which is given while registration.');
+				redirect('users/login');
+			}
+		}
+
+		public function send_mail($to, $type = NULL , $password = NULL) { 
+
+			$config = Array(
+				'protocol' => 'smtp',
+				'smtp_host' => 'ssl://smtp.googlemail.com',
+				'smtp_port' => 465,
+				'smtp_user' => 'stockhub.christ@gmail.com',
+				'smtp_pass' => 'Qwe1234%',
+				'mailtype'  => 'html', 
+				'charset'   => 'iso-8859-1'
+			);
+			$this->load->library('email', $config);
+			$this->email->set_newline("\r\n");
+
+			if($type === NULL){
+				$this->session->set_flashdata("flash-danger","Internal Error : Mail Type not defined.");
+				redirect('home');
+			}
+			elseif($type === 'recovery'){
+				$subject = 'Password Recovery - StockHUB';
+				$message = 'Hello, Your Password is changed to "'.$password.'" (without the quotes). Please Log in with this password and change to your preferred password in dashboard. StockHUB - Automated ';
+			
+				// $this->email->initialize($config);
+				$this->email->from('stockhub.christ@gmail.com');
+				$this->email->to($to);
+				$this->email->subject($subject);
+				$this->email->message($message);
+		
+				//Send mail 
+				if($this->email->send()){
+					$this->session->set_flashdata("flash-success","Email sent successfully.");
+					redirect('users/login');
+				}
+				else {
+					// show_error($this->email->print_debugger());
+					$this->session->set_flashdata("flash-danger","Failed to sent Email.");
+					redirect('home');
+				}
+			}
+			
+
+		}
+
 		// Check if username exists
 		public function check_username_exists($username){
 			$this->form_validation->set_message('check_username_exists', 'That username is taken. Please choose a different one');
@@ -167,11 +233,13 @@
 				if($this->session->userdata('usertype') === 'manufacturer') {
 
 					$this->user_model->check_active_status();
+					$id = $this->session->userdata('user_id');
 
 					$data['title'] = "Manufacturer Dashboard";
 					
 					$data['addresses_arr'] =$this->user_model->get_address();
 					$data['messages'] = $this->user_model->get_messages();
+					$data['userDetails'] = $this->user_model->userIDInfo($id);
 					
 					$this->load->view('templates/header', $data);
 					$this->load->view('users/userdashboard', $data);
@@ -397,11 +465,101 @@
 			$data['address_arr'] = $this->user_model->get_address(0,$id);
 			$data['userDetails'] = $this->user_model->userIDInfo($id);
 			$data['id'] = $id;
-			print_r($data);
+			
+			if($id[0] === 'V'){
+				$data['completedTenders'] = $this->tender_model->vendorTenders("completed",$id);
+				$data['ongoingTenders'] = $this->tender_model->vendorTenders("ongoing",$id);
+			}
+			else{
+				$data['activeTenders'] = $this->tender_model->userTenders("active",$id);
+				$data['completedTenders'] = $this->tender_model->userTenders("completed",$id);
+				$data['ongoingTenders'] = $this->tender_model->userTenders("ongoing",$id);
+			}
+			
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('users/profile', $data);
 			$this->load->view('templates/footer');
 		}
+
+		public function do_upload(){
+			$id=$this->session->userdata('user_id');
+			$config = array(
+			'upload_path' => ("./assets/images/Profile_Pic/"),
+			'allowed_types' => "jpg|png|jpeg",
+			'overwrite' => TRUE,
+			'max_size' => "2048000", // 2mb
+			'max_height' => "1024",
+			'max_width' => "1024",
+			'file_name' => $id
+			);
+			$this->load->library('upload', $config);
+			if($this->upload->do_upload())
+			{
+				$upload_data = $this->upload->data();
+				$file_name = $upload_data['file_name'];
+
+				$this->user_model->userProPic($file_name);
+				$this->session->set_flashdata('flash-success', 'upload success');
+				redirect('userdashboard');
+			}
+			else
+			{
+				$error = $this->upload->display_errors();
+				$error=str_ireplace('<p>','',$error);
+				$error=str_ireplace('</p>','',$error);  
+				$this->session->set_flashdata('flash-danger', $error);
+				redirect('userdashboard');
+			}
+		}
+
+		public function changePass(){
+			$this->form_validation->set_rules('password', 'Password', 'required');
+            $this->form_validation->set_rules('password2', 'Confirm Password', 'matches[password]');
+            
+			if($this->form_validation->run() === FALSE){
+				$this->session->set_flashdata('flash-danger', "Incorrect Details");
+				redirect('userdashboard');
+			} else {
+				$id=$this->session->userdata('user_id');
+				$data['userDetails'] = $this->user_model->userIDInfo($id);
+				$password = md5($this->input->post('password'));
+
+				if($id[0] === 'V'){
+					if($data['userDetails']['v_password'] === md5($this->input->post('cpassword'))){
+						$this->user_model->changePassword($password, $id);
+						$this->session->set_flashdata('flash-success', "Password Changed");
+						redirect('userdashboard');
+					}
+					else{
+						$this->session->set_flashdata('flash-danger', "Wrong Password");
+						redirect('userdashboard');
+					}
+				}
+				else{
+					if($data['userDetails']['m_password'] === md5($this->input->post('cpassword'))){
+						$this->user_model->changePassword($password, $id);
+						$this->session->set_flashdata('flash-success', "Password Changed");
+						redirect('userdashboard');
+					}
+					else{
+						$this->session->set_flashdata('flash-danger', "Wrong Password");
+						redirect('userdashboard');
+					}
+				}
+
+				// Encrypt password
+				$enc_password = md5($this->input->post('password'));
+				$this->user_model->register($enc_password);
+				// Set message
+				$this->session->set_flashdata('flash-success', 'You are now registered. Log In to continue');
+				redirect('userdashboard');
+			}
+		}
+
+
+
+
+
 		
 	}

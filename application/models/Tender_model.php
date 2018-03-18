@@ -52,10 +52,18 @@
 		}
 
 
+<<<<<<< HEAD
 		public function vendorTenders($passValue){
 			
 			$id = $this->session->userdata('user_id');
 
+=======
+		public function userTenders($passValue , $id = NULL){
+			if($id === NULL){
+				$id = $this->session->userdata('user_id');
+			}
+				
+>>>>>>> b257bf26abf47a7d999cfdf9f4887c7fab5bd348
 			$this->db->join('raw_material','raw_material.raw_material_id = tender.raw_material_id');
 			$this->db->where('m_id', $id);
 			$query = $this->db->get_where('tender', array('tender_status' => $passValue));
@@ -63,9 +71,15 @@
 		
 		}
 
+<<<<<<< HEAD
 		public function userTenders($passValue){
+=======
+		public function vendorTenders($passValue , $id = NULL){
+>>>>>>> b257bf26abf47a7d999cfdf9f4887c7fab5bd348
 			
-			$id = $this->session->userdata('user_id');
+			if($id === NULL){
+				$id = $this->session->userdata('user_id');
+			}
 			
 			$this->db->join('diff_vendor_req','diff_vendor_req.tender_id = tender.tender_id');
 			$this->db->join('raw_material','raw_material.raw_material_id = tender.raw_material_id');

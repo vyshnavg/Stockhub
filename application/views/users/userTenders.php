@@ -4,7 +4,7 @@
 
     <div class="col-md-2 col-sm-4">
     <div class="list-group" id="listInUserTender">
-        <a href="#active" class="list-group-item active" data-toggle="collapse" data-parent="#accordion" >Active Tenders<span class="badge"><?php echo count($activeTenders);?></span></a>
+        <a href="#active" class="list-group-item active" data-toggle="collapse" data-parent="#accordion" >Created Tenders<span class="badge"><?php echo count($activeTenders);?></span></a>
         <a href="#ongoing" class="list-group-item" data-toggle="collapse" data-parent="#accordion">Ongoing Tenders<span class="badge"><?php echo count($ongoingTenders);?></span></a>
         <a href="#completed" class="list-group-item" data-toggle="collapse" data-parent="#accordion">Completed Tenders<span class="badge"><?php echo count($completedTenders);?></span></a>
         <a href="#expired" class="list-group-item" data-toggle="collapse" data-parent="#accordion">Expired Tenders<span class="badge"><?php echo count($expiredTenders);?></span></a>
@@ -16,7 +16,7 @@
         
         <div class="row collapse in" id="active">
 
-            <h3 style="padding-left:20px;" >Active Tenders</h3>
+            <h3 style="padding-left:20px;" >Created Tenders</h3>
 
             <?php foreach($activeTenders as $active): ?>
 

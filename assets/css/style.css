@@ -304,3 +304,6 @@ footer{
     margin-bottom: 0px;
 }
 
+.navbar-brand{
+    padding-top: 2px;
+}

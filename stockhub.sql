@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2018 at 04:52 PM
+-- Generation Time: Mar 19, 2018 at 09:50 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -115,7 +115,8 @@ INSERT INTO `diff_vendor_req` (`request_id`, `vendor_id`, `quantity`, `quantity_
 
 CREATE TABLE `feedback` (
   `feedback_id` int(11) NOT NULL,
-  `user_id` varchar(11) NOT NULL,
+  `from_id` varchar(11) NOT NULL,
+  `to_id` varchar(11) NOT NULL,
   `feedback` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -143,9 +144,8 @@ CREATE TABLE `manufacturers` (
 --
 
 INSERT INTO `manufacturers` (`m_id`, `m_firstname`, `m_lastname`, `m_email`, `m_username`, `m_password`, `m_org_name`, `m_status`, `m_profile_pic`, `register_date`) VALUES
-('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', 'M2.png', '2018-03-18 14:06:36'),
-('M8', 'Tim', 'Cook', 'icevys@yahoo.com', 'tim12345', '2c32c2f80b4e7801e1cbdc1cd9382dbd', NULL, 'Inactive', NULL, '2018-03-16 06:03:11'),
-('M9', 'dfsd', 'sdf', 'df@sad.c', 'qweasdzxc', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', NULL, '2018-03-18 11:26:27');
+('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', 'M2.jpg', '2018-03-19 07:06:09'),
+('M8', 'Tim', 'Cook', 'icevys@yahoo.com', 'tim12345', '5f790ab081d85b42be98b15fd1df0fe7', NULL, 'Inactive', NULL, '2018-03-19 05:04:47');
 
 -- --------------------------------------------------------
 
@@ -302,6 +302,13 @@ CREATE TABLE `report` (
   `report_type` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `report`
+--
+
+INSERT INTO `report` (`rep_id`, `user_id`, `accused_id`, `message`, `report_type`) VALUES
+(1, 'M2', 'V1', 'Not Responding to message', 'Not Responding/Inactive');
+
 -- --------------------------------------------------------
 
 --
@@ -335,7 +342,7 @@ INSERT INTO `tender` (`tender_id`, `m_id`, `raw_material_id`, `tender_quantity`,
 (32, 'M2', 12, 50, 'Kilograms', '2018-03-12', '09:56:00', '2018-03-20', '09:56:00', 2, 500, '', 'active'),
 (33, 'M2', 8, 1, 'Kilograms', '2018-03-12', '09:57:00', '2018-03-29', '09:57:00', 2, 500, '', 'active'),
 (34, 'M2', 7, 15, 'Kilograms', '2018-03-12', '14:44:00', '2018-03-28', '14:44:00', 2, 500, '', 'active'),
-(35, 'M2', 5, 1, 'Kilograms', '2018-03-16', '11:24:00', '2018-03-19', '11:18:00', 1, 0, '', 'active'),
+(35, 'M2', 5, 1, 'Kilograms', '2018-03-16', '09:19:00', '2018-03-19', '09:21:00', 1, 0, '', 'expired'),
 (36, 'M2', 11, 10, 'Kilograms', '2018-03-16', '16:03:00', '2018-03-25', '16:03:00', 2, 5000, '5*2 pieces', 'cancelled');
 
 -- --------------------------------------------------------
@@ -429,8 +436,7 @@ CREATE TABLE `vendor_materials` (
 --
 
 INSERT INTO `vendor_materials` (`v_material_id`, `vendor_id`, `v_raw_material_id`, `quality_info`) VALUES
-(3, 'V1', 12, 'Imported from aus'),
-(4, 'V1', 11, '');
+(3, 'V1', 12, 'Imported from aus');
 
 --
 -- Indexes for dumped tables
@@ -576,7 +582,7 @@ ALTER TABLE `material_subcat`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `messages_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `messages_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `m_address_dict`
@@ -606,7 +612,7 @@ ALTER TABLE `raw_material`
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-  MODIFY `rep_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `rep_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tender`

@@ -7,6 +7,8 @@
             $data['title'] = 'Tenders';
 
             $data['tenders'] = $this->tender_model->get_tenders();
+
+            $this->tender_model->checkExpiryStatus();
             
 
             $this->load->view('templates/header', $data);
@@ -145,6 +147,21 @@
             $tender_id = $this->tender_model->deliveryNotGet($transID);            
             redirect('tenders/view/'.$tender_id);
         }
+
+        public function print($tender_id = NULL){
+            if($tender_id === NULL){
+                redirect('home');
+            }
+            $data['tender'] = $this->tender_model->get_tenders($tender_id);
+            $data['DiffVendorRequests'] = $this->tender_model->get_diffVendorReq($data['tender']['tender_id']);
+            $data['transaction'] = $this->tender_model->get_transaction($data['tender']['tender_id']);
+            $data['address_arr'] = $this->user_model->get_address(1,$data['tender']['delivery_location']);
+
+            // print_r($data);
+			$this->load->view('tenders/print',$data);
+        }
+
+        
 
 
         

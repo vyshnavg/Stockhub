@@ -338,6 +338,7 @@
 
 		}
 
+		// set profile picture
 		public function userProPic($file_name){
 			$id = $this->session->userdata('user_id');
 
@@ -356,6 +357,29 @@
 				return $this->db->update('manufacturers', $data);
 			}
 
+		}
+
+		// remove profile picture
+		public function rmProPic($file_name){
+			$id = $this->session->userdata('user_id');
+			$path_to_file = './assets/images/Profile_Pic/'.$file_name;
+			
+			if(unlink($path_to_file)){
+				if($id[0] === 'V'){ //for vendors
+					$data = array(
+						'v_profile_pic' => ""
+					);
+					$this->db->where('v_id', $id);
+					$this->db->update('vendors', $data);
+				}
+				else{
+					$data = array(
+						'm_profile_pic' => ""
+					);
+					$this->db->where('m_id', $id);
+					$this->db->update('manufacturers', $data);
+				}
+			}
 		}
 
 

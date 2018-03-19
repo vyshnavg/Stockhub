@@ -569,6 +569,7 @@
                     </dl>
                     <?php endif;
                         endforeach; ?>
+                <button class="btn btn-info" onclick="location.href='<?php echo base_url(); ?>tenders/print/<?php echo $title?>'">Print Invoice</button>
                 </div>
             </div>
 

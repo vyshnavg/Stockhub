@@ -33,7 +33,9 @@
                 <span class="icon-bar"></span>
             </button>
             <?php if($title!="Home") :?>
-                <a class="navbar-brand" href="<?php echo base_url(); ?>">StockHub</a>
+                <a class="navbar-brand" href="<?php echo base_url(); ?>">
+                <img class="img-circle" src="<?php echo asset_url().'images/web-req/logo3.png' ?>" alt="Image not found" style="max-width:125%;max-height:125%;"/>
+                </a>
             <?php endif;?>
             </div>
 

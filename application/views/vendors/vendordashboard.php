@@ -248,7 +248,11 @@ function time_elapsed_string($datetime, $full = false) {
 									<h4 class="modal-title">Change Profile Picture</h4>
 								</div>
 								<div class="modal-body">
-									
+									<p class="text-warning">Picture Must Be:
+										<li class="text-warning">Size : Less than 2 MB</li>
+										<li class="text-warning">Max Height and Width : 1024 x 1024</li>
+										<li class="text-warning">Formats : jpg, png, jpeg</li>
+									</p>
 									<?php echo form_open_multipart('users/do_upload');?>
 									<?php echo "<input type='file' name='userfile' size='20' />"; ?>
 									<?php echo "<br>"; ?>
@@ -257,6 +261,7 @@ function time_elapsed_string($datetime, $full = false) {
 
 								</div>
 								<div class="modal-footer">
+								<button type="button" class="btn btn-danger" onclick="location.href='<?php echo base_url(); ?>users/rmProPic/<?php echo $userDetails['v_profile_pic'] ?>'">Remove Profile Picture</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 								</div>
 							</div>
@@ -279,13 +284,6 @@ function time_elapsed_string($datetime, $full = false) {
 									<button class="btn btn-primary btn-sm" onClick="window.location.reload()"><i class="glyphicon glyphicon-refresh"></i></button>
 
 
-									<div class="pull-right">
-										1-50/200
-										<div class="btn-group">
-											<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
-											<button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
-										</div><!-- /.btn-group -->
-									</div><!-- /.pull-right -->
 								</div>
 								<hr>
 								<div class="table-responsive mailbox-messages">

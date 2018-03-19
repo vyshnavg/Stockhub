@@ -1,10 +1,10 @@
-<!-- <div class="container"> -->
+<div class="container">
     
     
 
     <div class="row">
     
-        <div class="col-md-2">
+        <!-- <div class="col-md-2">
             <h1>     </h1>
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -13,24 +13,18 @@
                 <div class="panel-body">
                     
                         <h3 class="panel-title">Price</h3>
-                            <li class="list-unstyled"><a href="#">Under ₹10,000</a></li>
-                            <li class="list-unstyled"><a href="#">₹1,000 - ₹10,000</a></li>
-                            <li class="list-unstyled"><a href="#">₹10,000 - ₹50,000</a></li>
-                            <li class="list-unstyled"><a href="#">₹50,000 - ₹1,00,000</a></li>
-                            <li class="list-unstyled"><a href="#">Over ₹1,00,000</a></li>
-                        <hr>
+                        <li class="list-unstyled"><a href="#">Under ₹10,000</a></li>
+                        <li class="list-unstyled"><a href="#">₹1,000 - ₹10,000</a></li>
+                        <li class="list-unstyled"><a href="#">₹10,000 - ₹50,000</a></li>
+                        <li class="list-unstyled"><a href="#">₹50,000 - ₹1,00,000</a></li>
+                        <li class="list-unstyled"><a href="#">Over ₹1,00,000</a></li>
 
-                        <h3 class="panel-title">Raw Material</h3>
-                            <select class="form-control" id="sel1" name="tender_quantity_unit">
-                                <option value="wood">Wood</option>
-                                <option value="glass">Glass</option>
-                            </select>
             </div>
 
             </div>
         </div>
 
-        <div class="col-md-10">
+        <div class="col-md-10"> -->
 
             <h1><?= $title ?></h1>
 
@@ -88,6 +82,6 @@
         
     </div>
 
-    
 
-<!-- </div> -->
+
+</div>

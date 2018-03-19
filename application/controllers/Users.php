@@ -270,10 +270,12 @@
 
 					$data['title'] = "Admin Dashboard";
 					
-					$data['addresses_arr'] =$this->user_model->get_address();
+					$data['manufacturers'] =$this->admin_model->get_manufacturers();
+					$data['vendors'] =$this->admin_model->get_vendors();
+					$data['reports'] =$this->admin_model->get_reports();
 					
 					$this->load->view('templates/header', $data);
-					$this->load->view('users/userdashboard', $data);
+					$this->load->view('admins/admindashboard', $data);
 					$this->load->view('templates/footer');
 
 				}
@@ -442,17 +444,21 @@
 			// No toID passed
 			else{
 
-				$data['messages'] = $this->user_model->messages($id1);
 				$id2 = $this->session->userdata('user_id');
-				$data['id1'] = $this->user_model->userIDInfo($id1);
-				$data['toID'] = $id1;
-				// $data['id2'] = $this->user_model->userIDInfo($id2);
-				$data['title'] = "Message";
-
-				$this->load->view('templates/header', $data);
-				$this->load->view('users/messages', $data);
-				$this->load->view('templates/footer');
-				
+				if($id1 != $id2){
+					$data['messages'] = $this->user_model->messages($id1);
+					$data['id1'] = $this->user_model->userIDInfo($id1);
+					$data['toID'] = $id1;
+					// $data['id2'] = $this->user_model->userIDInfo($id2);
+					$data['title'] = "Message";
+	
+					$this->load->view('templates/header', $data);
+					$this->load->view('users/messages', $data);
+					$this->load->view('templates/footer');
+				}
+				else{
+					redirect('userdashboard');
+				}
 			}
 			
 		}
@@ -555,6 +561,24 @@
 				$this->session->set_flashdata('flash-success', 'You are now registered. Log In to continue');
 				redirect('userdashboard');
 			}
+		}
+
+		public function rmProPic($file_name = NULL){
+			
+			// Check if the user is already logged in.
+			if(!$this->session->userdata('logged_in')){
+				redirect('home');
+			}
+			elseif($file_name === NULL){
+				$this->session->set_flashdata('flash-warning', "Profile Picture Not Present");
+				redirect('userdashboard');
+			}
+			else{
+				$this->user_model->rmProPic($file_name);
+				$this->session->set_flashdata('flash-success', "Profile Picture Removed");
+				redirect('userdashboard');
+			}
+			
 		}
 
 

@@ -36,4 +36,36 @@
 			}
 		}
 
+		public function get_manufacturers(){
+			$query = $this->db->get('manufacturers');
+			return $query->result_array();
+		}
+
+		public function get_vendors(){
+			$query = $this->db->get('vendors');
+			return $query->result_array();
+		}
+		
+		public function rmManuf(){
+			return $this->db->delete('manufacturers', array('m_id' => $this->input->post('id'))); 
+		}
+		
+		public function rmVen(){
+			return $this->db->delete('vendors', array('v_id' => $this->input->post('id'))); 
+		}
+
+		public function get_reports(){
+			$query = $this->db->get('report');
+			return $query->result_array();
+		}
+		
+		public function reportUser($accused){
+			$data = array(
+				'user_id' => $this->session->userdata('user_id'),
+				'accused_id' => $accused,
+				'message' => $this->input->post('message'),
+				'report_type' => $this->input->post('rp_type')
+			);
+			return $this->db->insert('report', $data);
+		}
 	}

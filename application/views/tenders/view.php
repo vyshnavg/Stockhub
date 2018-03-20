@@ -184,7 +184,8 @@
         </div>
         </div>
         <hr>
-        <h3>Tender Requests</h3>
+        <button class="btn btn-danger pull-right" type="button" href="#" title="Do you want to cancel this tender?" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="<form action='<?php echo base_url(); ?>tenders/cancelTender/<?php echo($tender['tender_id']) ?>'><input class='btn btn-danger btn-block' type='submit' value='Yes' /></form> <button class='btn btn-info btn-block' href='home'>No</button>"><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span> Cancel Tender</button>
+		<h3>Tender Requests</h3>
         </br>
                 
         <?php if($tempExpired==1): ?>
@@ -570,6 +571,41 @@
                     <?php endif;
                         endforeach; ?>
                 <button class="btn btn-info" onclick="location.href='<?php echo base_url(); ?>tenders/print/<?php echo $title?>'">Print Invoice</button>
+                <?php if($this->session->userdata('user_id') === $tender['m_id']): ?>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myModal">Give Feedback</button>
+
+                    <!-- Modal -->
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Send Feedback</h4>
+                            </div>
+                            <div class="modal-body">
+                            <?php echo form_open('users/sendFeedback/'.$transaction['vendor_id']); ?>
+                            
+                                <div class="form-group">
+                                    <div class="input-group"> 
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                                        <textarea class="form-control" rows="8" id="message" placeholder="Max 300 characters" maxlength="300" name="message" required></textarea>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-success btn-block">Submit</button>
+                                
+                            <?php echo form_close(); ?>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
+                <?php endif;?>
                 </div>
             </div>
 

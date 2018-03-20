@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2018 at 09:50 AM
+-- Generation Time: Mar 20, 2018 at 04:14 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -110,19 +110,6 @@ INSERT INTO `diff_vendor_req` (`request_id`, `vendor_id`, `quantity`, `quantity_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `feedback`
---
-
-CREATE TABLE `feedback` (
-  `feedback_id` int(11) NOT NULL,
-  `from_id` varchar(11) NOT NULL,
-  `to_id` varchar(11) NOT NULL,
-  `feedback` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `manufacturers`
 --
 
@@ -144,7 +131,7 @@ CREATE TABLE `manufacturers` (
 --
 
 INSERT INTO `manufacturers` (`m_id`, `m_firstname`, `m_lastname`, `m_email`, `m_username`, `m_password`, `m_org_name`, `m_status`, `m_profile_pic`, `register_date`) VALUES
-('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', 'M2.jpg', '2018-03-19 07:06:09'),
+('M2', 'Jack', 'Doe', 'jack@google.com', 'jackdoe12', '0a80250fe4bbd7759207d6bff43c8661', NULL, 'Active', 'M2.jpg', '2018-03-19 09:06:37'),
 ('M8', 'Tim', 'Cook', 'icevys@yahoo.com', 'tim12345', '5f790ab081d85b42be98b15fd1df0fe7', NULL, 'Inactive', NULL, '2018-03-19 05:04:47');
 
 -- --------------------------------------------------------
@@ -179,7 +166,7 @@ CREATE TABLE `messages` (
   `from_id` varchar(11) NOT NULL,
   `to_id` varchar(11) NOT NULL,
   `message_body` text NOT NULL,
-  `message_type` set('Notification','DM') NOT NULL,
+  `message_type` set('Notification','DM','Feedback') NOT NULL,
   `message_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -191,7 +178,9 @@ INSERT INTO `messages` (`messages_id`, `from_id`, `to_id`, `message_body`, `mess
 (21, 'M2', 'V1', 'A Tender is available for Hide Glue. <a href=\"http://localhost/Stockhub/tenders/view/32\">View..</a>', 'Notification', '2018-03-12 04:26:30'),
 (24, 'V1', 'M8', 'Another manufacuturer', 'DM', '2018-03-12 10:04:26'),
 (30, 'M2', 'V1', 'Hello, what is the quality grade of the product?', 'DM', '2018-03-16 03:00:41'),
-(36, 'M2', 'V1', 'hello\r\n', 'DM', '2018-03-16 10:48:28');
+(36, 'M2', 'V1', 'hello\r\n', 'DM', '2018-03-16 10:48:28'),
+(38, 'M2', 'V1', 'A Tender is available for Hide Glue. <a href=\"http://localhost/Stockhub/tenders/view/37\">View..</a>', 'Notification', '2018-03-19 09:32:13'),
+(39, 'M2', 'V1', 'Product is really good. The delivery time can be improved if it is in Road or Air Method rather than ship.', 'Feedback', '2018-03-20 03:04:42');
 
 -- --------------------------------------------------------
 
@@ -343,7 +332,8 @@ INSERT INTO `tender` (`tender_id`, `m_id`, `raw_material_id`, `tender_quantity`,
 (33, 'M2', 8, 1, 'Kilograms', '2018-03-12', '09:57:00', '2018-03-29', '09:57:00', 2, 500, '', 'active'),
 (34, 'M2', 7, 15, 'Kilograms', '2018-03-12', '14:44:00', '2018-03-28', '14:44:00', 2, 500, '', 'active'),
 (35, 'M2', 5, 1, 'Kilograms', '2018-03-16', '09:19:00', '2018-03-19', '09:21:00', 1, 0, '', 'expired'),
-(36, 'M2', 11, 10, 'Kilograms', '2018-03-16', '16:03:00', '2018-03-25', '16:03:00', 2, 5000, '5*2 pieces', 'cancelled');
+(36, 'M2', 11, 10, 'Kilograms', '2018-03-16', '16:03:00', '2018-03-25', '16:03:00', 2, 5000, '5*2 pieces', 'cancelled'),
+(37, 'M2', 12, 10, 'Litres', '2018-03-19', '15:02:00', '2018-03-27', '23:01:00', 1, 100, 'sdfghjk', 'cancelled');
 
 -- --------------------------------------------------------
 
@@ -376,18 +366,6 @@ INSERT INTO `transaction` (`trans_id`, `tender_created_id`, `diff_vendor_reqid`,
 (6, 30, 6, '2018-03-12', '09:33:00', '2018-03-14', '09:33:00', NULL, NULL, '', 'delivered'),
 (7, 31, 7, '2018-03-12', '09:48:00', '2018-03-15', '09:48:00', 2, 'Days', 'sorry', 'packed'),
 (8, 36, 12, '2018-03-16', '16:19:00', '2018-03-23', '16:19:00', 1, 'Days', '', 'packed');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `trde_mrkt`
---
-
-CREATE TABLE `trde_mrkt` (
-  `id_trade_mrkt` int(11) NOT NULL,
-  `v_id` varchar(11) NOT NULL,
-  `location` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -461,12 +439,6 @@ ALTER TABLE `diff_vendor_req`
   ADD PRIMARY KEY (`request_id`);
 
 --
--- Indexes for table `feedback`
---
-ALTER TABLE `feedback`
-  ADD PRIMARY KEY (`feedback_id`);
-
---
 -- Indexes for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
@@ -527,12 +499,6 @@ ALTER TABLE `transaction`
   ADD PRIMARY KEY (`trans_id`);
 
 --
--- Indexes for table `trde_mrkt`
---
-ALTER TABLE `trde_mrkt`
-  ADD PRIMARY KEY (`id_trade_mrkt`);
-
---
 -- Indexes for table `vendors`
 --
 ALTER TABLE `vendors`
@@ -567,12 +533,6 @@ ALTER TABLE `diff_vendor_req`
   MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `feedback`
---
-ALTER TABLE `feedback`
-  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `material_subcat`
 --
 ALTER TABLE `material_subcat`
@@ -582,7 +542,7 @@ ALTER TABLE `material_subcat`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `messages_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `messages_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `m_address_dict`
@@ -618,19 +578,13 @@ ALTER TABLE `report`
 -- AUTO_INCREMENT for table `tender`
 --
 ALTER TABLE `tender`
-  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `tender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
   MODIFY `trans_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `trde_mrkt`
---
-ALTER TABLE `trde_mrkt`
-  MODIFY `id_trade_mrkt` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `vendor_materials`

@@ -161,8 +161,6 @@
 			$this->load->view('tenders/print',$data);
         }
 
-        
-
 
         
 	}

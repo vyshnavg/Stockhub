@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/animate.min.css" />
     <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/awesomplete.css" />
     <link rel="stylesheet" type="text/css"  href="<?php echo asset_url();?>css/fontawesome-all.min.css" />
+    <link rel="icon" href="<?php echo asset_url().'images/web-req/logo2.png' ?>" type="image/gif">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"> -->
 
     <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css" rel="stylesheet"/> -->
@@ -73,11 +74,10 @@
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo ucfirst($this->session->userdata('first_name'))." ".ucfirst($this->session->userdata('last_name')) ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo base_url(); ?>userdashboard">Dashboard</a></li>
-                        <li><a href="<?php echo base_url(); ?>users/userTenders">Manage your Tenders</a></li>
+                        <li><a href="<?php echo base_url(); ?>userdashboard"><i class="fas fa-user-circle"></i> Dashboard</a></li>
+                        <li><a href="<?php echo base_url(); ?>users/userTenders"><i class="fas fa-tachometer-alt"></i> Manage your Tenders</a></li>
                         <li role="separator" class="divider"></li>
-                        <li > <a href="<?php echo base_url(); ?>users/logout">Logout
-                        <i class="fas fa-sign-out-alt"  aria-hidden="true"></i> 
+                        <li><a href="<?php echo base_url(); ?>users/logout"><i class="fas fa-sign-out-alt"  aria-hidden="true"></i> Logout
                     </a></li>
                     </ul>
                     </li>

@@ -35,7 +35,7 @@
                 
                 <thead>
                     <tr>
-                        <th>SI No</th>
+                        <th>#</th>
                         <th onclick="sortTable(0)" >Raw Material</th>
                         <th onclick="sortTable(1)" >Quantity</th> <!-- quantity and unit combined-->
                         <th onclick="sortTable(2)" >Time till Expiry</th>

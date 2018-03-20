@@ -321,6 +321,16 @@ function time_elapsed_string($datetime, $full = false) {
 														<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
 														</td>
 													</tr>
+												<?php elseif($message['message_type'] === 'Feedback'): ?>
+												<tr>
+														<td class="mailbox-star"><i class="far fa-comment"></i></td>
+														<td class="mailbox-name"><a href="<?php echo base_url(); ?>users/profile/<?php echo ($message['from_id'])?>"><?php echo($message['m_firstname']." ".$message['m_lastname'])?></a></td>
+														<td class="mailbox-subject"><?php echo($message['message_body']) ?></td>
+														<td class="mailbox-date"><?php echo(time_elapsed_string($message['message_time'])) ?></td>
+														<td>
+														<button class="btn btn-danger btn-sm" onclick="location.href='<?php echo base_url(); ?>users/delMessage/<?php echo ($message['messages_id'])?>'"><i class="glyphicon glyphicon-trash"></i></button>
+														</td>
+													</tr>
 												<?php endif;?>
 											<?php endforeach; ?>
 											<?php endif;?>

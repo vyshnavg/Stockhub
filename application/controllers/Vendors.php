@@ -69,33 +69,6 @@
 			$this->load->view('templates/footer');
 		}
 
-		//Edit UserDetails
-		public function editUserDetails(){
-
-			$this->form_validation->set_rules('username', 'Username', 'required|callback_check_username_exists');
-
-			// Check if the user is already logged in.
-			if(!$this->session->userdata('logged_in')){
-				redirect('home');
-			}
-			//execute code
-			else{
-
-				if($this->form_validation->run() === FALSE){
-					// Set message
-					$this->session->set_flashdata('flash-danger', 'Editing Fail : Username already exists');
-					redirect('userdashboard');
-				} else {
-					$this->vendor_model->editUserDetails();
-					// Set message
-					$this->session->set_flashdata('flash-success', 'User details changed');
-					redirect('userdashboard');
-				}
-
-			}
-			
-		}
-
 		//Add new address
 		public function newAddress(){
 			
@@ -134,7 +107,7 @@
 		}
 		
 		//Delete materials
-		public function delVendorMaterial($material = NULL){
+		public function delMaterial($material = NULL){
 			
 			// Check if the user is already logged in.
 			if(!$this->session->userdata('logged_in')){
@@ -147,7 +120,7 @@
 			}
 			//execute code
 			else{
-				$this->vendor_model->delVendorMaterial($material);
+				$this->vendor_model->delMaterial($material);
 				// Set message
 				$this->session->set_flashdata('flash-success', 'Material Deleted');
 				redirect('userdashboard');
@@ -156,20 +129,18 @@
 		}
 		
 		//Add new vendor material
-		public function newVendorMaterial(){
+		public function newMaterial(){
 			
 			// Check if the user is already logged in.
 			if(!$this->session->userdata('logged_in')){
 				redirect('home');
 			}
 			
-			$this->vendor_model->newVendorMaterial();
+			$this->vendor_model->newMaterial();
 			// Set message
-			$this->session->set_flashdata('flash-success', 'Material added. You will get notifications on the respective materials.');
+			$this->session->set_flashdata('flash-success', 'material added successfully. You will be notified if a tender is created');
 			redirect('userdashboard');
 			
 		}
 		
-		
-
 	}

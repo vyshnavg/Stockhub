@@ -470,7 +470,7 @@ function time_elapsed_string($datetime, $full = false) {
 
 			<div id="materials" class="tab-pane fade in">
 
-				<h3> Manage Materials</h3><small>Choose the materials which you would like to get notification on, if a tender is put on it.</small>
+				<h3> Manage Materials</h3><small>Add the materials you can supply. If a tender is created for the same, you will be notified</small>
 				<br><br>
 
 				<div class="row is-flex">

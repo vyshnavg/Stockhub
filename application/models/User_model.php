@@ -283,6 +283,17 @@
 			// sent message
 			$this->db->insert('messages', $data);
 		}
+		public function sendFeedback($toID){
+			// message data array
+			$data = array(
+				'from_id' => $this->session->userdata('user_id'),
+				'to_id' => $toID,
+				'message_body' => $this->input->post('message'),
+                'message_type' => 'Feedback'
+			);
+			// sent message
+			$this->db->insert('messages', $data);
+		}
 
 		public function delMessage($data){
 			return $this->db->delete('messages', array('messages_id' => $data));
@@ -295,7 +306,7 @@
 			$this->db->select('*');
 			$this->db->from('messages');
 			$this->db->where("(from_id='$fromID' AND to_id='$toID' OR from_id='$toID' AND to_id='$fromID')", NULL, FALSE);
-			$this->db->where('message_type !=', 'Notification');
+			$this->db->where('message_type', 'DM');
 			$query = $this->db->get();
 			return $query->result_array();
 

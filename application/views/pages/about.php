@@ -11,27 +11,10 @@ Stockhub will show them the various <a href="<?php echo base_url();?>materials">
 A tender can be created to procure the product. The notification will be broadcasted to every vendor who deals with these materials. All this will create a network of interactions and save tons of research
 </h4>
 <hr><br>
-<h3 style="text-align:center;"><a data-toggle="modal" data-target="#myModal">Contact Us</a></h3>
+<h3 style="text-align:center;"><a class="text-info" data-toggle="collapse" data-target="#contact">Contact Us</a></h3>
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
+<div style="text-align:center;" id="contact" class="collapse">
+<h3>Email : <a href="mailto:stockhub.christ@gmail.com" target="_top">stockhub.christ@gmail.com</a></h3>
 </div>
 
 </div>  

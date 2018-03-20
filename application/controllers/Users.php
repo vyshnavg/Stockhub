@@ -434,6 +434,12 @@
 			redirect('users/messages/'.$toID);	
 		}
 		
+		//Send message
+		public function sendFeedback($toID = NULL){
+			$this->user_model->sendFeedback($toID);	
+			$this->session->set_flashdata('flash-success', 'Feedback Sent');
+			redirect('userdashboard');	
+		}
 		//direct message
 		public function messages($id1 = NULL){
 
